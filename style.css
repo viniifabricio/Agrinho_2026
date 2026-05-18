@@ -1,13 +1,32 @@
+/* ==========================================================================
+   1. PERSONALIZAÇÃO OBRIGATÓRIA: PALETA DE CORES VIA :ROOT (ESTILO AGRO-TECH)
+   ========================================================================== */
+:root {
+    --cor-principal: #1b4d3e;      /* Verde Escuro Floresta (Cabeçalho e Títulos) */
+    --cor-secundaria: #27ae60;     /* Verde Folha Ativo (Luzes e Hovers) */
+    --cor-destaque: #2980b9;       /* Azul Tecnológico (Elementos de Transição) */
+    --cor-fundo: #f4f7f6;          /* Cinza Claro Ecológico (Fundo da Tela) */
+    --cor-textos: #2c3e50;         /* Azul Escuro Confortável (Textos Gerais) */
+    --cor-cards: #ffffff;          /* Fundo dos blocos/cards */
+}
+
+/* ==========================================================================
+   2. CONFIGURAÇÕES GERAIS E ANIMAÇÕES
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth; /* Efeito obrigatório de rolagem suave nas seções */
 }
 
 body {
-    background-color: #f4f7f5;
-    color: #2c3e50;
+    background-color: var(--cor-fundo);
+    color: var(--cor-textos);
     line-height: 1.6;
 }
 
@@ -17,12 +36,47 @@ body {
     padding: 20px;
 }
 
-/* HEADER / HERO SECTION */
+/* ==========================================================================
+   3. MENU DE NAVEGAÇÃO RESPONSIVO
+   ========================================================================== */
+.navbar {
+    background-color: var(--cor-principal);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar .logo {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.navbar nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.navbar nav a:hover {
+    color: var(--cor-secundaria); /* Efeito Hover Moderno */
+}
+
+/* ==========================================================================
+   4. BANNER PRINCIPAL (HERO SECTION)
+   ========================================================================== */
 .hero-section {
     position: relative;
     background: url('https://images.unsplash.com/photo-1592982537447-744077110934?auto=format&fit=crop&q=80&w=1200') no-repeat center center/cover;
-    background-color: #1e3d2f;
-    height: 320px;
+    height: 350px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,227 +86,67 @@ body {
 
 .overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(16, 44, 31, 0.75);
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(27, 77, 62, 0.8);
 }
 
 .hero-content {
     position: relative;
     z-index: 1;
-    padding: 0 20px;
 }
 
 .hero-content h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     margin-bottom: 10px;
-    font-weight: 700;
-}
-
-.hero-content p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    margin-bottom: 15px;
 }
 
 .badge {
-    background-color: #27ae60;
-    padding: 6px 15px;
+    background: var(--cor-secundaria);
+    padding: 5px 15px;
     border-radius: 20px;
-    font-size: 0.9rem;
     font-weight: bold;
+    font-size: 0.9rem;
 }
 
-/* SEÇÕES */
-.intro-section, .radar-section, .ferramentas-section {
-    background: white;
-    padding: 30px;
+/* ==========================================================================
+   5. ESTRUTURAÇÃO DAS SEÇÕES DO SITE
+   ========================================================================== */
+.site-section, .ferramentas-section {
+    background: var(--cor-cards);
+    padding: 35px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    margin-bottom: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    margin-top: 30px;
 }
 
-.intro-section h2, .radar-section h2, .ferramentas-section h2 {
-    color: #1e3d2f;
-    margin-bottom: 12px;
-    border-left: 4px solid #27ae60;
+.site-section h2, .ferramentas-section h2 {
+    color: var(--cor-principal);
+    margin-bottom: 15px;
+    border-left: 5px solid var(--cor-secundaria);
     padding-left: 10px;
 }
 
 .sub-painel {
     color: #7f8c8d;
     margin-bottom: 20px;
-}
-
-/* RADAR CONTEINER */
-.radar-container {
-    width: 100%;
-    height: 450px;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 2px solid #e2e8f0;
-}
-
-.radar-frame {
-    width: 100%;
-    height: 100%;
-}
-
-.radar-legendas {
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid #ecf0f1;
-}
-
-.legenda-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 15px;
-}
-
-.legenda-item {
-    display: flex;
-    align-items: flex-start;
     font-size: 0.95rem;
 }
 
-.cor-bloco {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-    margin-right: 10px;
-    flex-shrink: 0;
-}
-
-.c-verde { background-color: #2ecc71; }
-.c-amarelo { background-color: #f1c40f; }
-.c-vermelho { background-color: #e74c3c; }
-
-/* CARDS GRID */
-.cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-    margin-top: 20px;
-}
-
-.card {
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    overflow: hidden;
-    background: #fafbfc;
-    display: flex;
-    flex-direction: column;
-}
-
-.card-image-sim {
-    background: #e8f5e9;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4rem;
-}
-
-.card-body {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-grow: 1;
-}
-
-.card-body h3 {
-    color: #1e3d2f;
-    margin-bottom: 10px;
-}
-
-/* BOX DE STATUS INTERATIVO */
-.status-box {
-    background: white;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.status-luz {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    transition: all 0.4s ease;
-}
-
-.cinza { background-color: #95a5a6; }
-.verde-ativo { background-color: #2ecc71; box-shadow: 0 0 12px #2ecc71; }
-.amarelo-ativo { background-color: #f1c40f; box-shadow: 0 0 12px #f1c40f; }
-.vermelho-ativo { background-color: #e74c3c; box-shadow: 0 0 12px #e74c3c; }
-
-.status-texto {
-    font-size: 0.9rem !important;
-    font-weight: 600;
-}
-
-/* SIMULADOR */
-.simulador-controle {
-    margin-top: 35px;
-    background: #f8fafc;
-    border: 2px dashed #cbd5e1;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.botoes-simulador {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-top: 15px;
-}
-
-.simulador-controle button {
-    background: #1e3d2f;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.2s;
-}
-
-.simulador-controle button:hover {
-    background: #27ae60;
-}
-
-/* FOOTER */
-footer {
-    background-color: #1a3024;
-    color: #a3b8ad;
-    text-align: center;
-    padding: 25px 20px;
-    font-size: 0.9rem;
-    margin-top: 40px;
-}
-
-@media (max-width: 600px) {
-    .hero-content h1 { font-size: 1.8rem; }
-    .radar-container { height: 320px; }
-    .cards-grid { grid-template-columns: 1fr; }
-}
-/* ESTILOS DA NOVA SEÇÃO INFORMATIVA */
+/* ==========================================================================
+   6. SEÇÃO INFORMATIVA (ESTILO CARDS GRID COM HOVER)
+   ========================================================================== */
 .informativo-section {
-    background: white;
+    background: var(--cor-cards);
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    margin-top: 30px;
+}
+
+.informativo-section h2 {
+    color: var(--cor-principal);
+    border-left: 5px solid var(--cor-secundaria);
+    padding-left: 10px;
 }
 
 .info-grid {
@@ -267,12 +161,12 @@ footer {
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     padding: 20px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .info-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+    transform: translateY(-5px); /* Animação suave para cima */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.06);
 }
 
 .info-tag {
@@ -288,30 +182,189 @@ footer {
 }
 
 .info-card h3 {
-    color: #1e3d2f;
-    font-size: 1.2rem;
+    color: var(--cor-principal);
+    font-size: 1.15rem;
     margin-bottom: 10px;
 }
 
 .info-card p {
     font-size: 0.9rem;
     color: #475569;
-    line-height: 1.5;
-}
-/* ESTILOS DA SEÇÃO DE EXPLICAÇÕES FINAIS */
-.conclusao-section {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    margin-bottom: 30px;
+    text-align: justify;
 }
 
-.conclusao-section h2 {
-    color: #1e3d2f;
-    margin-bottom: 5px;
-    border-left: 4px solid #27ae60;
-    padding-left: 10px;
+/* ==========================================================================
+   7. TABELA DE IMPACTOS POSITIVOS
+   ========================================================================== */
+.tabela-impactos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.tabela-impactos th {
+    background-color: var(--cor-principal);
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.tabela-impactos td {
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   8. COMPONENTE DO QUIZ E DO SIMULADOR (BOTÕES COM HOVER)
+   ========================================================================== */
+.quiz-container {
+    background: #eef7f2;
+    border: 1px solid var(--cor-secundaria);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.botoes-quiz button, .simulador-controle button {
+    background-color: var(--cor-principal);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.botoes-quiz button:hover, .simulador-controle button:hover {
+    background-color: var(--cor-secundaria);
+    transform: scale(1.02); /* Pequeno pulo ao passar o mouse */
+}
+
+/* ==========================================================================
+   9. RADAR DO CLIMA E CARDS DE STATUS
+   ========================================================================== */
+.radar-container {
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    border: 1px solid #cbd5e1;
+}
+
+.radar-frame {
+    width: 100%;
+    height: 100%;
+}
+
+.radar-legendas {
+    margin-top: 15px;
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.legenda-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 12px;
+}
+
+.legenda-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.88rem;
+}
+
+.cor-bloco {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.c-verde { background-color: #2ecc71; }
+.c-amarelo { background-color: #f1c40f; }
+.c-vermelho { background-color: #e74c3c; }
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fafbfc;
+}
+
+.card-image-sim {
+    background: #e8f5e9;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.status-box {
+    background: white;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.status-luz {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.cinza { background: #95a5a6; }
+.verde-ativo { background: #2ecc71; box-shadow: 0 0 10px #2ecc71; }
+.amarelo-ativo { background: #f1c40f; box-shadow: 0 0 10px #f1c40f; }
+.vermelho-ativo { background: #e74c3c; box-shadow: 0 0 10px #e74c3c; }
+
+.status-texto {
+    font-size: 0.88rem;
+    font-weight: bold;
+}
+
+.simulador-controle {
+    margin-top: 25px;
+    text-align: center;
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px dashed #cbd5e1;
+}
+
+/* ==========================================================================
+   10. SEÇÃO EXPLICAÇÕES COMPLEMENTARES FINAIS
+   ========================================================================== */
+.conclusao-section {
+    background: var(--cor-cards);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    margin-top: 30px;
 }
 
 .conclusao-conteudo {
@@ -323,19 +376,60 @@ footer {
 
 .conclusao-bloco {
     background: #f8fafc;
-    border-left: 4px solid #1e3d2f;
+    border-left: 4px solid var(--cor-principal);
     padding: 20px;
     border-radius: 0 8px 8px 0;
 }
 
+.final-highlight {
+    border-left-color: var(--cor-secundaria);
+    background: #eef7f2;
+}
+
 .conclusao-bloco h3 {
-    color: #1e3d2f;
+    color: var(--cor-principal);
     font-size: 1.15rem;
     margin-bottom: 8px;
 }
 
 .conclusao-bloco p {
     font-size: 0.95rem;
-    color: #475569;
-    line-height: 1.6;
+    color: var(--cor-textos);
+    text-align: justify;
+}
+
+/* ==========================================================================
+   11. RODAPÉ ESTILIZADO (FOOTER)
+   ========================================================================== */
+footer {
+    background-color: #112d24;
+    color: #a3b8ad;
+    text-align: center;
+    padding: 25px;
+    font-size: 0.9rem;
+    margin-top: 40px;
+}
+
+/* ==========================================================================
+   12. REQUISITO EXIGIDO: RESPONSIVIDADE (MOBILE & TABLET)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    .navbar nav a {
+        margin: 0 8px;
+        font-size: 0.85rem;
+    }
+    .hero-content h1 {
+        font-size: 1.9rem;
+    }
+    .radar-container {
+        height: 280px;
+    }
+    .site-section, .ferramentas-section, .informativo-section, .conclusao-section {
+        padding: 20px;
+    }
 }
