@@ -1,35 +1,46 @@
-// Simulação de dados coletados do Radar/Previsão do Tempo
-const dadosClimaticosAtuais = {
-    velocidadeVento: 25, // em km/h
-    chanceDeChuvaAmanha: 85, // em porcentagem
-    umidadeSolo: 40 // em porcentagem
-};
-
-function rodarPainelSustentavel() {
-    // 1. Lógica do Alerta de Pulverização
-    const luz = document.getElementById('luz-pulverizacao');
-    const textoPulv = document.getElementById('texto-pulverizacao');
-
-    if (dadosClimaticosAtuais.velocidadeVento > 20) {
-        luz.className = "status-luz vermelho";
-        textoPulv.innerText = `Vento a ${dadosClimaticosAtuais.velocidadeVento} km/h. NÃO PULVERIZE! Risco alto de desvio do produto para áreas de preservação.`;
-    } else if (dadosClimaticosAtuais.velocidadeVento > 10) {
-        luz.className = "status-luz amarelo";
-        textoPulv.innerText = `Vento a ${dadosClimaticosAtuais.velocidadeVento} km/h. Atenção ao aplicar.`;
+// O Cérebro do Front-End: Regras de Sustentabilidade baseadas no Clima
+function simularClima(velocidadeVento, chanceChuva) {
+    
+    // ELEMENTS - CARD 1: PULVERIZAÇÃO
+    const luzPulverizacao = document.getElementById('luz-pulverizacao');
+    const textoPulverizacao = document.getElementById('texto-pulverizacao');
+    
+    // REGRA SUSTENTÁVEL DA PULVERIZAÇÃO
+    if (velocidadeVento > 20) {
+        luzPulverizacao.className = "status-luz vermelho-ativo";
+        textoPulverizacao.innerText = `Vento forte a ${velocidadeVento} km/h. NÃO PULVERIZE! Risco extremo de desviar o produto para rios e áreas de preservação.`;
+        textoPulverizacao.style.color = "#c0392b";
+    } else if (velocidadeVento >= 10 && velocidadeVento <= 20) {
+        luzPulverizacao.className = "status-luz amarelo-ativo";
+        textoPulverizacao.innerText = `Vento moderado a ${velocidadeVento} km/h. Atenção na aplicação se houver florestas e polinizadores por perto.`;
+        textoPulverizacao.style.color = "#d35400";
     } else {
-        luz.className = "status-luz verde";
-        textoPulv.innerText = "Condições ideais de vento para pulverização segura.";
+        luzPulverizacao.className = "status-luz verde-ativo";
+        textoPulverizacao.innerText = `Vento seguro a ${velocidadeVento} km/h. Condições atmosféricas ideais para uma pulverização segura.`;
+        textoPulverizacao.style.color = "#27ae60";
     }
 
-    // 2. Lógica da Irrigação Inteligente
+    // ELEMENTS - CARD 2: IRRIGAÇÃO
+    const luzIrrigacao = document.getElementById('luz-irrigacao');
     const textoIrrigacao = document.getElementById('texto-irrigacao');
     
-    if (dadosClimaticosAtuais.chanceDeChuvaAmanha > 70) {
-        textoIrrigacao.innerText = `Chuva detectada no radar (${dadosClimaticosAtuais.chanceDeChuvaAmanha}% de chance amanhã). DESLIGUE os irrigadores hoje e economize água!`;
+    // REGRA SUSTENTÁVEL DA IRRIGAÇÃO
+    if (chanceChuva > 70) {
+        luzIrrigacao.className = "status-luz vermelho-ativo"; // Alerta: Desligue o sistema
+        textoIrrigacao.innerText = `Radar acusa ${chanceChuva}% de chuva vindo aí. PAUSE A IRRIGAÇÃO! Permita que a água da natureza trabalhe e economize água e energia.`;
+        textoIrrigacao.style.color = "#c0392b";
+    } else if (chanceChuva >= 30 && chanceChuva <= 70) {
+        luzIrrigacao.className = "status-luz amarelo-ativo";
+        textoIrrigacao.innerText = `Instabilidade de ${chanceChuva}% detectada no radar. Reduza a vazão das bombas e economize recursos hídricos.`;
+        textoIrrigacao.style.color = "#d35400";
     } else {
-        textoIrrigacao.innerText = "Sem previsão de chuva significativa. Mantenha o cronograma normal de irrigação.";
+        luzIrrigacao.className = "status-luz verde-ativo"; // Seguro para irrigar
+        textoIrrigacao.innerText = `Tempo seco (${chanceChuva}% de chuva). Mantenha o cronograma. Dê preferência ao gotejamento para máxima eficiência.`;
+        textoIrrigacao.style.color = "#27ae60";
     }
 }
 
-// Executa a função ao carregar a página
-window.onload = rodarPainelSustentavel;
+// Inicia automaticamente simulando um dia de clima padrão bom
+window.onload = function() {
+    simularClima(12, 15);
+};
