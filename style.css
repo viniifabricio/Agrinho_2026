@@ -1,0 +1,9 @@
+.status-luz {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 15px auto;
+}
+.verde { background-color: #4caf50; box-shadow: 0 0 10px #4caf50; }
+.amarelo { background-color: #ffeb3b; box-shadow: 0 0 10px #ffeb3b; }
+.vermelho { background-color: #f44336; box-shadow: 0 0 10px #f44336; }

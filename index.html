@@ -4,9 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Projeto Agrinho 2026</title>
+    <title>AgroClima Sustentável - Agrinho 2026</title>
 </head>
 <body>
     <script src="main.js"></script>
+</body>
+</html>
+<header>
+        <h1>🌱 AgroClima Sustentável</h1>
+        <p>Tecnologia para um agro forte e um futuro sustentável</p>
+    </header>
+
+    <main class="container">
+        <section class="radar-section">
+            <h2>📍 Radar Meteorológico em Tempo Real</h2>
+            <div class="radar-wrapper">
+                <iframe src="https://www.ipmetradar.com.br/" class="radar-frame" frameborder="0"></iframe>
+            </div>
+            <p class="legenda">Fonte: Dados em tempo real simulados/integrados do IPMet.</p>
+        </section>
+
+        <section class="ferramentas-sustentaveis">
+            
+            <div class="card" id="card-pulverizacao">
+                <h3>🚜 Alerta de Pulverização Segura</h3>
+                <p>Evite a deriva de defensivos agrícolas protegendo o solo e os rios.</p>
+                <div class="status-luz vermelho" id="luz-pulverizacao"></div>
+                <p id="texto-pulverizacao">Carregando dados do vento...</p>
+            </div>
+
+            <div class="card" id="card-irrigacao">
+                <h3>💧 Economia de Água (Irrigação)</h3>
+                <p>Cruzamento de dados climáticos para evitar o desperdício de água.</p>
+                <div class="alerta-irrigacao" id="status-irrigacao">
+                    <span class="icone-gota">💧</span>
+                    <p id="texto-irrigacao">Avaliando umidade e previsão de chuva...</p>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>Projeto Desenvolvido para o Concurso Agrinho 2026 - Categoria Front-End</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
