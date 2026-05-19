@@ -12,10 +12,11 @@
         <div class="logo">🌱 EcoRadar Agro</div>
         <nav>
             <a href="#intro">Sobre o Projeto</a>
+            <a href="#radar-secao">Radar</a>
             <a href="#informativo">Espaço Informativo</a>
-            <a href="#impactos">Tabela de Impactos</a>
-            <a href="#quiz">Quiz Sustentável</a>
-            <a href="#painel">Radar & Decisão</a>
+            <a href="#impactos">Impactos Positivos</a>
+            <a href="#quiz">Quiz Técnico</a>
+            <a href="#painel">Painel de Decisão</a>
             <a href="#conclusao">Conclusão</a>
         </nav>
     </header>
@@ -36,7 +37,7 @@
             <p>O <strong>EcoRadar Agro</strong> é uma plataforma digital desenvolvida para auxiliar pequenos e grandes produtores rurais a tomarem decisões inteligentes e ecológicas no campo. O sistema une a tecnologia de ponta do monitoramento climático com práticas sustentáveis, garantindo um agro forte que protege o futuro do nosso planeta.</p>
         </section>
 
-        <section class="radar-section">
+        <section id="radar-secao" class="radar-section">
             <h2>📍 Radar Meteorológico em Tempo Real</h2>
             <p class="sub-painel">Monitore o avanço das nuvens de chuva e planeje suas ações no campo com precisão.</p>
             
@@ -59,7 +60,6 @@
             <p class="sub-painel">Informações e boas práticas para entender a importância da tecnologia e da preservação no campo.</p>
             
             <div class="info-grid">
-                
                 <div class="info-card">
                     <div class="info-tag">Tecnologia</div>
                     <h3>Projeto Agrinho 2026 — “Agro Forte, Futuro Sustentável”</h3>
@@ -68,53 +68,52 @@
 
                 <div class="info-card">
                     <div class="info-tag">Sustentabilidade</div>
-                    <h3>O que é o Agro Sustentável?</h3>
+                    <h3>O QUE É O AGRO SUSTENTÁVEL?</h3>
                     <p>O agro sustentável é um modelo de produção agrícola que procura atender às necessidades atuais da sociedade sem comprometer os recursos naturais das futuras gerações. Esse sistema valoriza o equilíbrio entre economia, meio ambiente e desenvolvimento social. A agricultura sustentável utiliza práticas que preservam o solo, economizam água, reduzem desperdícios e diminuem impactos ambientais. Além disso, incentiva o uso consciente da tecnologia para aumentar a produção sem causar degradação da natureza. Atualmente, o campo vem passando por grandes transformações com o uso da agricultura digital, drones, sensores inteligentes e sistemas automatizados. Essas tecnologias ajudam produtores a monitorar plantações, economizar recursos e produzir alimentos com mais eficiência.</p>
                 </div>
 
                 <div class="info-card">
                     <div class="info-tag">Inovação</div>
-                    <h3>A Importância do Agronegócio para o Brasil</h3>
+                    <h3>A IMPORTÂNCIA DO AGRONEGÓCIO PARA O BRASIL</h3>
                     <p>O agronegócio é um dos setores mais importantes da economia brasileira. Ele é responsável pela produção de alimentos, geração de empregos e movimentação econômica em diversas regiões do país. O campo fornece alimentos consumidos diariamente pela população, como arroz, feijão, frutas, verduras, leite e carne. Além disso, o agro também produz matérias-primas utilizadas em roupas, combustíveis e medicamentos. Com o crescimento da população mundial, a produção de alimentos precisa aumentar. Porém, isso deve acontecer de maneira sustentável, preservando florestas, rios e a biodiversidade. Por isso, muitos especialistas defendem um modelo agrícola baseado em inovação tecnológica, preservação ambiental e uso racional dos recursos naturais.</p>
                 </div>
-
             </div>
         </section>
 
         <section id="impactos" class="site-section">
-            <h2>4. Impactos Positivos na Sociedade</h2>
-            <p class="sub-painel">Como a união da tecnologia e ecologia beneficia toda a cadeia do agronegócio.</p>
+            <h2>4. Impactos Positivos do Agro Digital</h2>
+            <p class="sub-painel">Como a tecnologia integrada à ecologia transforma positivamente a sociedade.</p>
             <table class="tabela-impactos">
                 <thead>
                     <tr>
                         <th>Para o Produtor</th>
-                        <th>Para a Cidade</th>
+                        <th>Para as Cidades</th>
                         <th>Para o Meio Ambiente</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Uso racional de insumos e redução de custos operacionais.</td>
-                        <td>Garantia de segurança alimentar e alimentos com mais qualidade.</td>
-                        <td>Proteção de lençóis freáticos contra contaminação por deriva.</td>
+                        <td>Decisões em tempo real baseadas em dados de vento e umidade.</td>
+                        <td>Alimentos mais limpos, saudáveis e sem desperdício de recursos.</td>
+                        <td>Proteção direta de rios e polinizadores contra a deriva química.</td>
                     </tr>
                     <tr>
-                        <td>Previsibilidade na colheita através do monitoramento de dados.</td>
-                        <td>Movimentação econômica estável e geração de empregos verdes.</td>
-                        <td>Preservação da biodiversidade e dos polinizadores locais.</td>
+                        <td>Economia de energia elétrica e redução de gastos operacionais.</td>
+                        <td>Fortalecimento da economia interna e segurança alimentar garantida.</td>
+                        <td>Redução da pegada de carbono através do uso consciente do maquinário.</td>
                     </tr>
                 </tbody>
             </table>
         </section>
 
         <section id="quiz" class="site-section">
-            <h2>📚 Quiz: Consciência Ecológica no Campo</h2>
-            <p class="sub-painel">Teste seus conhecimentos sobre as regras do nosso sistema agro sustentável!</p>
+            <h2>🧠 Quiz Técnico: Sustentabilidade e Tecnologia</h2>
+            <p class="sub-painel">Teste seus conhecimentos sobre o funcionamento inteligente do nosso sistema!</p>
             <div class="quiz-container">
-                <p id="pergunta-quiz">Qual o principal benefício de suspender a irrigação se o radar apontar chuva iminente?</p>
+                <p id="pergunta-quiz">Por que devemos evitar a pulverização quando o radar indica ventos acima de 20 km/h?</p>
                 <div class="botoes-quiz">
-                    <button onclick="responderQuiz(true)">Economizar água doce e energia elétrica</button>
-                    <button onclick="callQuizErrado()">Fazer a plantação crescer no dobro da velocidade</button>
+                    <button onclick="responderQuiz(true)">Para evitar a deriva e proteger matas nativas e abelhas</button>
+                    <button onclick="responderQuiz(false)">Apenas para economizar combustível do trator</button>
                 </div>
                 <p id="resultado-quiz"></p>
             </div>
@@ -125,13 +124,11 @@
             <p class="sub-painel">Abaixo, nosso sistema processa os dados meteorológicos e indica as melhores ações ecológicas.</p>
 
             <div class="cards-grid">
-                
                 <div class="card">
                     <div class="card-image-sim">🚜</div>
                     <div class="card-body">
                         <h3>Pulverização Consciente</h3>
-                        <p>Evite o fenômeno da <strong>deriva</strong>. Quando o vento está muito forte, os defensores agrícolas evaporam ou são levados pelo vento antes de tocar a planta, contaminando rios, matas nativas e polinizadores essenciais como as abelhas.</p>
-                        
+                        <p>Evite o fenômeno da deriva. Quando o vento está muito forte, os defensores agrícolas evaporam ou são levados pelo vento antes de tocar a planta, contaminando rios, matas nativas e polinizadores essenciais como as abelhas.</p>
                         <div class="status-box">
                             <div id="luz-pulverizacao" class="status-luz cinza"></div>
                             <p id="texto-pulverizacao" class="status-texto">Aguardando leitura do vento...</p>
@@ -144,14 +141,12 @@
                     <div class="card-body">
                         <h3>Irrigação Inteligente</h3>
                         <p>A agricultura consome cerca de 70% da água doce do planeta. Irrigar a lavoura momentos antes de uma chuva forte se aproximar gera desperdício de recursos hídricos e gasto desnecessário de energia elétrica nas bombas d'água.</p>
-                        
                         <div class="status-box">
                             <div id="luz-irrigacao" class="status-luz cinza"></div>
                             <p id="texto-irrigacao" class="status-texto">Analisando umidade e nuvens de chuva...</p>
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="simulador-controle">
@@ -177,7 +172,7 @@
 
                 <div class="conclusao-bloco final-highlight">
                     <h3>CONCLUSÃO</h3>
-                    <p>O tema “Agro Forte, Futuro Sustentável” mostra que o desenvolvimento do agronegócio precisa caminhar junto com a preservação do meio ambiente e o uso consciente da tecnologia. A agricultura sustentável representa um caminho importante para garantir alimentos de qualidade, preservar os recursos naturais e melhorar a vida das futuras gerações. Com inovação, educação ambiental e responsabilidade social, é possível construir um campo mais produtivo, moderno e sustentável.</p>
+                    <p>O tema “Agro Forte, Futuro Sustentável” mostra que o desenvolvimento do agronegócio precisa caminhar junto com a preservação do meio ambiente e o uso consciente da tecnologia. A agricultura sustentável representa um caminho importante para garantir alimentos de qualidade, preservar os recursos naturais e melhorar a vida das futuras gerações. Com inovação, educação ambiental e responsabilidade social, é possível construir um campo mais productivo, moderno e sustentável.</p>
                 </div>
             </div>
         </section>
@@ -188,6 +183,7 @@
         <p>© 2026 EcoRadar Agro — Desenvolvido para o Concurso Agrinho 2026</p>
         <p>Tema: "Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente"</p>
     </footer>
+
     <script src="./main.js"></script>
 </body>
 </html>
