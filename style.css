@@ -1,30 +1,23 @@
 /* ==========================================================================
-   1. REGRA DO REGULAMENTO: VARIÁVEIS DO ESTILO VISUAL AGRO-TECH
+   1. VARIÁVEIS DE AMBIENTE E CONFIGURAÇÕES GERAIS (:ROOT)
    ========================================================================== */
 :root {
-    --cor-principal: #1b4d3e;      /* Verde Escuro Floresta */
-    --cor-secundaria: #27ae60;     /* Verde Folha Ativo */
-    --cor-fundo: #f4f7f6;          /* Cinza Claro Ecológico */
-    --cor-textos: #2c3e50;         /* Azul Escuro Confortável */
-    --cor-cards: #ffffff;          /* Fundo dos blocos brancos */
+    --cor-principal: #1b4332;   /* Verde Escuro Floresta */
+    --cor-secundaria: #52b788;  /* Verde Folha Claro */
+    --cor-background: #f4f9f4;  /* Branco Esverdeado muito leve */
+    --cor-textos: #2d3748;      /* Cinza Escuro para leitura perfeita */
+    --cor-cards: #ffffff;       /* Fundo puro para blocos */
 }
 
-/* ==========================================================================
-   2. CONFIGURAÇÕES GERAIS E ROLAGEM SUAVE
-   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Arial, sans-serif;
-}
-
-html {
-    scroll-behavior: smooth; /* Efeito obrigatório de rolagem suave */
 }
 
 body {
-    background-color: var(--cor-fundo);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--cor-background);
     color: var(--cor-textos);
     line-height: 1.6;
 }
@@ -36,7 +29,7 @@ body {
 }
 
 /* ==========================================================================
-   3. MENU DE NAVEGAÇÃO RESPONSIVO STICKY
+   2. NAVBAR E COMPONENTES DE NAVEGAÇÃO
    ========================================================================== */
 .navbar {
     background-color: var(--cor-principal);
@@ -47,12 +40,12 @@ body {
     padding: 15px 5%;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .navbar .logo {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: bold;
 }
 
@@ -60,17 +53,17 @@ body {
     color: white;
     text-decoration: none;
     margin-left: 20px;
-    font-weight: 600;
     font-size: 0.95rem;
+    font-weight: 500;
     transition: color 0.3s;
 }
 
 .navbar nav a:hover {
-    color: var(--cor-secundaria); /* Hover Suave */
+    color: var(--cor-secundaria);
 }
 
 /* ==========================================================================
-   4. HERO SECTION COM A SUA FOTO DO GITHUB (CONECTADA EM .PNG)
+   3. HERO SECTION (BANNER PRINCIPAL COM A IMAGEM CORRETA)
    ========================================================================== */
 .hero-section {
     position: relative;
@@ -85,56 +78,83 @@ body {
 
 .overlay {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(17, 45, 36, 0.55); /* Máscara para leitura do texto */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
+    padding: 0 20px;
 }
 
 .hero-content h1 {
-    font-size: 2.8rem;
+    font-size: 3rem;
     margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    font-weight: 300;
 }
 
 .badge {
-    background: var(--cor-secundaria);
-    padding: 5px 15px;
+    background-color: var(--cor-secundaria);
+    padding: 6px 15px;
     border-radius: 20px;
+    font-size: 0.9rem;
     font-weight: bold;
 }
 
 /* ==========================================================================
-   5. SEÇÕES E ESTILIZAÇÃO DOS ELEMENTOS DO RADAR
+   4. SEÇÕES GENÉRICAS DO SITE
    ========================================================================== */
-.site-section, .ferramentas-section, .radar-section, .informativo-section {
+.site-section {
     background: var(--cor-cards);
-    padding: 35px;
+    padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
     margin-top: 30px;
 }
 
-.site-section h2, .ferramentas-section h2, .radar-section h2, .informativo-section h2 {
+h2 {
     color: var(--cor-principal);
+    border-bottom: 3px solid var(--cor-secundaria);
+    padding-bottom: 8px;
     margin-bottom: 15px;
-    border-left: 5px solid var(--cor-secundaria);
-    padding-left: 10px;
+    font-size: 1.6rem;
 }
 
 .sub-painel {
-    color: #7f8c8d;
+    color: #718096;
+    font-size: 0.95rem;
     margin-bottom: 20px;
 }
 
+/* ==========================================================================
+   5. RADAR METEOROLÓGICO (IFRAME)
+   ========================================================================== */
+.radar-section {
+    background: var(--cor-cards);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    margin-top: 30px;
+}
+
 .radar-container {
+    position: relative;
     width: 100%;
-    height: 400px;
+    height: 450px;
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid #cbd5e1;
+    border: 2px solid #e2e8f0;
 }
 
 .radar-frame {
@@ -143,33 +163,39 @@ body {
 }
 
 .radar-legendas {
-    margin-top: 15px;
+    margin-top: 20px;
     background: #f8fafc;
     padding: 15px;
-    border-radius: 6px;
+    border-radius: 8px;
+}
+
+.radar-legendas h3 {
+    font-size: 1.1rem;
+    color: var(--cor-principal);
+    margin-bottom: 10px;
 }
 
 .legenda-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .legenda-item {
     display: flex;
     align-items: center;
-    font-size: 0.88rem;
+    font-size: 0.9rem;
 }
 
 .cor-bloco {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     border-radius: 4px;
-    margin-right: 8px;
+    margin-right: 10px;
     flex-shrink: 0;
 }
 
-.c-verde { background-color: #2ecc71; }
+.c-verde { background-color: #27ae60; }
 .c-amarelo { background-color: #f1c40f; }
 .c-vermelho { background-color: #e74c3c; }
 
@@ -187,19 +213,17 @@ body {
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px; /* Aumentado o espaço para acomodar a rotação */
+    gap: 30px;
     margin-top: 20px;
-    perspective: 1000px; /* Cria o ambiente 3D para o efeito de virar */
+    perspective: 1000px;
 }
 
-/* Estrutura externa do card */
 .flash-card {
     background-color: transparent;
     height: 320px;
     cursor: pointer;
 }
 
-/* Container interno que segura as duas faces */
 .flash-card-inner {
     position: relative;
     width: 100%;
@@ -209,17 +233,15 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Gatilho de animação: Vira o card ao passar o mouse */
 .flash-card:hover .flash-card-inner {
     transform: rotateY(180deg);
 }
 
-/* Configurações básicas comuns às duas faces */
 .flash-card-front, .flash-card-back {
     position: absolute;
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden; /* Esconde a face oposta */
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: 8px;
     padding: 25px;
@@ -231,7 +253,6 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.03);
 }
 
-/* Estilo específico da Frente */
 .flash-card-front {
     background-color: #f8fafc;
     color: var(--cor-textos);
@@ -250,11 +271,10 @@ body {
     font-style: italic;
 }
 
-/* Estilo específico do Verso */
 .flash-card-back {
     background-color: var(--cor-principal);
     color: white;
-    transform: rotateY(180deg); /* Começa virado de costas */
+    transform: rotateY(180deg);
     justify-content: center;
 }
 
@@ -293,120 +313,224 @@ body {
     margin-top: 15px;
 }
 
-.tabela-impactos th {
-    background-color: var(--cor-principal);
-    color: white;
+.tabela-impactos th, .tabela-impactos td {
+    border: 1px solid #e2e8f0;
     padding: 12px;
     text-align: left;
 }
 
-.tabela-impactos td {
-    padding: 12px;
-    border-bottom: 1px solid #e2e8f0;
-    font-size: 0.9rem;
+.tabela-impactos th {
+    background-color: var(--cor-principal);
+    color: white;
+}
+
+.tabela-impactos tr:nth-child(even) {
+    background-color: #f8fafc;
 }
 
 /* ==========================================================================
-   8. COMPONENTE DO QUIZ E SIMULADORES (LOGIC DE STATUS)
+   8. COMPONENTE INTERATIVO: QUIZ (AJUSTADO PARA TEXTOS LONGOS)
    ========================================================================== */
 .quiz-container {
-    background: #eef7f2;
-    border: 1px solid var(--cor-secundaria);
-    padding: 20px;
+    background-color: #f8fafc;
+    padding: 25px;
     border-radius: 8px;
+    border-left: 5px solid var(--cor-secundaria);
     text-align: center;
 }
 
-.botoes-quiz button, .simulador-controle button {
+.botoes-quiz button {
     background-color: var(--cor-principal);
     color: white;
     border: none;
-    padding: 10px 20px;
-    margin: 8px;
-    border-radius: 6px;
+    padding: 14px 20px;
+    margin: 6px 0;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 500;
+    text-align: left;
+    width: 100%;
+    font-size: 0.95rem;
+    line-height: 1.4;
     transition: background-color 0.2s, transform 0.1s;
 }
 
-.botoes-quiz button:hover, .simulador-controle button:hover {
-    background-color: var(--cor-secundaria);
-    transform: scale(1.02);
+.botoes-quiz button:hover:not(:disabled) {
+    background-color: #2d6a4f;
+    transform: translateX(3px);
+}
+
+.botoes-quiz button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#btn-proxima {
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* ==========================================================================
+   9. PAINEL DE TOMADA DE DECISÃO E REGRAS CLIMÁTICAS
+   ========================================================================== */
+.ferramentas-section {
+    background: var(--cor-cards);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    margin-top: 30px;
 }
 
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
+    gap: 20px;
 }
 
 .card {
+    background: #f8fafc;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .card-image-sim {
-    background: #e8f5e9;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3.5rem;
+    background: #e2e8f0;
+    font-size: 3rem;
+    padding: 20px;
+    text-align: center;
 }
 
-.card-body { padding: 20px; }
+.card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-body h3 {
+    color: var(--cor-principal);
+    margin-bottom: 10px;
+}
+
+.card-body p {
+    font-size: 0.9rem;
+    color: #4a5568;
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
 
 .status-box {
-    background: white;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    padding: 12px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-top: 15px;
+    background: white;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #edf2f7;
 }
 
-.status-luz { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; }
-.cinza { background: #95a5a6; }
-.verde-ativo { background: #2ecc71; box-shadow: 0 0 10px #2ecc71; }
-.vermelho-ativo { background: #e74c3c; box-shadow: 0 0 10px #e74c3c; }
-.status-texto { font-size: 0.88rem; font-weight: bold; }
+.status-luz {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.cinza { background-color: #a0aec0; }
+.verde-ativo { background-color: #2ecc71; box-shadow: 0 0 8px #2ecc71; }
+.vermelho-ativo { background-color: #e74c3c; box-shadow: 0 0 8px #e74c3c; }
+
+.status-texto {
+    font-size: 0.85rem !important;
+    font-weight: bold;
+    margin: 0 !important;
+}
 
 .simulador-controle {
     margin-top: 25px;
-    text-align: center;
-    background: #f8fafc;
-    padding: 15px;
+    background: #edf2f7;
+    padding: 20px;
     border-radius: 8px;
-    border: 1px dashed #cbd5e1;
+}
+
+.simulador-controle h3 {
+    font-size: 1.1rem;
+    color: var(--cor-principal);
+    margin-bottom: 8px;
+}
+
+.botoes-simulador {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.botoes-simulador button {
+    background: var(--cor-principal);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.botoes-simulador button:hover {
+    background: #2d6a4f;
 }
 
 /* ==========================================================================
-   9. CONCLUSÃO E RODAPÉ (FOOTER)
+   10. SEÇÃO DE CONCLUSÃO E FOOTER
    ========================================================================== */
-.conclusao-section { margin-top: 30px; }
-.conclusao-conteudo { display: flex; flex-direction: column; gap: 20px; }
-.conclusao-bloco { background: #f8fafc; border-left: 4px solid var(--cor-principal); padding: 20px; border-radius: 0 8px 8px 0; }
-.final-highlight { border-left-color: var(--cor-secundaria); background: #eef7f2; }
+.conclusao-section {
+    background: var(--cor-cards);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    margin-top: 30px;
+}
+
+.conclusao-conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.conclusao-bloco h3 {
+    color: var(--cor-principal);
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.final-highlight {
+    background-color: #e8f5e9;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 5px solid var(--cor-principal);
+}
 
 footer {
-    background-color: #112d24;
-    color: #a3b8ad;
+    background-color: var(--cor-principal);
+    color: white;
     text-align: center;
     padding: 25px;
-    font-size: 0.9rem;
     margin-top: 40px;
+    font-size: 0.9rem;
 }
 
-/* ==========================================================================
-   10. MEDIA QUERIES (RESPONSIVIDADE COMPLETA OBRIGATÓRIA)
-   ========================================================================== */
-@media (max-width: 768px) {
-    .navbar { flex-direction: column; gap: 10px; }
-    .navbar nav a { margin: 0 8px; font-size: 0.85rem; }
-    .hero-content h1 { font-size: 1.9rem; }
-    .radar-container { height: 280px; }
-    .site-section, .ferramentas-section, .informativo-section { padding: 20px; }
+footer p:last-child {
+    font-size: 0.8rem;
+    color: var(--cor-secundaria);
+    margin-top: 5px;
 }
