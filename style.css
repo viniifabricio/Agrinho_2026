@@ -174,25 +174,103 @@ body {
 .c-vermelho { background-color: #e74c3c; }
 
 /* ==========================================================================
-   6. GRID INFORMATIVO COM EFEITO DE ANIMAÇÃO HOVER
+   6. SEÇÃO INFORMATIVA - ANIMAÇÃO 3D FLASH CARDS
    ========================================================================== */
+.informativo-section {
+    background: var(--cor-cards);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    margin-top: 30px;
+}
+
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    gap: 30px; /* Aumentado o espaço para acomodar a rotação */
+    margin-top: 20px;
+    perspective: 1000px; /* Cria o ambiente 3D para o efeito de virar */
 }
 
-.info-card {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+/* Estrutura externa do card */
+.flash-card {
+    background-color: transparent;
+    height: 320px;
+    cursor: pointer;
+}
+
+/* Container interno que segura as duas faces */
+.flash-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* Gatilho de animação: Vira o card ao passar o mouse */
+.flash-card:hover .flash-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Configurações básicas comuns às duas faces */
+.flash-card-front, .flash-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Esconde a face oposta */
+    backface-visibility: hidden;
     border-radius: 8px;
-    padding: 20px;
-    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
 }
 
-.info-card:hover {
-    transform: translateY(-5px); /* Pequena flutuação suave para cima */
-    box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+/* Estilo específico da Frente */
+.flash-card-front {
+    background-color: #f8fafc;
+    color: var(--cor-textos);
+}
+
+.flash-card-front h3 {
+    color: var(--cor-principal);
+    font-size: 1.25rem;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.instrucao-virar {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    font-style: italic;
+}
+
+/* Estilo específico do Verso */
+.flash-card-back {
+    background-color: var(--cor-principal);
+    color: white;
+    transform: rotateY(180deg); /* Começa virado de costas */
+    justify-content: center;
+}
+
+.flash-card-back h3 {
+    margin-bottom: 12px;
+    color: var(--cor-secundaria);
+    font-size: 1.2rem;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.flash-card-back p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    text-align: justify;
 }
 
 .info-tag {
@@ -203,7 +281,7 @@ body {
     font-weight: bold;
     padding: 4px 10px;
     border-radius: 4px;
-    margin-bottom: 12px;
+    text-transform: uppercase;
 }
 
 /* ==========================================================================
