@@ -76,7 +76,7 @@ body {
 .hero-section {
     position: relative;
     /* Conecta diretamente com a sua imagem Agrinhop.jpg */
-    background: url('Agrinhop.png') no-repeat center center/cover;
+    background: url('Agrinho.png') no-repeat center center/cover;
     height: 380px; /* Aumentei um pouquinho o tamanho para valorizar a foto */
     display: flex;
     align-items: center;
