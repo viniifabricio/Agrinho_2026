@@ -135,13 +135,18 @@
         <section id="quiz" class="site-section">
             <h2>🧠 Quiz Técnico: Sustentabilidade e Tecnologia</h2>
             <p class="sub-painel">Teste seus conhecimentos sobre o funcionamento inteligente do nosso sistema!</p>
+            
             <div class="quiz-container">
-                <p id="pergunta-quiz">Por que devemos evitar a pulverização quando o radar indica ventos acima de 20 km/h?</p>
-                <div class="botoes-quiz">
-                    <button onclick="responderQuiz(true)">Para evitar a deriva e proteger matas nativas e abelhas</button>
-                    <button onclick="responderQuiz(false)">Apenas para economizar combustível do trator</button>
+                <h3 id="status-pergunta">Pergunta 1 de 4</h3>
+                <p id="pergunta-quiz" style="font-size: 1.1rem; font-weight: bold; margin: 15px 0; color: var(--cor-principal);"></p>
+                
+                <div class="botoes-quiz" style="display: flex; flex-direction: column; gap: 10px; max-width: 600px; margin: 0 auto;">
+                    <button id="btn-opcao-a" onclick="verificarResposta(0)" style="text-align: left; padding: 12px; width: 100%; font-size: 0.95rem;"></button>
+                    <button id="btn-opcao-b" onclick="verificarResposta(1)" style="text-align: left; padding: 12px; width: 100%; font-size: 0.95rem;"></button>
                 </div>
-                <p id="resultado-quiz"></p>
+                
+                <p id="resultado-quiz" style="margin-top: 15px; font-weight: bold; min-height: 24px; padding: 0 10px;"></p>
+                <button id="btn-proxima" onclick="proximaPergunta()" style="display: none; background-color: var(--cor-secundaria); margin-top: 10px;">Avançar Próxima Pergunta ➡️</button>
             </div>
         </section>
 
@@ -197,7 +202,7 @@
                 </div>
 
                 <div class="conclusao-bloco final-highlight">
-                    <h3>CONCLUSION</h3>
+                    <h3>CONCLUSÃO</h3>
                     <p>O tema “Agro Forte, Futuro Sustentável” mostra que o desenvolvimento do agronegócio precisa caminhar junto com a preservação do meio ambiente e o uso consciente da tecnologia. A agricultura sustentável representa um caminho importante para garantir alimentos de qualidade, preservar os recursos naturais e melhorar a vida das futuras gerações. Com inovação, educação ambiental e responsabilidade social, é possível construir um campo mais produtivo, moderno e sustentável.</p>
                 </div>
             </div>
