@@ -71,12 +71,13 @@ body {
 }
 
 /* ==========================================================================
-   4. BANNER PRINCIPAL (HERO SECTION)
-   ========================================================================== */
+   4. BANNER PRINCIPAL (HERO SECTION) COM A SUA IMAGEM PERSONALIZADA
+   ========================================================================= */
 .hero-section {
     position: relative;
-    background: url('https://images.unsplash.com/photo-1592982537447-744077110934?auto=format&fit=crop&q=80&w=1200') no-repeat center center/cover;
-    height: 350px;
+    /* Conecta diretamente com a sua imagem Agrinhop.jpg */
+    background: url('Agrinhop.png') no-repeat center center/cover;
+    height: 380px; /* Aumentei um pouquinho o tamanho para valorizar a foto */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -86,26 +87,12 @@ body {
 
 .overlay {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(27, 77, 62, 0.8);
-}
-
-.hero-content {
-    position: relative;
-    z-index: 1;
-}
-
-.hero-content h1 {
-    font-size: 2.8rem;
-    margin-bottom: 10px;
-}
-
-.badge {
-    background: var(--cor-secundaria);
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 0.9rem;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    /* Esse fundo escurece a imagem de leve para as letras brancas se destacarem */
+    background: rgba(17, 45, 36, 0.5); 
 }
 
 /* ==========================================================================
