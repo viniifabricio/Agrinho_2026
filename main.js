@@ -179,7 +179,7 @@ function simularClima(velocidadeVento, umidadeAr) {
         textoPulverizacao.innerHTML = `<strong>Aviso:</strong> Vento muito fraco (${velocidadeVento} km/h). Risco de inversão térmica.`;
     } else {
         luzPulverizacao.className = "status-luz verde-ativo";
-        textoPulverizacao.innerHTML = ` = `<strong>Liberado:</strong> Vento a ${velocidadeVento} km/h. Condição ideal para aplicação segura.`;
+        textoPulverizacao.innerHTML = `<strong>Liberado:</strong> Vento a ${velocidadeVento} km/h. Condição ideal para aplicação segura.`;
     }
 
     if (umidadeAr > 80) {
