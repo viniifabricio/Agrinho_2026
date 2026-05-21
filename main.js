@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PROJETO DESENVOLVIDO PARA O CONCURSO AGRINHO 2026 - LOGICA DO FRONT-END
+   PROJETO DESENVOLVIDO PARA O CONCURSO AGRINHO 2026 - LÓGICA DO FRONT-END
    ========================================================================= */
 
 // --- BANCO DE DADOS LOCAL DO QUIZ ---
@@ -57,41 +57,34 @@ function inicializarQuizEPainel() {
 }
 
 /* ==========================================================================
-   2. ACESSIBILIDADE - LEITURA DE VOZ
+   2. ACESSIBILIDADE - LEITURA DE VOZ (VERSÃO ORIGINAL REVERTIDA)
    ========================================================================= */
 function toggleLeituraVoz() {
     const btnVoz = document.getElementById("btn-voz");
     
     if (!vozAtiva) {
-        sinteseVoz.cancel(); // Zera qualquer voz travada no sistema
         vozAtiva = true;
         btnVoz.innerText = "🛑 Parar Leitura";
         btnVoz.classList.add("btn-ativo");
         
-        let textoParaLer = "EcoRadar Agro. Desenvolvedor Vinicius Montagna Fabricio. Colégio Estadual Cívico-Militar Stella Maris. Andirá Paraná. Plataforma digital criada para o equilíbrio entre a força da produção e a proteção do meio ambiente.";
+        let textoParaLer = "Bem-vindo ao EcoRadar Agro. Categoria Front-End, Agrinho 2026. ";
+        textoParaLer += "Desenvolvedor: Vinicius Montagna Fabricio. Escola: Colégio Estadual Cívico-Militar Stella Maris, Andirá Paraná. ";
+        textoParaLer += "Sobre o Projeto: O EcoRadar Agro é uma plataforma digital desenvolvida para auxiliar pequenos e grandes produtores rurais a tomarem decisões inteligentes e ecológicas no campo.";
         
         utteranceAtual = new SpeechSynthesisUtterance(textoParaLer);
         utteranceAtual.lang = 'pt-BR';
-        utteranceAtual.rate = 1.05;
+        utteranceAtual.rate = 1.1;
         
         utteranceAtual.onend = function() {
-            pararLeituraVoz();
-        };
-        utteranceAtual.onerror = function() {
-            pararLeituraVoz();
+            vozAtiva = false;
+            btnVoz.innerText = "🔊 Ouvir Site";
+            btnVoz.classList.remove("btn-ativo");
         };
         
         sinteseVoz.speak(utteranceAtual);
     } else {
-        pararLeituraVoz();
-    }
-}
-
-function pararLeituraVoz() {
-    vozAtiva = false;
-    sinteseVoz.cancel();
-    const btnVoz = document.getElementById("btn-voz");
-    if (btnVoz) {
+        vozAtiva = false;
+        sinteseVoz.cancel();
         btnVoz.innerText = "🔊 Ouvir Site";
         btnVoz.classList.remove("btn-ativo");
     }
@@ -186,7 +179,7 @@ function simularClima(velocidadeVento, umidadeAr) {
         textoPulverizacao.innerHTML = `<strong>Aviso:</strong> Vento muito fraco (${velocidadeVento} km/h). Risco de inversão térmica.`;
     } else {
         luzPulverizacao.className = "status-luz verde-ativo";
-        textoPulverizacao.innerHTML = `<strong>Liberado:</strong> Vento a ${velocidadeVento} km/h. Condição ideal para aplicação segura.`;
+        textoPulverizacao.innerHTML = ` = `<strong>Liberado:</strong> Vento a ${velocidadeVento} km/h. Condição ideal para aplicação segura.`;
     }
 
     if (umidadeAr > 80) {
