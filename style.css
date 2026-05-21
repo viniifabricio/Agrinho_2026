@@ -184,15 +184,38 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* ESTILO PADRÃO DO BLOCO DE CRÉDITOS */
+/* REFINAMENTO DESIGN DO BLOCO DE CRÉDITOS (MELHORIA N° 3) */
 .creditos-bloco {
-    margin-top: 15px;
-    padding: 12px;
+    margin-top: 20px;
+    padding: 16px;
     background-color: #f8fafc;
-    border-left: 4px solid var(--cor-principal);
-    border-radius: 4px;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    border: 1px solid #e2e8f0;
+    border-left: 5px solid var(--cor-principal);
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.creditos-titulo {
+    font-weight: bold;
+    color: var(--cor-principal);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.creditos-item {
+    font-size: 0.92rem;
+    margin-bottom: 4px;
+    color: var(--cor-textos);
+}
+
+.creditos-item:last-child {
+    margin-bottom: 0;
+}
+
+.creditos-item span {
+    font-weight: 600;
 }
 
 .radar-container {
@@ -444,7 +467,7 @@ footer {
 }
 
 /* ==========================================================================
-   8. CLASSE EXCLUSIVA PARA ALTO CONTRASTE (CORRIGIDO REGRAS DE SUMIÇO DE LETRAS)
+   8. CLASSE EXCLUSIVA PARA ALTO CONTRASTE
    ========================================================================== */
 body.alto-contraste {
     background-color: #000000 !important;
@@ -463,14 +486,15 @@ body.alto-contraste .botoes-simulador button {
 body.alto-contraste h2,
 body.alto-contraste h3,
 body.alto-contraste strong,
-body.alto-contraste #pergunta-quiz {
+body.alto-contraste #pergunta-quiz,
+body.alto-contraste .creditos-titulo {
     color: #ffff00 !important;
 }
 
-/* Força os textos de apoio, subtítulos e parágrafos a ficarem brancos no modo escuro */
 body.alto-contraste p,
 body.alto-contraste .sub-painel,
-body.alto-contraste .instrucao-virar {
+body.alto-contraste .instrucao-virar,
+body.alto-contraste .creditos-item {
     color: #ffffff !important;
 }
 
@@ -490,10 +514,9 @@ body.alto-contraste .status-box {
     border: 2px solid #ffffff !important;
 }
 
-/* Correção específica do Bloco de Créditos no Alto Contraste */
+/* Correção do Bloco de Créditos no Alto Contraste */
 body.alto-contraste .creditos-bloco {
     background-color: #000000 !important;
-    color: #ffffff !important;
     border: 2px solid #ffff00 !important;
 }
 
