@@ -25,7 +25,7 @@
             </div>
             
             <div class="acessibilidade-botoes">
-                <button id="btn-contraste" onclick="toggleContraste()" class="nav-btn-acessivel" title="Ativar alto contraste">Publico</button>
+                <button id="btn-contraste" onclick="toggleContraste()" class="nav-btn-acessivel" title="Ativar alto contraste">Contraste</button>
                 <button id="btn-voz" onclick="toggleLeituraVoz()" class="nav-btn-acessivel" title="Ouvir Site">🔊 Ouvir Site</button>
             </div>
         </nav>
@@ -46,7 +46,7 @@
             <h2>Sobre o Projeto</h2>
             <p>O <strong>EcoRadar Agro</strong> é uma plataforma digital desenvolvida para auxiliar pequenos e grandes produtores rurais a tomarem decisões inteligentes e ecológicas no campo. O sistema une a tecnologia de ponta do monitoramento climático com práticas sustentáveis, garantindo um agro forte que protege o futuro do nosso planeta.</p>
             
-            <div style="margin-top: 15px; padding: 12px; background-color: #f8fafc; border-left: 4px solid var(--cor-principal); border-radius: 4px; font-size: 0.9rem; line-height: 1.5;" class="creditos-bloco">
+            <div class="creditos-bloco">
                 <strong>💻 Desenvolvedor:</strong> Vinicius Montagna Fabricio<br>
                 <strong>🏫 Escola:</strong> Colégio Estadual Cívico-Militar Stella Maris<br>
                 <strong>📍 Cidade:</strong> Andirá - PR
@@ -213,8 +213,8 @@
             
             <div class="conclusao-conteudo">
                 <div class="conclusao-bloco">
-                    <h3>DESAFIOS DO FUTURO</h3>
-                    <p>O grande desafio do campo é mitigar impactos históricos, como a escassez de água e o uso inequado de insumos. É aqui que a tecnologia se torna indispensável: investimentos em agricultura de precisão e monitoramento digital oferecem soluções reais para que o produtor aumente sua colheita enquanto protege ativamente os ecossistemas, construindo o verdadeiro equilíbrio ecológico.</p>
+                    <h3>DESAAIOS DO FUTURO</h3>
+                    <p>O grande desafio do campo é mitigar impactos históricos, como a escassez de água e o uso inadequado de insumos. É aqui que a tecnologia se torna indispensável: investimentos em agricultura de precisão e monitoramento digital oferecem soluções reais para que o produtor augmente sua colheita enquanto protege ativamente os ecossistemas, construindo o verdadeiro equilíbrio ecológico.</p>
                 </div>
 
                 <div class="conclusao-bloco final-highlight">
@@ -240,7 +240,6 @@
     </div>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
-        // Correção de inicialização do Widget externo
         window.onload = function() {
             new window.VLibras.Widget('https://vlibras.gov.br/app');
             inicializarQuizEPainel();
