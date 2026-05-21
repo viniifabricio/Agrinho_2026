@@ -127,20 +127,18 @@ function simularClima(velocidadeVento, proximidadeChuva) {
         textoIrrigacao.innerText = `Tempo Seco (${proximidadeChuva}%). Irrigação LIBERADA para a saúde do plantio.`;
     }
 }
-
 /* ==========================================================================
-   3. ALTO CONTRASTE
+   3. ALTO CONTRASTE (CORRIGIDO)
    ========================================================================= */
 function toggleContraste() {
-    document.body.classList.toggle("alto-contrast");
+    document.body.classList.toggle("alto-contraste");
     const btn = document.getElementById("btn-contraste");
     if (document.body.classList.contains("alto-contraste")) {
-        btn.innerText = "Normal";
+        btn.innerText = "☀️ Modo Normal";
     } else {
-        btn.innerText = "Contraste";
+        btn.innerText = "🌓 Contraste";
     }
 }
-
 /* ==========================================================================
    4. LEITOR DE TELA ROBUSTO (FALA TODO O CONTEÚDO)
    ========================================================================= */
