@@ -57,7 +57,7 @@ function inicializarQuizEPainel() {
 }
 
 /* ==========================================================================
-   2. ACESSIBILIDADE - LEITURA DE VOZ
+   2. ACESSIBILIDADE - LEITURA DE VOZ (LÊ O SITE INTEIRO)
    ========================================================================= */
 function toggleLeituraVoz() {
     const btnVoz = document.getElementById("btn-voz");
@@ -67,13 +67,65 @@ function toggleLeituraVoz() {
         btnVoz.innerText = "🛑 Parar Leitura";
         btnVoz.classList.add("btn-ativo");
         
-        let textoParaLer = "Bem-vindo ao EcoRadar Agro. Categoria Front-End, Agrinho 2026. ";
-        textoParaLer += "Desenvolvedor: Vinicius Montagna Fabricio. Escola: Colégio Estadual Cívico-Militar Stella Maris, Andirá Paraná. ";
-        textoParaLer += "Sobre o Projeto: O EcoRadar Agro é uma plataforma digital desenvolvida para auxiliar pequenos e grandes produtores rurais a tomarem decisões inteligentes e ecológicas no campo.";
+        // 1. Coleta os dados principais de identificação
+        let textoParaLer = "Iniciando leitura do site EcoRadar Agro. Categoria Front-End, Agrinho 2026. ";
+        textoParaLer += "Desenvolvedor: Vinicius Montagna Fabricio. Escola: Colégio Estadual Cívico-Militar Stella Maris, Cidade: Andirá Paraná. ";
         
+        // 2. Busca o conteúdo da seção "Sobre"
+        const secaoIntro = document.getElementById("intro");
+        if (secaoIntro) {
+            textoParaLer += "Sobre o Projeto: " + secaoIntro.querySelector("p").innerText + " ";
+        }
+        
+        // 3. Adiciona as informações explicativas do Radar
+        const secaoRadar = document.getElementById("radar-secao");
+        if (secaoRadar) {
+            textoParaLer += "Seção do Radar Meteorológico. Como entender as cores do Radar: ";
+            const itensLegenda = secaoRadar.querySelectorAll(".legenda-item");
+            itensLegenda.forEach(item => {
+                textoParaLer += item.innerText + ". ";
+            });
+        }
+        
+        // 4. Adiciona as perguntas e respostas dos Flash Cards Informativos
+        textoParaLer += "Espaço Informativo sobre Agro Sustentável: ";
+        const cards = document.querySelectorAll(".flash-card");
+        cards.forEach((card, index) => {
+            const tag = card.querySelector(".info-tag") ? card.querySelector(".info-tag").innerText : "";
+            const pergunta = card.querySelector(".flash-card-front h3") ? card.querySelector(".flash-card-front h3").innerText : "";
+            const respostaTitulo = card.querySelector(".flash-card-back h3") ? card.querySelector(".flash-card-back h3").innerText : "";
+            const respostaCorpo = card.querySelector(".flash-card-back p") ? card.querySelector(".flash-card-back p").innerText : "";
+            
+            textoParaLer += `Card número ${index + 1}, tema ${tag}: Pergunta: ${pergunta} Resposta: ${respostaTitulo}. Descrição: ${respostaCorpo} `;
+        });
+        
+        // 5. Adiciona o conteúdo do Painel de Tomada de Decisão
+        textoParaLer += "Painel de Tomada de Decisão Sustentável. ";
+        const cardsDecisao = document.querySelectorAll("#painel .card");
+        cardsDecisao.forEach(card => {
+            const tituloDecisao = card.querySelector("h3") ? card.querySelector("h3").innerText : "";
+            const descDecisao = card.querySelector("p") ? card.querySelector("p").innerText : "";
+            textoParaLer += `${tituloDecisao}: ${descDecisao} `;
+        });
+        
+        // 6. Adiciona a Conclusão do projeto
+        const secaoConclusao = document.getElementById("conclusao");
+        if (secaoConclusao) {
+            textoParaLer += "Conclusões Finais do Projeto. ";
+            const blocosConclusao = secaoConclusao.querySelectorAll(".conclusao-bloco");
+            blocosConclusao.forEach(bloco => {
+                const tit = bloco.querySelector("h3") ? bloco.querySelector("h3").innerText : "";
+                const texto = bloco.querySelector("p") ? bloco.querySelector("p").innerText : "";
+                textoParaLer += `${tit}: ${texto} `;
+            });
+        }
+
+        textoParaLer += "Fim da leitura do documento.";
+
+        // Configuração final da síntese de voz do navegador
         utteranceAtual = new SpeechSynthesisUtterance(textoParaLer);
         utteranceAtual.lang = 'pt-BR';
-        utteranceAtual.rate = 1.1;
+        utteranceAtual.rate = 1.05; // Velocidade confortável de audição
         
         utteranceAtual.onend = function() {
             vozAtiva = false;
