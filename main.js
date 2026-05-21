@@ -57,109 +57,59 @@ function inicializarQuizEPainel() {
 }
 
 /* ==========================================================================
-   2. ACESSIBILIDADE - LEITURA DE VOZ (LÊ O SITE INTEIRO - VERSÃO ESTÁVEL)
+   2. ACESSIBILIDADE - LEITURA DE VOZ (VERSÃO DEFINITIVA COM TEXTO ESTRUTURADO)
    ========================================================================= */
-let blocosDeTexto = [];
-let indiceBlocoAtual = 0;
-
 function toggleLeituraVoz() {
     const btnVoz = document.getElementById("btn-voz");
     
     if (!vozAtiva) {
-        sinteseVoz.cancel(); // Garante que não há nenhuma leitura travada
+        sinteseVoz.cancel(); // Para qualquer áudio residual travado no navegador
         vozAtiva = true;
         btnVoz.innerText = "🛑 Parar Leitura";
         btnVoz.classList.add("btn-ativo");
         
-        // 1. Monta a lista de textos por seções para não travar o navegador
-        blocosDeTexto = [];
-        
-        blocosDeTexto.push("Iniciando leitura do site EcoRadar Agro. Categoria Front-End, Agrinho 2026.");
-        blocosDeTexto.push("Desenvolvedor: Vinicius Montagna Fabricio. Escola: Colégio Estadual Cívico-Militar Stella Maris. Cidade: Andirá Paraná.");
-        
-        const secaoIntro = document.getElementById("intro");
-        if (secaoIntro && secaoIntro.querySelector("p")) {
-            blocosDeTexto.push("Sobre o Projeto: " + secaoIntro.querySelector("p").innerText);
-        }
-        
-        const secaoRadar = document.getElementById("radar-secao");
-        if (secaoRadar) {
-            blocosDeTexto.push("Seção do Radar Meteorológico em Tempo Real. Como entender as cores do Radar:");
-            const itensLegenda = secaoRadar.querySelectorAll(".legenda-item");
-            itensLegenda.forEach(item => {
-                blocosDeTexto.push(item.innerText);
-            });
-        }
-        
-        blocosDeTexto.push("Espaço Informativo sobre Agro Sustentável.");
-        const cards = document.querySelectorAll(".flash-card");
-        cards.forEach((card, index) => {
-            const tag = card.querySelector(".info-tag") ? card.querySelector(".info-tag").innerText : "";
-            const pergunta = card.querySelector(".flash-card-front h3") ? card.querySelector(".flash-card-front h3").innerText : "";
-            const respostaTitulo = card.querySelector(".flash-card-back h3") ? card.querySelector(".flash-card-back h3").innerText : "";
-            const respostaCorpo = card.querySelector(".flash-card-back p") ? card.querySelector(".flash-card-back p").innerText : "";
+        // Texto explicativo e completo estruturado diretamente para o motor de voz
+        let textoExplicativo = "Iniciando a leitura completa do site EcoRadar Agro. " +
+            "Este projeto foi desenvolvido para o Concurso Agrinho 2026, na Categoria Front-End. " +
+            "Identificação do desenvolvedor: Aluno Vinicius Montagna Fabricio. " +
+            "Instituição de ensino: Colégio Estadual Cívico-Militar Stella Maris. " +
+            "Município: Andirá, Paraná. " +
             
-            blocosDeTexto.push(`Card número ${index + 1}, tema ${tag}. Pergunta: ${pergunta}`);
-            blocosDeTexto.push(`Resposta: ${respostaTitulo}. Descrição: ${respostaCorpo}`);
-        });
-        
-        blocosDeTexto.push("Painel de Tomada de Decisão Sustentável.");
-        const cardsDecisao = document.querySelectorAll("#painel .card");
-        cardsDecisao.forEach(card => {
-            const tituloDecisao = card.querySelector("h3") ? card.querySelector("h3").innerText : "";
-            const descDecisao = card.querySelector("p") ? card.querySelector("p").innerText : "";
-            blocosDeTexto.push(`${tituloDecisao}: ${descDecisao}`);
-        });
-        
-        const secaoConclusao = document.getElementById("conclusao");
-        if (secaoConclusao) {
-            blocosDeTexto.push("Explicações Complementares e Impacto Prático.");
-            const blocosConclusao = secaoConclusao.querySelectorAll(".conclusao-bloco");
-            blocosConclusao.forEach(bloco => {
-                const tit = bloco.querySelector("h3") ? bloco.querySelector("h3").innerText : "";
-                const texto = bloco.querySelector("p") ? bloco.querySelector("p").innerText : "";
-                blocosDeTexto.push(`${tit}: ${texto}`);
-            });
-        }
+            "Sobre o projeto: O EcoRadar Agro é uma plataforma digital criada para auxiliar pequenos e grandes produtores rurais a tomarem decisões inteligentes e ecológicas no campo. O sistema une a tecnologia de ponta do monitoramento climático com práticas sustentáveis, garantindo um agro forte que protege o futuro do nosso planeta. " +
+            
+            "Na seção do Radar Meteorológico em Tempo Real, o sistema monitora o avanço das nuvens de chuva para o planejamento das ações no campo. A legenda explica as cores do radar: A cor verde indica chuva fraca, ideal para infiltração de água no solo. A cor amarela indica chuva moderada, exigindo cautela na colheita e transporte. A cor vermelha indica tempo severo e tempestades, alertando o produtor para proteger o solo contra a erosão. " +
+            
+            "No Espaço Informativo, apresentamos três conceitos centrais. Primeiro, sobre Tecnologia, o foco do Programa Agrinho 2026 é Agro Forte, Futuro Sustentável, unindo produção e responsabilidade social. Segundo, sobre Sustentabilidade, destaca-se o equilíbrio de recursos através da agricultura digital, drones e sensores inteligentes. Terceiro, sobre Inovação, o grande desafio do agronegócio é garantir a segurança alimentar aumentando a produtividade sem comprometer a biodiversidade local. " +
+            
+            "Na seção de Impactos Positivos do Agro Digital, a tabela demonstra benefícios práticos: decisões em tempo real para o produtor, alimentos mais saudáveis para as cidades e a proteção direta de rios e polinizadores contra a deriva química para o meio ambiente. " +
+            
+            "O site conta também com um Painel de Tomada de Decisão Sustentável. Este painel analisa o clima e emite alertas automáticos. Para a pulverização consciente, o sistema bloqueia a aplicação se o vento estiver acima de vinte quilômetros por hora para evitar a deriva química. Para a irrigação inteligente, o sistema desliga as bombas se detectar chuva iminente, economizando água doce e energia elétrica. " +
+            
+            "Concluindo o projeto, ressalta-se que o desenvolvimento do agronegócio precisa caminhar junto com a preservação ambiental. O tema Agro Forte, Futuro Sustentável prova que, com inovação, educação ambiental e responsabilidade social, é possível construir um campo muito mais produtivo, moderno e em perfeito equilíbrio com a natureza. " +
+            
+            "Fim da leitura do projeto EcoRadar Agro.";
 
-        blocosDeTexto.push("Fim da leitura do documento.");
-        
-        // 2. Inicia a leitura do primeiro bloco
-        indiceBlocoAtual = 0;
-        lerProximoBloco();
-        
-    } else {
-        pararLeituraCompleta();
-    }
-}
-
-function lerProximoBloco() {
-    if (!vozAtiva) return;
-
-    if (indiceBlocoAtual < blocosDeTexto.length) {
-        utteranceAtual = new SpeechSynthesisUtterance(blocosDeTexto[indiceBlocoAtual]);
+        utteranceAtual = new SpeechSynthesisUtterance(textoExplicativo);
         utteranceAtual.lang = 'pt-BR';
-        utteranceAtual.rate = 1.05;
+        utteranceAtual.rate = 1.05; // Velocidade natural e confortável de audição
         
-        // Quando terminar o bloco atual, chama o próximo automaticamente
+        // Evento executado quando o áudio termina naturalmente
         utteranceAtual.onend = function() {
-            indiceBlocoAtual++;
-            lerProximoBloco();
+            desativarBotaoVoz();
         };
         
-        // Caso ocorra um erro, pula para o próximo para não travar o botão
+        // Evento executado caso ocorra um erro de áudio no navegador
         utteranceAtual.onerror = function() {
-            indiceBlocoAtual++;
-            lerProximoBloco();
+            desativarBotaoVoz();
         };
         
         sinteseVoz.speak(utteranceAtual);
     } else {
-        pararLeituraCompleta();
+        desativarBotaoVoz();
     }
 }
 
-function pararLeituraCompleta() {
+function desativarBotaoVoz() {
     vozAtiva = false;
     sinteseVoz.cancel();
     const btnVoz = document.getElementById("btn-voz");
