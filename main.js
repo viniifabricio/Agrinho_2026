@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PROJETO DESENVOLVIDO PARA O CONCURSO AGRINHO 2026 - LÓGICA DO FRONT-END
+   PROJETO DESENVOLVIDO PARA O CONCURSO AGRINHO 2026 - LOGICA DO FRONT-END
    ========================================================================= */
 
 // --- BANCO DE DADOS LOCAL DO QUIZ ---
@@ -43,7 +43,7 @@ const perguntasQuiz = [
 ];
 
 let indicePerguntaAtual = 0;
-let acertosQuiz = 0; 
+let acertosQuiz = 0; // CONTADOR DE ACERTOS (MELHORIA N° 1)
 let vozAtiva = false;
 let sinteseVoz = window.speechSynthesis;
 let utteranceAtual = null;
@@ -53,11 +53,11 @@ let utteranceAtual = null;
    ========================================================================= */
 function inicializarQuizEPainel() {
     renderizarPerguntaQuiz();
-    simularClima(12, 15); 
+    simularClima(12, 15); // Configuração neutra inicial
 }
 
 /* ==========================================================================
-   2. ACESSIBILIDADE - LEITURA DE VOZ (VERSÃO ORIGINAL REVERTIDA)
+   2. ACESSIBILIDADE - LEITURA DE VOZ
    ========================================================================= */
 function toggleLeituraVoz() {
     const btnVoz = document.getElementById("btn-voz");
@@ -91,7 +91,7 @@ function toggleLeituraVoz() {
 }
 
 /* ==========================================================================
-   3. ALTO CONTRASTE 
+   3. ALTO CONTRASTE (CORRIGIDO)
    ========================================================================= */
 function toggleContraste() {
     document.body.classList.toggle("alto-contraste");
@@ -104,7 +104,7 @@ function toggleContraste() {
 }
 
 /* ==========================================================================
-   4. SISTEMA DO QUIZ INTERATIVO
+   4. SISTEMA DO QUIZ INTERATIVO COM CONTADOR (MELHORIA N° 1)
    ========================================================================= */
 function renderizarPerguntaQuiz() {
     const statusTxt = document.getElementById("status-pergunta");
@@ -115,6 +115,7 @@ function renderizarPerguntaQuiz() {
     const btnProxima = document.getElementById("btn-proxima");
 
     resultadoTxt.innerText = "";
+    resultadoTxt.style.color = "initial";
     btnProxima.style.display = "none";
     
     btnA.disabled = false;
@@ -127,9 +128,22 @@ function renderizarPerguntaQuiz() {
         btnA.innerText = dados.opcoes[0];
         btnB.innerText = dados.opcoes[1];
     } else {
+        // TELA FINAL COM CONTADOR ATUALIZADO (MELHORIA N° 1)
         statusTxt.innerText = "✨ Quiz Concluído!";
         perguntaTxt.innerText = `Você finalizou o teste ecológico!`;
-        resultadoTxt.innerHTML = `<span style='font-size:1.1rem;'>Você acertou <strong>${acertosQuiz} de ${perguntasQuiz.length}</strong> perguntas.</span>`;
+        
+        let feedbackAcertos = "";
+        if(acertosQuiz === perguntasQuiz.length) {
+            feedbackAcertos = "🏆 Excelente! Você possui consciência ecológica máxima!";
+        } else if(acertosQuiz >= 2) {
+            feedbackAcertos = "🌱 Muito bom! Você conhece bastante sobre o campo.";
+        } else {
+            feedbackAcertos = "📚 Vale a pena ler o Espaço Informativo para aprender mais.";
+        }
+        
+        resultadoTxt.innerHTML = `<span style="font-size:1.2rem; display:block; margin-bottom:8px;">Você acertou <strong>${acertosQuiz} de ${perguntasQuiz.length}</strong> perguntas.</span> ${feedbackAcertos}`;
+        resultadoTxt.style.color = "#2e7d32";
+        
         btnA.style.display = "none";
         btnB.style.display = "none";
     }
@@ -146,7 +160,7 @@ function verificarResposta(opcaoSelecionada) {
     btnB.disabled = true;
 
     if (opcaoSelecionada === dados.correta) {
-        acertosQuiz++; 
+        acertosQuiz++; // SOMA O ACERTO
         resultadoTxt.innerText = "✅ " + dados.explicacao;
         resultadoTxt.style.color = "#27ae60";
     } else {
@@ -171,6 +185,7 @@ function simularClima(velocidadeVento, umidadeAr) {
     const luzIrrigacao = document.getElementById("luz-irrigacao");
     const textoIrrigacao = document.getElementById("texto-irrigacao");
 
+    // Lógica para Pulverização (Baseado na velocidade do vento)
     if (velocidadeVento > 20) {
         luzPulverizacao.className = "status-luz vermelho-ativo";
         textoPulverizacao.innerHTML = `<strong>Bloqueado:</strong> Vento a ${velocidadeVento} km/h. Risco extremo de deriva química!`;
@@ -182,9 +197,10 @@ function simularClima(velocidadeVento, umidadeAr) {
         textoPulverizacao.innerHTML = `<strong>Liberado:</strong> Vento a ${velocidadeVento} km/h. Condição ideal para aplicação segura.`;
     }
 
+    // Lógica para Irrigação Inteligente (Baseado na umidade/proximidade de chuva)
     if (umidadeAr > 80) {
         luzIrrigacao.className = "status-luz vermelho-ativo";
-        textoIrrigacao.innerHTML = `<strong>Desligar:</strong> Umidade em ${umidadeAr}%. Chuva iminente detectada via satélite. Economize água!`;
+        textoIrrigacao.innerHTML = `<strong>Desligar:</strong> Umidade em ${umidadeAr}%. Chuva iminente detetada via satélite. Economize água!`;
     } else if (umidadeAr < 30) {
         luzIrrigacao.className = "status-luz verde-ativo";
         textoIrrigacao.innerHTML = `<strong>Ativar Urgente:</strong> Solo seco (${umidadeAr}%). Irrigação necessária para o crescimento.`;
