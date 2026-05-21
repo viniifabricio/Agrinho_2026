@@ -21,11 +21,15 @@
             <a href="#quiz">Quiz Técnico</a>
             <a href="#painel">Painel de Decisão</a>
             <a href="#conclusao">Conclusão</a>
-            <button id="btn-contraste" onclick="toggleContraste()" class="nav-btn-acessivel" aria-label="Ativar ou desativar alto contraste">🌓 Alto Contraste</button>
+            
+            <div class="acessibilidade-botoes">
+                <button id="btn-contraste" onclick="toggleContraste()" class="nav-btn-acessivel" title="Ativar alto contraste para baixa visão">🌓 Contraste</button>
+                <button id="btn-voz" onclick="toggleLeituraVoz()" class="nav-btn-acessivel" title="Ativar leitura de tela por voz para deficientes visuais">🔊 Ouvir Site</button>
+            </div>
         </nav>
     </header>
 
-    <section class="hero-section" role="img" aria-label="Banner principal com imagem do campo sustentável">
+    <section class="hero-section" role="img" aria-label="Banner principal com imagem de plantações verdes e tecnologia sustentável">
         <div class="overlay"></div>
         <div class="hero-content">
             <h1>🌱 EcoRadar Agro</h1>
@@ -36,23 +40,23 @@
 
     <main class="container">
         
-        <section id="intro" class="site-section">
+        <section id="intro" class="site-section" tabindex="0">
             <h2>Sobre o Projeto</h2>
             <p>O <strong>EcoRadar Agro</strong> é uma plataforma digital desenvolvida para auxiliar pequenos e grandes produtores rurais a tomarem decisões inteligentes e ecológicas no campo. O sistema une a tecnologia de ponta do monitoramento climático com práticas sustentáveis, garantindo um agro forte que protege o futuro do nosso planeta.</p>
             
             <div style="margin-top: 15px; padding: 12px; background-color: #f8fafc; border-left: 4px solid var(--cor-principal); border-radius: 4px; font-size: 0.9rem; line-height: 1.5;" class="creditos-bloco">
-                <strong>💻 Desenvolvedores:</strong> Vinicius Montagna Fabricio<br>
-                <strong>🏫 Escola:</strong> Colégio Estadual Civíco Militar Stella Maris<br>
+                <strong>💻 Desenvolvedores:</strong> Vinicius & Fabricio<br>
+                <strong>🏫 Escola:</strong> Colégio Estadual de Andirá<br>
                 <strong>📍 Cidade:</strong> Andirá - PR
             </div>
         </section>
 
-        <section id="radar-secao" class="radar-section">
+        <section id="radar-secao" class="radar-section" tabindex="0">
             <h2>📍 Radar Meteorológico em Tempo Real</h2>
             <p class="sub-painel">Monitore o avanço das nuvens de chuva e planeje suas ações no campo com precisão.</p>
             
             <div class="radar-container">
-                <iframe src="https://embed.windy.com/embed2.html?lat=-23.548&lon=-46.636&zoom=6&level=surface&overlay=radar&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=-23.548&detailLon=-46.636&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=true" class="radar-frame" frameborder="0" title="Radar Meteorológico interativo em tempo real do Windy"></iframe>
+                <iframe src="https://embed.windy.com/embed2.html?lat=-23.548&lon=-46.636&zoom=6&level=surface&overlay=radar&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=-23.548&detailLon=-46.636&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=true" class="radar-frame" frameborder="0" title="Radar Meteorológico interativo em tempo real mostrando deslocamento de massas de ar e chuva"></iframe>
             </div>
             
             <div class="radar-legendas">
@@ -67,16 +71,16 @@
 
         <section id="informativo" class="informativo-section">
             <h2>📚 Espaço Informativo: Agro Sustentável</h2>
-            <p class="sub-painel">Passe o mouse ou clique sobre os cards para descobrir as respostas e boas práticas no campo!</p>
+            <p class="sub-painel">Passe o mouse ou pressione Tab para descobrir as respostas e boas práticas no campo!</p>
             
             <div class="info-grid">
                 
-                <div class="flash-card" tabindex="0" aria-label="Card Informativo sobre Tecnologia. Interaja para ler o conteúdo completo.">
+                <div class="flash-card" tabindex="0" aria-label="Card Informativo sobre Tecnologia. Foco do programa agrinho 2026.">
                     <div class="flash-card-inner">
                         <div class="flash-card-front">
                             <div class="info-tag">Tecnologia</div>
                             <h3>Qual o foco do Programa Agrinho 2026?</h3>
-                            <p class="instrucao-virar">✨ Passe o mouse para virar</p>
+                            <p class="instrucao-virar">✨ Interaja para descobrir a resposta</p>
                         </div>
                         <div class="flash-card-back">
                             <h3>Agro Forte, Futuro Sustentável</h3>
@@ -85,12 +89,12 @@
                     </div>
                 </div>
 
-                <div class="flash-card" tabindex="0" aria-label="Card Informativo sobre Sustentabilidade. Interaja para ler o conteúdo completo.">
+                <div class="flash-card" tabindex="0" aria-label="Card Informativo sobre Sustentabilidade. O que caracteriza o verdadeiro agro sustentável.">
                     <div class="flash-card-inner">
                         <div class="flash-card-front">
                             <div class="info-tag">Sustentabilidade</div>
                             <h3>O que caracteriza o verdadeiro Agro Sustentável?</h3>
-                            <p class="instrucao-virar">✨ Passe o mouse para virar</p>
+                            <p class="instrucao-virar">✨ Interaja para descobrir a resposta</p>
                         </div>
                         <div class="flash-card-back">
                             <h3>Equilíbrio de Recursos</h3>
@@ -99,12 +103,12 @@
                     </div>
                 </div>
 
-                <div class="flash-card" tabindex="0" aria-label="Card Informativo sobre Inovação. Interaja para ler o conteúdo completo.">
+                <div class="flash-card" tabindex="0" aria-label="Card Informativo sobre Inovação. Papel e desafios do agronegócio no brasil.">
                     <div class="flash-card-inner">
                         <div class="flash-card-front">
                             <div class="info-tag">Inovação</div>
                             <h3>Qual o papel e o desafio do Agronegócio no Brasil?</h3>
-                            <p class="instrucao-virar">✨ Passe o mouse para virar</p>
+                            <p class="instrucao-virar">✨ Interaja para descobrir a resposta</p>
                         </div>
                         <div class="flash-card-back">
                             <h3>Segurança Alimentar</h3>
@@ -116,7 +120,7 @@
             </div>
         </section>
 
-        <section id="impactos" class="site-section">
+        <section id="impactos" class="site-section" tabindex="0">
             <h2>4. Impactos Positivos do Agro Digital</h2>
             <p class="sub-painel">Como a tecnologia integrada à ecologia transforma positivamente a sociedade.</p>
             <table class="tabela-impactos">
@@ -146,13 +150,13 @@
             <h2>🧠 Quiz Técnico: Sustentabilidade e Tecnologia</h2>
             <p class="sub-painel">Teste seus conhecimentos sobre o funcionamento inteligente do nosso sistema!</p>
             
-            <div class="quiz-container" role="region" aria-label="Quiz interativo">
+            <div class="quiz-container" role="region" aria-label="Quiz interativo sobre sustentabilidade do campo">
                 <h3 id="status-pergunta">Pergunta 1 de 4</h3>
                 <p id="pergunta-quiz" style="font-size: 1.1rem; font-weight: bold; margin: 15px 0; color: var(--cor-principal);"></p>
                 
                 <div class="botoes-quiz" style="display: flex; flex-direction: column; gap: 10px; max-width: 600px; margin: 0 auto;">
-                    <button id="btn-opcao-a" onclick="verResposta(0)"></button>
-                    <button id="btn-opcao-b" onclick="verResposta(1)"></button>
+                    <button id="btn-opcao-a" onclick="verificarResposta(0)"></button>
+                    <button id="btn-opcao-b" onclick="verificarResposta(1)"></button>
                 </div>
                 
                 <p id="resultado-quiz" style="margin-top: 15px; font-weight: bold; min-height: 24px; padding: 0 10px;" aria-live="polite"></p>
@@ -165,7 +169,7 @@
             <p class="sub-painel">Abaixo, nosso sistema processa os dados meteorológicos e indica as melhores ações ecológicas.</p>
 
             <div class="cards-grid">
-                <div class="card">
+                <div class="card" tabindex="0">
                     <div class="card-image-sim" role="img" aria-label="Ícone de trator">🚜</div>
                     <div class="card-body">
                         <h3>Pulverização Consciente</h3>
@@ -177,7 +181,7 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" tabindex="0">
                     <div class="card-image-sim" role="img" aria-label="Ícone de gota de água">💧</div>
                     <div class="card-body">
                         <h3>Irrigação Inteligente</h3>
@@ -190,7 +194,7 @@
                 </div>
             </div>
 
-            <div class="simulador-controle">
+            <div class="simulador-controle" tabindex="0">
                 <h3>🧪 Painel de Testes para a Banca Avaliadora</h3>
                 <p>Altere as condições do tempo abaixo para ver como o Front-End do site reage em tempo real com as regras de sustentabilidade:</p>
                 <div class="botoes-simulador">
@@ -201,7 +205,7 @@
             </div>
         </section>
 
-        <section id="conclusao" class="conclusao-section">
+        <section id="conclusao" class="conclusao-section" tabindex="0">
             <h2>📝 Explicações Complementares e Impacto Prático</h2>
             <p class="sub-painel">Entenda como este projeto de Front-End se conecta diretamente com a realidade do produtor rural.</p>
             
@@ -225,6 +229,17 @@
         <p style="margin-top: 5px; font-weight: bold; color: var(--cor-secundaria); font-size: 1rem;">🚀 Parceria: @agrinho | #Agrinho2026</p>
         <p style="margin-top: 8px; font-size: 0.8rem; opacity: 0.8;">Tema: "Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente"</p>
     </footer>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 
     <script src="./main.js"></script>
 </body>

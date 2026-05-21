@@ -68,12 +68,17 @@ body {
     color: var(--cor-secundaria);
 }
 
+.acessibilidade-botoes {
+    display: flex;
+    gap: 8px;
+    margin-left: 20px;
+}
+
 .nav-btn-acessivel {
     background-color: transparent;
     color: white;
     border: 2px solid white;
     padding: 6px 12px;
-    margin-left: 20px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.85rem;
@@ -84,6 +89,13 @@ body {
 .nav-btn-acessivel:hover {
     background-color: white;
     color: var(--cor-principal);
+}
+
+/* Ativo do botão de voz */
+.btn-ativo {
+    background-color: #f1c40f !important;
+    color: #000 !important;
+    border-color: #f1c40f !important;
 }
 
 /* ==========================================================================
@@ -360,7 +372,7 @@ h2 {
 }
 
 /* ==========================================================================
-   8. QUIZ (OTIMIZADO)
+   8. QUIZ
    ========================================================================== */
 .quiz-container {
     background-color: #f8fafc;
@@ -575,8 +587,13 @@ footer p:last-child {
     margin-top: 5px;
 }
 
+/* Ajuste posicional do VLibras para não cobrir o rodapé */
+.vw-plugin-wrapper {
+    z-index: 99999 !important;
+}
+
 /* ==========================================================================
-   11. CLASSE EXCLUSIVA PARA ALTO CONTRASTE (ACESSIBILIDADE VISUAL)
+   11. CLASSE EXCLUSIVA PARA ALTO CONTRASTE
    ========================================================================== */
 body.alto-contraste {
     background-color: #000000 !important;
@@ -641,10 +658,4 @@ body.alto-contraste .tabela-impactos tr {
 body.alto-contraste .final-highlight {
     background-color: #000000 !important;
     border: 3px dashed #ffff00 !important;
-}
-
-body.alto-contraste .nav-btn-acessivel {
-    background-color: #ffff00 !important;
-    color: #000000 !important;
-    border: 2px solid #ffff00 !important;
 }

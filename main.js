@@ -63,12 +63,20 @@ function verificarResposta(opcaoSelecionada) {
     document.getElementById("btn-opcao-a").disabled = true;
     document.getElementById("btn-opcao-b").disabled = true;
     
+    let feedbackTexto = "";
     if (opcaoSelecionada === dadosPergunta.correta) {
-        elementResultado.innerText = "✨ Resposta Correta! Excelente consciência ecológica.";
+        feedbackTexto = "Resposta Correta! Excelente consciência ecológica.";
+        elementResultado.innerText = `✨ ${feedbackTexto}`;
         elementResultado.style.color = "#27ae60";
     } else {
-        elementResultado.innerText = "❌ Resposta Incorreta. Lembre-se do foco na sustentabilidade ambiental!";
+        feedbackTexto = "Resposta Incorreta. Lembre-se do foco na sustentabilidade ambiental!";
+        elementResultado.innerText = `❌ ${feedbackTexto}`;
         elementResultado.style.color = "#e74c3c";
+    }
+    
+    // Se o sintetizador de voz estiver ligado, ele lê o feedback do quiz automaticamente
+    if (vozLigada) {
+        falarTexto(feedbackTexto);
     }
     
     document.getElementById("btn-proxima").style.display = "inline-block";
@@ -78,18 +86,23 @@ function proximaPergunta() {
     indiceAtual++;
     if (indiceAtual < bancoPerguntas.length) {
         carregarPergunta();
+        if(vozLigada) {
+            setTimeout(() => { falarTexto(document.getElementById("pergunta-quiz").innerText); }, 500);
+        }
     } else {
+        const fimTexto = "Quiz Concluído! Parabéns! Você completou a trilha de conhecimento técnico sobre agricultura sustentável e digital.";
         document.getElementById("status-pergunta").innerText = "Quiz Concluído! 🎉";
         document.getElementById("pergunta-quiz").innerText = "Parabéns! Você completou a trilha de conhecimento técnico sobre agricultura sustentável e digital.";
         document.getElementById("btn-opcao-a").style.display = "none";
         document.getElementById("btn-opcao-b").style.display = "none";
         document.getElementById("resultado-quiz").innerText = "";
         document.getElementById("btn-proxima").style.display = "none";
+        if(vozLigada) { falarTexto(fimTexto); }
     }
 }
 
 /* ==========================================================================
-   2. SISTEMA DE SIMULAÇÃO CLIMÁTICA (REGRAS E LUZES DE STATUS)
+   2. SISTEMA DE SIMULAÇÃO CLIMÁTICA
    ========================================================================== */
 function simularClima(velocidadeVento, proximidadeChuva) {
     const luzPulverizacao = document.getElementById("luz-pulverizacao");
@@ -97,7 +110,6 @@ function simularClima(velocidadeVento, proximidadeChuva) {
     const luzIrrigacao = document.getElementById("luz-irrigacao");
     const textoIrrigacao = document.getElementById("texto-irrigacao");
 
-    // Regra 1: Pulverização Consciente (Deriva)
     luzPulverizacao.className = "status-luz";
     if (velocidadeVento > 20) {
         luzPulverizacao.classList.add("vermelho-ativo");
@@ -107,7 +119,6 @@ function simularClima(velocidadeVento, proximidadeChuva) {
         textoPulverizacao.innerText = `Seguro (${velocidadeVento} km/h). Vento ideal para aplicação precisa dos insumos.`;
     }
 
-    // Regra 2: Irrigação Inteligente (Economia de Água)
     luzIrrigacao.className = "status-luz";
     if (proximidadeChuva > 70) {
         luzIrrigacao.classList.add("vermelho-ativo");
@@ -119,22 +130,75 @@ function simularClima(velocidadeVento, proximidadeChuva) {
 }
 
 /* ==========================================================================
-   3. SISTEMA DE ALTO CONTRASTE (ACESSIBILIDADE WEB)
+   3. SISTEMA DE ALTO CONTRASTE (ACESSIBILIDADE VISUAL COGNITIVA)
    ========================================================================= */
 function toggleContraste() {
     document.body.classList.toggle("alto-contraste");
-    
-    // Altera o texto do botão para que o usuário saiba o status do recurso
     const btn = document.getElementById("btn-contraste");
     if (document.body.classList.contains("alto-contraste")) {
         btn.innerText = "☀️ Modo Normal";
     } else {
-        btn.innerText = "🌓 Alto Contraste";
+        btn.innerText = "🌓 Contraste";
     }
+}
+
+/* ==========================================================================
+   4. LEITOR DE TELA INTEGRADO POR VOZ (PARA CEGOS)
+   ========================================================================= */
+let vozLigada = false;
+const sintetizador = window.speechSynthesis;
+
+function toggleLeituraVoz() {
+    const btnVoz = document.getElementById("btn-voz");
+    vozLigada = !vozLigada;
+
+    if (vozLigada) {
+        btnVoz.classList.add("btn-ativo");
+        btnVoz.innerText = "🛑 Parar Voz";
+        falarTexto("Leitor de tela integrado ativado. Passe o mouse ou clique nas seções para ouvir o conteúdo do EcoRadar Agro.");
+        adicionarEventosLeitura();
+    } else {
+        btnVoz.classList.remove("btn-ativo");
+        btnVoz.innerText = "🔊 Ouvir Site";
+        sintetizador.cancel();
+    }
+}
+
+function falarTexto(texto) {
+    if (!vozLigada) return;
+    sintetizador.cancel(); // Para qualquer fala em andamento antes de começar a próxima
+    const fala = new SpeechSynthesisUtterance(texto);
+    fala.lang = "pt-BR";
+    fala.rate = 1.1; // Velocidade da voz ligeiramente mais rápida e natural
+    sintetizador.speak(fala);
+}
+
+function adicionarEventosLeitura() {
+    // Captura tags de texto importantes e blocos interativos para ler alto ao focar/passar o mouse
+    const elementosParaLer = document.querySelectorAll('.site-section, .radar-section, .informativo-section, .ferramentas-section, .conclusao-section, .flash-card, .card');
+    
+    elementosParaLer.forEach(elemento => {
+        // Evento para quando passa o mouse
+        elemento.addEventListener('mouseenter', () => {
+            if (vozLigada) {
+                let textoExtraido = elemento.innerText || elemento.getAttribute('aria-label');
+                // Limpa textos muito longos ou instruções repetitivas para leitura dinâmica
+                falarTexto(textoExtraido.split('\n')[0] + ". " + (textoExtraido.split('\n')[1] || ""));
+            }
+        });
+        
+        // Evento para navegação via teclado usando a tecla TAB (Acessibilidade Avançada)
+        elemento.addEventListener('focus', () => {
+            if (vozLigada) {
+                let textoExtraido = elemento.innerText || elemento.getAttribute('aria-label');
+                falarTexto(textoExtraido.split('\n')[0]);
+            }
+        });
+    });
 }
 
 // Inicializações Automáticas ao Carregar a Página
 window.onload = function() {
     carregarPergunta();
-    simularClima(12, 15); // Clima base inicial padrão
+    simularClima(12, 15);
 };
