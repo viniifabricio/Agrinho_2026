@@ -57,38 +57,41 @@ function inicializarQuizEPainel() {
 }
 
 /* ==========================================================================
-   2. ACESSIBILIDADE - LEITURA DE VOZ (LÊ O SITE INTEIRO)
+   2. ACESSIBILIDADE - LEITURA DE VOZ (LÊ O SITE INTEIRO - VERSÃO ESTÁVEL)
    ========================================================================= */
+let blocosDeTexto = [];
+let indiceBlocoAtual = 0;
+
 function toggleLeituraVoz() {
     const btnVoz = document.getElementById("btn-voz");
     
     if (!vozAtiva) {
+        sinteseVoz.cancel(); // Garante que não há nenhuma leitura travada
         vozAtiva = true;
         btnVoz.innerText = "🛑 Parar Leitura";
         btnVoz.classList.add("btn-ativo");
         
-        // 1. Coleta os dados principais de identificação
-        let textoParaLer = "Iniciando leitura do site EcoRadar Agro. Categoria Front-End, Agrinho 2026. ";
-        textoParaLer += "Desenvolvedor: Vinicius Montagna Fabricio. Escola: Colégio Estadual Cívico-Militar Stella Maris, Cidade: Andirá Paraná. ";
+        // 1. Monta a lista de textos por seções para não travar o navegador
+        blocosDeTexto = [];
         
-        // 2. Busca o conteúdo da seção "Sobre"
+        blocosDeTexto.push("Iniciando leitura do site EcoRadar Agro. Categoria Front-End, Agrinho 2026.");
+        blocosDeTexto.push("Desenvolvedor: Vinicius Montagna Fabricio. Escola: Colégio Estadual Cívico-Militar Stella Maris. Cidade: Andirá Paraná.");
+        
         const secaoIntro = document.getElementById("intro");
-        if (secaoIntro) {
-            textoParaLer += "Sobre o Projeto: " + secaoIntro.querySelector("p").innerText + " ";
+        if (secaoIntro && secaoIntro.querySelector("p")) {
+            blocosDeTexto.push("Sobre o Projeto: " + secaoIntro.querySelector("p").innerText);
         }
         
-        // 3. Adiciona as informações explicativas do Radar
         const secaoRadar = document.getElementById("radar-secao");
         if (secaoRadar) {
-            textoParaLer += "Seção do Radar Meteorológico. Como entender as cores do Radar: ";
+            blocosDeTexto.push("Seção do Radar Meteorológico em Tempo Real. Como entender as cores do Radar:");
             const itensLegenda = secaoRadar.querySelectorAll(".legenda-item");
             itensLegenda.forEach(item => {
-                textoParaLer += item.innerText + ". ";
+                blocosDeTexto.push(item.innerText);
             });
         }
         
-        // 4. Adiciona as perguntas e respostas dos Flash Cards Informativos
-        textoParaLer += "Espaço Informativo sobre Agro Sustentável: ";
+        blocosDeTexto.push("Espaço Informativo sobre Agro Sustentável.");
         const cards = document.querySelectorAll(".flash-card");
         cards.forEach((card, index) => {
             const tag = card.querySelector(".info-tag") ? card.querySelector(".info-tag").innerText : "";
@@ -96,52 +99,75 @@ function toggleLeituraVoz() {
             const respostaTitulo = card.querySelector(".flash-card-back h3") ? card.querySelector(".flash-card-back h3").innerText : "";
             const respostaCorpo = card.querySelector(".flash-card-back p") ? card.querySelector(".flash-card-back p").innerText : "";
             
-            textoParaLer += `Card número ${index + 1}, tema ${tag}: Pergunta: ${pergunta} Resposta: ${respostaTitulo}. Descrição: ${respostaCorpo} `;
+            blocosDeTexto.push(`Card número ${index + 1}, tema ${tag}. Pergunta: ${pergunta}`);
+            blocosDeTexto.push(`Resposta: ${respostaTitulo}. Descrição: ${respostaCorpo}`);
         });
         
-        // 5. Adiciona o conteúdo do Painel de Tomada de Decisão
-        textoParaLer += "Painel de Tomada de Decisão Sustentável. ";
+        blocosDeTexto.push("Painel de Tomada de Decisão Sustentável.");
         const cardsDecisao = document.querySelectorAll("#painel .card");
         cardsDecisao.forEach(card => {
             const tituloDecisao = card.querySelector("h3") ? card.querySelector("h3").innerText : "";
             const descDecisao = card.querySelector("p") ? card.querySelector("p").innerText : "";
-            textoParaLer += `${tituloDecisao}: ${descDecisao} `;
+            blocosDeTexto.push(`${tituloDecisao}: ${descDecisao}`);
         });
         
-        // 6. Adiciona a Conclusão do projeto
         const secaoConclusao = document.getElementById("conclusao");
         if (secaoConclusao) {
-            textoParaLer += "Conclusões Finais do Projeto. ";
+            blocosDeTexto.push("Explicações Complementares e Impacto Prático.");
             const blocosConclusao = secaoConclusao.querySelectorAll(".conclusao-bloco");
             blocosConclusao.forEach(bloco => {
                 const tit = bloco.querySelector("h3") ? bloco.querySelector("h3").innerText : "";
                 const texto = bloco.querySelector("p") ? bloco.querySelector("p").innerText : "";
-                textoParaLer += `${tit}: ${texto} `;
+                blocosDeTexto.push(`${tit}: ${texto}`);
             });
         }
 
-        textoParaLer += "Fim da leitura do documento.";
-
-        // Configuração final da síntese de voz do navegador
-        utteranceAtual = new SpeechSynthesisUtterance(textoParaLer);
-        utteranceAtual.lang = 'pt-BR';
-        utteranceAtual.rate = 1.05; // Velocidade confortável de audição
+        blocosDeTexto.push("Fim da leitura do documento.");
         
+        // 2. Inicia a leitura do primeiro bloco
+        indiceBlocoAtual = 0;
+        lerProximoBloco();
+        
+    } else {
+        pararLeituraCompleta();
+    }
+}
+
+function lerProximoBloco() {
+    if (!vozAtiva) return;
+
+    if (indiceBlocoAtual < blocosDeTexto.length) {
+        utteranceAtual = new SpeechSynthesisUtterance(blocosDeTexto[indiceBlocoAtual]);
+        utteranceAtual.lang = 'pt-BR';
+        utteranceAtual.rate = 1.05;
+        
+        // Quando terminar o bloco atual, chama o próximo automaticamente
         utteranceAtual.onend = function() {
-            vozAtiva = false;
-            btnVoz.innerText = "🔊 Ouvir Site";
-            btnVoz.classList.remove("btn-ativo");
+            indiceBlocoAtual++;
+            lerProximoBloco();
+        };
+        
+        // Caso ocorra um erro, pula para o próximo para não travar o botão
+        utteranceAtual.onerror = function() {
+            indiceBlocoAtual++;
+            lerProximoBloco();
         };
         
         sinteseVoz.speak(utteranceAtual);
     } else {
-        vozAtiva = false;
-        sinteseVoz.cancel();
+        pararLeituraCompleta();
+    }
+}
+
+function pararLeituraCompleta() {
+    vozAtiva = false;
+    sinteseVoz.cancel();
+    const btnVoz = document.getElementById("btn-voz");
+    if (btnVoz) {
         btnVoz.innerText = "🔊 Ouvir Site";
         btnVoz.classList.remove("btn-ativo");
     }
 }
-
 /* ==========================================================================
    3. ALTO CONTRASTE (CORRIGIDO)
    ========================================================================= */
