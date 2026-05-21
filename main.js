@@ -43,7 +43,7 @@ const perguntasQuiz = [
 ];
 
 let indicePerguntaAtual = 0;
-let acertosQuiz = 0; // CONTADOR DE ACERTOS (MELHORIA N° 1)
+let acertosQuiz = 0; 
 let vozAtiva = false;
 let sinteseVoz = window.speechSynthesis;
 let utteranceAtual = null;
@@ -53,63 +53,41 @@ let utteranceAtual = null;
    ========================================================================= */
 function inicializarQuizEPainel() {
     renderizarPerguntaQuiz();
-    simularClima(12, 15); // Configuração neutra inicial
+    simularClima(12, 15); 
 }
 
 /* ==========================================================================
-   2. ACESSIBILIDADE - LEITURA DE VOZ (VERSÃO DEFINITIVA COM TEXTO ESTRUTURADO)
+   2. ACESSIBILIDADE - LEITURA DE VOZ
    ========================================================================= */
 function toggleLeituraVoz() {
     const btnVoz = document.getElementById("btn-voz");
     
     if (!vozAtiva) {
-        sinteseVoz.cancel(); // Para qualquer áudio residual travado no navegador
+        sinteseVoz.cancel(); // Zera qualquer voz travada no sistema
         vozAtiva = true;
         btnVoz.innerText = "🛑 Parar Leitura";
         btnVoz.classList.add("btn-ativo");
         
-        // Texto explicativo e completo estruturado diretamente para o motor de voz
-        let textoExplicativo = "Iniciando a leitura completa do site EcoRadar Agro. " +
-            "Este projeto foi desenvolvido para o Concurso Agrinho 2026, na Categoria Front-End. " +
-            "Identificação do desenvolvedor: Aluno Vinicius Montagna Fabricio. " +
-            "Instituição de ensino: Colégio Estadual Cívico-Militar Stella Maris. " +
-            "Município: Andirá, Paraná. " +
-            
-            "Sobre o projeto: O EcoRadar Agro é uma plataforma digital criada para auxiliar pequenos e grandes produtores rurais a tomarem decisões inteligentes e ecológicas no campo. O sistema une a tecnologia de ponta do monitoramento climático com práticas sustentáveis, garantindo um agro forte que protege o futuro do nosso planeta. " +
-            
-            "Na seção do Radar Meteorológico em Tempo Real, o sistema monitora o avanço das nuvens de chuva para o planejamento das ações no campo. A legenda explica as cores do radar: A cor verde indica chuva fraca, ideal para infiltração de água no solo. A cor amarela indica chuva moderada, exigindo cautela na colheita e transporte. A cor vermelha indica tempo severo e tempestades, alertando o produtor para proteger o solo contra a erosão. " +
-            
-            "No Espaço Informativo, apresentamos três conceitos centrais. Primeiro, sobre Tecnologia, o foco do Programa Agrinho 2026 é Agro Forte, Futuro Sustentável, unindo produção e responsabilidade social. Segundo, sobre Sustentabilidade, destaca-se o equilíbrio de recursos através da agricultura digital, drones e sensores inteligentes. Terceiro, sobre Inovação, o grande desafio do agronegócio é garantir a segurança alimentar aumentando a produtividade sem comprometer a biodiversidade local. " +
-            
-            "Na seção de Impactos Positivos do Agro Digital, a tabela demonstra benefícios práticos: decisões em tempo real para o produtor, alimentos mais saudáveis para as cidades e a proteção direta de rios e polinizadores contra a deriva química para o meio ambiente. " +
-            
-            "O site conta também com um Painel de Tomada de Decisão Sustentável. Este painel analisa o clima e emite alertas automáticos. Para a pulverização consciente, o sistema bloqueia a aplicação se o vento estiver acima de vinte quilômetros por hora para evitar a deriva química. Para a irrigação inteligente, o sistema desliga as bombas se detectar chuva iminente, economizando água doce e energia elétrica. " +
-            
-            "Concluindo o projeto, ressalta-se que o desenvolvimento do agronegócio precisa caminhar junto com a preservação ambiental. O tema Agro Forte, Futuro Sustentável prova que, com inovação, educação ambiental e responsabilidade social, é possível construir um campo muito mais produtivo, moderno e em perfeito equilíbrio com a natureza. " +
-            
-            "Fim da leitura do projeto EcoRadar Agro.";
-
-        utteranceAtual = new SpeechSynthesisUtterance(textoExplicativo);
+        let textoParaLer = "EcoRadar Agro. Desenvolvedor Vinicius Montagna Fabricio. Colégio Estadual Cívico-Militar Stella Maris. Andirá Paraná. Plataforma digital criada para o equilíbrio entre a força da produção e a proteção do meio ambiente.";
+        
+        utteranceAtual = new SpeechSynthesisUtterance(textoParaLer);
         utteranceAtual.lang = 'pt-BR';
-        utteranceAtual.rate = 1.05; // Velocidade natural e confortável de audição
+        utteranceAtual.rate = 1.05;
         
-        // Evento executado quando o áudio termina naturalmente
         utteranceAtual.onend = function() {
-            desativarBotaoVoz();
+            pararLeituraVoz();
         };
-        
-        // Evento executado caso ocorra um erro de áudio no navegador
         utteranceAtual.onerror = function() {
-            desativarBotaoVoz();
+            pararLeituraVoz();
         };
         
         sinteseVoz.speak(utteranceAtual);
     } else {
-        desativarBotaoVoz();
+        pararLeituraVoz();
     }
 }
 
-function desativarBotaoVoz() {
+function pararLeituraVoz() {
     vozAtiva = false;
     sinteseVoz.cancel();
     const btnVoz = document.getElementById("btn-voz");
@@ -118,8 +96,9 @@ function desativarBotaoVoz() {
         btnVoz.classList.remove("btn-ativo");
     }
 }
+
 /* ==========================================================================
-   3. ALTO CONTRASTE (CORRIGIDO)
+   3. ALTO CONTRASTE 
    ========================================================================= */
 function toggleContraste() {
     document.body.classList.toggle("alto-contraste");
@@ -132,7 +111,7 @@ function toggleContraste() {
 }
 
 /* ==========================================================================
-   4. SISTEMA DO QUIZ INTERATIVO COM CONTADOR (MELHORIA N° 1)
+   4. SISTEMA DO QUIZ INTERATIVO
    ========================================================================= */
 function renderizarPerguntaQuiz() {
     const statusTxt = document.getElementById("status-pergunta");
@@ -143,7 +122,6 @@ function renderizarPerguntaQuiz() {
     const btnProxima = document.getElementById("btn-proxima");
 
     resultadoTxt.innerText = "";
-    resultadoTxt.style.color = "initial";
     btnProxima.style.display = "none";
     
     btnA.disabled = false;
@@ -156,22 +134,9 @@ function renderizarPerguntaQuiz() {
         btnA.innerText = dados.opcoes[0];
         btnB.innerText = dados.opcoes[1];
     } else {
-        // TELA FINAL COM CONTADOR ATUALIZADO (MELHORIA N° 1)
         statusTxt.innerText = "✨ Quiz Concluído!";
         perguntaTxt.innerText = `Você finalizou o teste ecológico!`;
-        
-        let feedbackAcertos = "";
-        if(acertosQuiz === perguntasQuiz.length) {
-            feedbackAcertos = "🏆 Excelente! Você possui consciência ecológica máxima!";
-        } else if(acertosQuiz >= 2) {
-            feedbackAcertos = "🌱 Muito bom! Você conhece bastante sobre o campo.";
-        } else {
-            feedbackAcertos = "📚 Vale a pena ler o Espaço Informativo para aprender mais.";
-        }
-        
-        resultadoTxt.innerHTML = `<span style="font-size:1.2rem; display:block; margin-bottom:8px;">Você acertou <strong>${acertosQuiz} de ${perguntasQuiz.length}</strong> perguntas.</span> ${feedbackAcertos}`;
-        resultadoTxt.style.color = "#2e7d32";
-        
+        resultadoTxt.innerHTML = `<span style='font-size:1.1rem;'>Você acertou <strong>${acertosQuiz} de ${perguntasQuiz.length}</strong> perguntas.</span>`;
         btnA.style.display = "none";
         btnB.style.display = "none";
     }
@@ -188,7 +153,7 @@ function verificarResposta(opcaoSelecionada) {
     btnB.disabled = true;
 
     if (opcaoSelecionada === dados.correta) {
-        acertosQuiz++; // SOMA O ACERTO
+        acertosQuiz++; 
         resultadoTxt.innerText = "✅ " + dados.explicacao;
         resultadoTxt.style.color = "#27ae60";
     } else {
@@ -213,7 +178,6 @@ function simularClima(velocidadeVento, umidadeAr) {
     const luzIrrigacao = document.getElementById("luz-irrigacao");
     const textoIrrigacao = document.getElementById("texto-irrigacao");
 
-    // Lógica para Pulverização (Baseado na velocidade do vento)
     if (velocidadeVento > 20) {
         luzPulverizacao.className = "status-luz vermelho-ativo";
         textoPulverizacao.innerHTML = `<strong>Bloqueado:</strong> Vento a ${velocidadeVento} km/h. Risco extremo de deriva química!`;
@@ -225,10 +189,9 @@ function simularClima(velocidadeVento, umidadeAr) {
         textoPulverizacao.innerHTML = `<strong>Liberado:</strong> Vento a ${velocidadeVento} km/h. Condição ideal para aplicação segura.`;
     }
 
-    // Lógica para Irrigação Inteligente (Baseado na umidade/proximidade de chuva)
     if (umidadeAr > 80) {
         luzIrrigacao.className = "status-luz vermelho-ativo";
-        textoIrrigacao.innerHTML = `<strong>Desligar:</strong> Umidade em ${umidadeAr}%. Chuva iminente detetada via satélite. Economize água!`;
+        textoIrrigacao.innerHTML = `<strong>Desligar:</strong> Umidade em ${umidadeAr}%. Chuva iminente detectada via satélite. Economize água!`;
     } else if (umidadeAr < 30) {
         luzIrrigacao.className = "status-luz verde-ativo";
         textoIrrigacao.innerHTML = `<strong>Ativar Urgente:</strong> Solo seco (${umidadeAr}%). Irrigação necessária para o crescimento.`;
