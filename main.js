@@ -1,138 +1,140 @@
-// ==========================================================================
-// 1. FUNCIONALIDADE INTERATIVA: SISTEMA DO QUIZ AVANÇADO (4 PERGUNTAS)
-// ==========================================================================
-const perguntasQuiz = [
+/* ==========================================================================
+   1. SISTEMA DO QUIZ INTERATIVO (4 PERGUNTAS)
+   ========================================================================== */
+const bancoPerguntas = [
     {
-        texto: "Por que devemos evitar a pulverização quando o radar indica ventos acima de 20 km/h?",
+        pergunta: "Como o monitoramento do vento pelo EcoRadar ajuda diretamente a preservar o ecossistema local?",
         opcoes: [
-            "Para evitar a deriva química, protegendo matas nativas, rios e polinizadores como as abelhas.",
-            "Apenas para economizar o combustível do trator durante a aplicação no campo."
+            "Indicando a direção do vento apenas para o conforto dos operadores de trator na lavoura.",
+            "Alertando o produtor sobre ventos fortes para evitar o efeito da deriva, protegendo abelhas e rios próximos."
         ],
-        correta: 0,
-        explicacao: "🎉 Correto! O vento forte carrega o produto para longe da lavoura, gerando prejuízo financeiro e grave poluição ambiental externa."
+        correta: 1
     },
     {
-        texto: "Qual o principal benefício ecológico de monitorar nuvens de chuva antes de acionar a irrigação?",
+        pergunta: "Por que a agricultura inteligente desliga os sistemas de irrigação automáticos quando o radar acusa chuva verde?",
         opcoes: [
-            "Acelerar o crescimento das folhas das plantas através do excesso de umidade acumulada.",
-            "Evitar o desperdício de água doce do planeta e poupar energia elétrica desnecessária nas bombas d'água."
+            "Para economizar água doce e energia elétrica, aproveitando de forma natural a água fornecida pela chuva.",
+            "Porque as plantas não conseguem absorver água artificial e água da chuva ao mesmo tempo."
         ],
-        correta: 1,
-        explicacao: "🎉 Excelente! A agricultura consome a maior parte da água doce mundial; ligar os pivôs antes de chover gera um desperdício imenso de recursos."
+        correta: 0
     },
     {
-        texto: "O que define a chamada 'Agricultura de Precisão' trazida no tema do Agrinho 2026?",
+        pergunta: "Qual o maior objetivo ecológico defendido pelo tema 'Agro forte, futuro sustentável' no projeto?",
         opcoes: [
-            "O uso de tecnologia (sensores, drones e dados) para aplicar recursos no local correto e na quantidade estritamente necessária.",
-            "A técnica antiga de plantar a mesma cultura em grandes áreas sem nenhum tipo de monitoramento técnico."
+            "Provar que a tecnologia serve apenas para aumentar os lucros financeiros das grandes propriedades rurais.",
+            "Mostrar que é possível expandir a produção de alimentos mantendo o equilíbrio ecológico e a preservação ambiental."
         ],
-        correta: 0,
-        explicacao: "🎉 Perfeito! A tecnologia serve para trazer eficiência, produzindo mais utilizando muito menos recursos naturais."
+        correta: 1
     },
     {
-        texto: "Como o monitoramento do radar meteorológico em tempo real ajuda diretamente o pequeno produtor?",
+        pergunta: "O que acontece com os defensivos agrícolas quando aplicados sob condições severas indicadas em vermelho no radar?",
         opcoes: [
-            "Permite prever tempestades severas a tempo de proteger o solo contra erosões e planejar colheitas seguras.",
-            "Garante que nunca mais vai chover forte nas áreas onde o sistema estiver instalado."
+            "São lavados pela tempestade, gerando prejuízo financeiro e escoando diretamente para os lençóis freáticos.",
+            "Eles penetram mais rápido no solo devido à força das gotas de chuva intensa."
         ],
-        correta: 0,
-        explicacao: "🎉 Muito bem! Os dados em tempo real dão poder de escolha ao produtor, minimizando as perdas causadas por eventos climáticos extremos."
+        correta: 0
     }
 ];
 
-let indicePerguntaAtual = 0;
+let indiceAtual = 0;
 
 function carregarPergunta() {
-    const q = perguntasQuiz[indicePerguntaAtual];
+    const dadosPergunta = bancoPerguntas[indiceAtual];
+    document.getElementById("status-pergunta").innerText = `Pergunta ${indiceAtual + 1} de ${bancoPerguntas.length}`;
+    document.getElementById("pergunta-quiz").innerText = dadosPergunta.pergunta;
     
-    // Atualiza os textos na tela
-    document.getElementById('status-pergunta').innerText = `Pergunta ${indicePerguntaAtual + 1} de ${perguntasQuiz.length}`;
-    document.getElementById('pergunta-quiz').innerText = q.texto;
-    document.getElementById('btn-opcao-a').innerText = `A) ${q.opcoes[0]}`;
-    document.getElementById('btn-opcao-b').innerText = `B) ${q.opcoes[1]}`;
+    const btnA = document.getElementById("btn-opcao-a");
+    const btnB = document.getElementById("btn-opcao-b");
     
-    // Limpa feedbacks anteriores
-    document.getElementById('resultado-quiz').innerText = "";
-    document.getElementById('btn-proxima').style.display = "none";
+    btnA.innerText = `A) ${dadosPergunta.opcoes[0]}`;
+    btnB.innerText = `B) ${dadosPergunta.opcoes[1]}`;
     
-    // Reativa os botões de resposta
-    document.getElementById('btn-opcao-a').disabled = false;
-    document.getElementById('btn-opcao-b').disabled = false;
+    btnA.disabled = false;
+    btnB.disabled = false;
+    
+    document.getElementById("resultado-quiz").innerText = "";
+    document.getElementById("btn-proxima").style.display = "none";
 }
 
 function verificarResposta(opcaoSelecionada) {
-    const q = perguntasQuiz[indicePerguntaAtual];
-    const resultado = document.getElementById('resultado-quiz');
+    const dadosPergunta = bancoPerguntas[indiceAtual];
+    const elementResultado = document.getElementById("resultado-quiz");
     
-    // Desativa os botões para não clicar duas vezes
-    document.getElementById('btn-opcao-a').disabled = true;
-    document.getElementById('btn-opcao-b').disabled = true;
+    document.getElementById("btn-opcao-a").disabled = true;
+    document.getElementById("btn-opcao-b").disabled = true;
     
-    if (opcaoSelecionada === q.correta) {
-        resultado.innerText = q.explicacao;
-        resultado.style.color = "#27ae60";
+    if (opcaoSelecionada === dadosPergunta.correta) {
+        elementResultado.innerText = "✨ Resposta Correta! Excelente consciência ecológica.";
+        elementResultado.style.color = "#27ae60";
     } else {
-        resultado.innerText = "❌ Resposta incorreta! Pense no equilíbrio entre a eficiência da produção e a segurança da natureza.";
-        resultado.style.color = "#e74c3c";
+        elementResultado.innerText = "❌ Resposta Incorreta. Lembre-se do foco na sustentabilidade ambiental!";
+        elementResultado.style.color = "#e74c3c";
     }
     
-    // Mostra o botão para avançar
-    document.getElementById('btn-proxima').style.display = "inline-block";
+    document.getElementById("btn-proxima").style.display = "inline-block";
 }
 
 function proximaPergunta() {
-    indicePerguntaAtual++;
-    
-    if (indicePerguntaAtual < perguntasQuiz.length) {
+    indiceAtual++;
+    if (indiceAtual < bancoPerguntas.length) {
         carregarPergunta();
     } else {
-        // Fim do quiz
-        document.getElementById('status-pergunta').innerText = "🏆 Quiz Concluído!";
-        document.getElementById('pergunta-quiz').innerText = "Parabéns! Você demonstrar ser um verdadeiro especialista em Agro Sustentável e soluções digitais de Front-End!";
-        document.getElementById('btn-opcao-a').style.display = "none";
-        document.getElementById('btn-opcao-b').style.display = "none";
-        document.getElementById('btn-proxima').style.display = "none";
-        document.getElementById('resultado-quiz').innerText = "";
+        document.getElementById("status-pergunta").innerText = "Quiz Concluído! 🎉";
+        document.getElementById("pergunta-quiz").innerText = "Parabéns! Você completou a trilha de conhecimento técnico sobre agricultura sustentável e digital.";
+        document.getElementById("btn-opcao-a").style.display = "none";
+        document.getElementById("btn-opcao-b").style.display = "none";
+        document.getElementById("resultado-quiz").innerText = "";
+        document.getElementById("btn-proxima").style.display = "none";
     }
 }
 
-// ==========================================================================
-// 2. FUNCIONALIDADE INTERATIVA: SISTEMA DE PROCESSAMENTO CLIMÁTICO DO RADAR
-// ==========================================================================
-function simularClima(velocidadeVento, chanceChuva) {
-    console.log(`Dados Climáticos Recebidos: Vento a ${velocidadeVento}km/h, Chuva em ${chanceChuva}%`);
-    
-    const luzPulverizacao = document.getElementById('luz-pulverizacao');
-    const textoPulverizacao = document.getElementById('texto-pulverizacao');
-    
-    if (luzPulverizacao && textoPulverizacao) {
-        if (velocidadeVento > 20) {
-            luzPulverizacao.className = "status-luz vermelho-ativo";
-            textoPulverizacao.innerText = `Vento forte a ${velocidadeVento} km/h. Risco alto de deriva! Evite aplicar defensivos biológicos agora.`;
-        } else {
-            luzPulverizacao.className = "status-luz verde-ativo";
-            textoPulverizacao.innerText = `Vento estável a ${velocidadeVento} km/h. Condições operacionais perfeitas e ecologicamente seguras.`;
-        }
+/* ==========================================================================
+   2. SISTEMA DE SIMULAÇÃO CLIMÁTICA (REGRAS E LUZES DE STATUS)
+   ========================================================================== */
+function simularClima(velocidadeVento, proximidadeChuva) {
+    const luzPulverizacao = document.getElementById("luz-pulverizacao");
+    const textoPulverizacao = document.getElementById("texto-pulverizacao");
+    const luzIrrigacao = document.getElementById("luz-irrigacao");
+    const textoIrrigacao = document.getElementById("texto-irrigacao");
+
+    // Regra 1: Pulverização Consciente (Deriva)
+    luzPulverizacao.className = "status-luz";
+    if (velocidadeVento > 20) {
+        luzPulverizacao.classList.add("vermelho-ativo");
+        textoPulverizacao.innerText = `Risco Alto (${velocidadeVento} km/h). Pulverização SUSPENSA para evitar a contaminação de rios.`;
+    } else {
+        luzPulverizacao.classList.add("verde-ativo");
+        textoPulverizacao.innerText = `Seguro (${velocidadeVento} km/h). Vento ideal para aplicação precisa dos insumos.`;
     }
 
-    const luzIrrigacao = document.getElementById('luz-irrigacao');
-    const textoIrrigacao = document.getElementById('texto-irrigacao');
-    
-    if (luzIrrigacao && textoIrrigacao) {
-        if (chanceChuva > 70) {
-            luzIrrigacao.className = "status-luz vermelho-ativo"; 
-            textoIrrigacao.innerText = `Frente de chuva iminente (${chanceChuva}%). Desligue os pivôs eletrônicos para poupar água doce e energia.`;
-        } else {
-            luzIrrigacao.className = "status-luz verde-ativo";
-            textoIrrigacao.innerText = `Baixa probabilidade de chuva (${chanceChuva}%). Sistemas de gotejamento de precisão autorizados para operação.`;
-        }
+    // Regra 2: Irrigação Inteligente (Economia de Água)
+    luzIrrigacao.className = "status-luz";
+    if (proximidadeChuva > 70) {
+        luzIrrigacao.classList.add("vermelho-ativo");
+        textoIrrigacao.innerText = `Chuva Iminente (${proximidadeChuva}%). Bombas DESLIGADAS para poupar recursos hídricos e energia.`;
+    } else {
+        luzIrrigacao.classList.add("verde-ativo");
+        textoIrrigacao.innerText = `Tempo Seco (${proximidadeChuva}%). Irrigação LIBERADA para a saúde do plantio.`;
     }
 }
 
-// Inicialização automática segura assim que o DOM carregar nativamente
-document.addEventListener("DOMContentLoaded", function() {
-    // Carrega a primeira pergunta do quiz automaticamente
+/* ==========================================================================
+   3. SISTEMA DE ALTO CONTRASTE (ACESSIBILIDADE WEB)
+   ========================================================================= */
+function toggleContraste() {
+    document.body.classList.toggle("alto-contraste");
+    
+    // Altera o texto do botão para que o usuário saiba o status do recurso
+    const btn = document.getElementById("btn-contraste");
+    if (document.body.classList.contains("alto-contraste")) {
+        btn.innerText = "☀️ Modo Normal";
+    } else {
+        btn.innerText = "🌓 Alto Contraste";
+    }
+}
+
+// Inicializações Automáticas ao Carregar a Página
+window.onload = function() {
     carregarPergunta();
-    // Inicia o painel com parâmetros ótimos por padrão
-    simularClima(12, 15);
-});
+    simularClima(12, 15); // Clima base inicial padrão
+};

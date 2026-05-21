@@ -20,6 +20,7 @@ body {
     background-color: var(--cor-background);
     color: var(--cor-textos);
     line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
@@ -49,6 +50,11 @@ body {
     font-weight: bold;
 }
 
+.navbar nav {
+    display: flex;
+    align-items: center;
+}
+
 .navbar nav a {
     color: white;
     text-decoration: none;
@@ -62,8 +68,26 @@ body {
     color: var(--cor-secundaria);
 }
 
+.nav-btn-acessivel {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 6px 12px;
+    margin-left: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-btn-acessivel:hover {
+    background-color: white;
+    color: var(--cor-principal);
+}
+
 /* ==========================================================================
-   3. HERO SECTION (BANNER PRINCIPAL COM A IMAGEM CORRETA)
+   3. HERO SECTION
    ========================================================================== */
 .hero-section {
     position: relative;
@@ -121,6 +145,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.04);
     margin-top: 30px;
+    transition: background-color 0.3s;
 }
 
 h2 {
@@ -146,6 +171,7 @@ h2 {
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.04);
     margin-top: 30px;
+    transition: background-color 0.3s;
 }
 
 .radar-container {
@@ -167,6 +193,7 @@ h2 {
     background: #f8fafc;
     padding: 15px;
     border-radius: 8px;
+    transition: background-color 0.3s;
 }
 
 .radar-legendas h3 {
@@ -208,6 +235,7 @@ h2 {
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.04);
     margin-top: 30px;
+    transition: background-color 0.3s;
 }
 
 .info-grid {
@@ -233,7 +261,7 @@ h2 {
     transform-style: preserve-3d;
 }
 
-.flash-card:hover .flash-card-inner {
+.flash-card:hover .flash-card-inner, .flash-card:focus .flash-card-inner {
     transform: rotateY(180deg);
 }
 
@@ -256,6 +284,7 @@ h2 {
 .flash-card-front {
     background-color: #f8fafc;
     color: var(--cor-textos);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .flash-card-front h3 {
@@ -276,6 +305,7 @@ h2 {
     color: white;
     transform: rotateY(180deg);
     justify-content: center;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .flash-card-back h3 {
@@ -322,6 +352,7 @@ h2 {
 .tabela-impactos th {
     background-color: var(--cor-principal);
     color: white;
+    transition: background-color 0.3s;
 }
 
 .tabela-impactos tr:nth-child(even) {
@@ -329,7 +360,7 @@ h2 {
 }
 
 /* ==========================================================================
-   8. COMPONENTE INTERATIVO: QUIZ (AJUSTADO PARA TEXTOS LONGOS)
+   8. QUIZ (OTIMIZADO)
    ========================================================================== */
 .quiz-container {
     background-color: #f8fafc;
@@ -337,6 +368,7 @@ h2 {
     border-radius: 8px;
     border-left: 5px solid var(--cor-secundaria);
     text-align: center;
+    transition: background-color 0.3s;
 }
 
 .botoes-quiz button {
@@ -377,7 +409,7 @@ h2 {
 }
 
 /* ==========================================================================
-   9. PAINEL DE TOMADA DE DECISÃO E REGRAS CLIMÁTICAS
+   9. PAINEL DE TOMADA DE DECISÃO
    ========================================================================== */
 .ferramentas-section {
     background: var(--cor-cards);
@@ -385,6 +417,7 @@ h2 {
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.04);
     margin-top: 30px;
+    transition: background-color 0.3s;
 }
 
 .cards-grid {
@@ -400,6 +433,7 @@ h2 {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.3s;
 }
 
 .card-image-sim {
@@ -407,6 +441,7 @@ h2 {
     font-size: 3rem;
     padding: 20px;
     text-align: center;
+    transition: background-color 0.3s;
 }
 
 .card-body {
@@ -435,6 +470,7 @@ h2 {
     padding: 10px;
     border-radius: 6px;
     border: 1px solid #edf2f7;
+    transition: background-color 0.3s;
 }
 
 .status-luz {
@@ -460,6 +496,7 @@ h2 {
     background: #edf2f7;
     padding: 20px;
     border-radius: 8px;
+    transition: background-color 0.3s;
 }
 
 .simulador-controle h3 {
@@ -491,7 +528,7 @@ h2 {
 }
 
 /* ==========================================================================
-   10. SEÇÃO DE CONCLUSÃO E FOOTER
+   10. CONCLUSÃO E FOOTER
    ========================================================================== */
 .conclusao-section {
     background: var(--cor-cards);
@@ -499,6 +536,7 @@ h2 {
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.04);
     margin-top: 30px;
+    transition: background-color 0.3s;
 }
 
 .conclusao-conteudo {
@@ -518,6 +556,7 @@ h2 {
     padding: 20px;
     border-radius: 8px;
     border-left: 5px solid var(--cor-principal);
+    transition: background-color 0.3s;
 }
 
 footer {
@@ -527,10 +566,85 @@ footer {
     padding: 25px;
     margin-top: 40px;
     font-size: 0.9rem;
+    transition: background-color 0.3s;
 }
 
 footer p:last-child {
     font-size: 0.8rem;
     color: var(--cor-secundaria);
     margin-top: 5px;
+}
+
+/* ==========================================================================
+   11. CLASSE EXCLUSIVA PARA ALTO CONTRASTE (ACESSIBILIDADE VISUAL)
+   ========================================================================== */
+body.alto-contraste {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+body.alto-contraste .navbar,
+body.alto-contraste footer,
+body.alto-contraste .botoes-quiz button,
+body.alto-contraste .botoes-simulador button {
+    background-color: #000000 !important;
+    color: #ffff00 !important;
+    border: 2px solid #ffff00 !important;
+}
+
+body.alto-contraste h2,
+body.alto-contraste h3,
+body.alto-contraste strong,
+body.alto-contraste #pergunta-quiz {
+    color: #ffff00 !important;
+}
+
+body.alto-contraste .site-section,
+body.alto-contraste .radar-section,
+body.alto-contraste .informativo-section,
+body.alto-contraste .ferramentas-section,
+body.alto-contraste .conclusao-section,
+body.alto-contraste .card,
+body.alto-contraste .radar-legendas,
+body.alto-contraste .quiz-container,
+body.alto-contraste .simulador-controle,
+body.alto-contraste .flash-card-front,
+body.alto-contraste .status-box,
+body.alto-contraste .creditos-bloco {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+body.alto-contraste .flash-card-back {
+    background-color: #ffff00 !important;
+    color: #000000 !important;
+    border: 2px solid #ffff00 !important;
+}
+
+body.alto-contraste .flash-card-back h3,
+body.alto-contraste .flash-card-back p {
+    color: #000000 !important;
+}
+
+body.alto-contraste .tabela-impactos th {
+    background-color: #ffff00 !important;
+    color: #000000 !important;
+}
+
+body.alto-contraste .tabela-impactos td,
+body.alto-contraste .tabela-impactos tr {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+body.alto-contraste .final-highlight {
+    background-color: #000000 !important;
+    border: 3px dashed #ffff00 !important;
+}
+
+body.alto-contraste .nav-btn-acessivel {
+    background-color: #ffff00 !important;
+    color: #000000 !important;
+    border: 2px solid #ffff00 !important;
 }

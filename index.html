@@ -12,7 +12,7 @@
 <body>
 
     <header class="navbar">
-        <div class="logo">🌱 EcoRadar Agro</div>
+        <div class="logo" aria-label="EcoRadar Agro">🌱 EcoRadar Agro</div>
         <nav>
             <a href="#intro">Sobre o Projeto</a>
             <a href="#radar-secao">Radar</a>
@@ -21,10 +21,11 @@
             <a href="#quiz">Quiz Técnico</a>
             <a href="#painel">Painel de Decisão</a>
             <a href="#conclusao">Conclusão</a>
+            <button id="btn-contraste" onclick="toggleContraste()" class="nav-btn-acessivel" aria-label="Ativar ou desativar alto contraste">🌓 Alto Contraste</button>
         </nav>
     </header>
 
-    <section class="hero-section">
+    <section class="hero-section" role="img" aria-label="Banner principal com imagem do campo sustentável">
         <div class="overlay"></div>
         <div class="hero-content">
             <h1>🌱 EcoRadar Agro</h1>
@@ -39,8 +40,8 @@
             <h2>Sobre o Projeto</h2>
             <p>O <strong>EcoRadar Agro</strong> é uma plataforma digital desenvolvida para auxiliar pequenos e grandes produtores rurais a tomarem decisões inteligentes e ecológicas no campo. O sistema une a tecnologia de ponta do monitoramento climático com práticas sustentáveis, garantindo um agro forte que protege o futuro do nosso planeta.</p>
             
-            <div style="margin-top: 15px; padding: 12px; background-color: #f8fafc; border-left: 4px solid var(--cor-principal); border-radius: 4px; font-size: 0.9rem; line-height: 1.5;">
-                <strong>💻 Desenvolvedor:</strong> Vinicius Montagna Fabricio<br>
+            <div style="margin-top: 15px; padding: 12px; background-color: #f8fafc; border-left: 4px solid var(--cor-principal); border-radius: 4px; font-size: 0.9rem; line-height: 1.5;" class="creditos-bloco">
+                <strong>💻 Desenvolvedores:</strong> Vinicius Montagna Fabricio<br>
                 <strong>🏫 Escola:</strong> Colégio Estadual Civíco Militar Stella Maris<br>
                 <strong>📍 Cidade:</strong> Andirá - PR
             </div>
@@ -51,7 +52,7 @@
             <p class="sub-painel">Monitore o avanço das nuvens de chuva e planeje suas ações no campo com precisão.</p>
             
             <div class="radar-container">
-                <iframe src="https://embed.windy.com/embed2.html?lat=-23.548&lon=-46.636&zoom=6&level=surface&overlay=radar&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=-23.548&detailLon=-46.636&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=true" class="radar-frame" frameborder="0"></iframe>
+                <iframe src="https://embed.windy.com/embed2.html?lat=-23.548&lon=-46.636&zoom=6&level=surface&overlay=radar&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=-23.548&detailLon=-46.636&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=true" class="radar-frame" frameborder="0" title="Radar Meteorológico interativo em tempo real do Windy"></iframe>
             </div>
             
             <div class="radar-legendas">
@@ -70,7 +71,7 @@
             
             <div class="info-grid">
                 
-                <div class="flash-card">
+                <div class="flash-card" tabindex="0" aria-label="Card Informativo sobre Tecnologia. Interaja para ler o conteúdo completo.">
                     <div class="flash-card-inner">
                         <div class="flash-card-front">
                             <div class="info-tag">Tecnologia</div>
@@ -84,7 +85,7 @@
                     </div>
                 </div>
 
-                <div class="flash-card">
+                <div class="flash-card" tabindex="0" aria-label="Card Informativo sobre Sustentabilidade. Interaja para ler o conteúdo completo.">
                     <div class="flash-card-inner">
                         <div class="flash-card-front">
                             <div class="info-tag">Sustentabilidade</div>
@@ -98,7 +99,7 @@
                     </div>
                 </div>
 
-                <div class="flash-card">
+                <div class="flash-card" tabindex="0" aria-label="Card Informativo sobre Inovação. Interaja para ler o conteúdo completo.">
                     <div class="flash-card-inner">
                         <div class="flash-card-front">
                             <div class="info-tag">Inovação</div>
@@ -143,18 +144,18 @@
 
         <section id="quiz" class="site-section">
             <h2>🧠 Quiz Técnico: Sustentabilidade e Tecnologia</h2>
-            <p class="sub-painel">Teste seus conhecimentos sobre o funcionamento inteligente do nosso system!</p>
+            <p class="sub-painel">Teste seus conhecimentos sobre o funcionamento inteligente do nosso sistema!</p>
             
-            <div class="quiz-container">
+            <div class="quiz-container" role="region" aria-label="Quiz interativo">
                 <h3 id="status-pergunta">Pergunta 1 de 4</h3>
                 <p id="pergunta-quiz" style="font-size: 1.1rem; font-weight: bold; margin: 15px 0; color: var(--cor-principal);"></p>
                 
                 <div class="botoes-quiz" style="display: flex; flex-direction: column; gap: 10px; max-width: 600px; margin: 0 auto;">
-                    <button id="btn-opcao-a" onclick="verificarResposta(0)"></button>
-                    <button id="btn-opcao-b" onclick="verificarResposta(1)"></button>
+                    <button id="btn-opcao-a" onclick="verResposta(0)"></button>
+                    <button id="btn-opcao-b" onclick="verResposta(1)"></button>
                 </div>
                 
-                <p id="resultado-quiz" style="margin-top: 15px; font-weight: bold; min-height: 24px; padding: 0 10px;"></p>
+                <p id="resultado-quiz" style="margin-top: 15px; font-weight: bold; min-height: 24px; padding: 0 10px;" aria-live="polite"></p>
                 <button id="btn-proxima" onclick="proximaPergunta()" style="display: none; background-color: var(--cor-secundaria); margin-top: 10px;">Avançar Próxima Pergunta ➡️</button>
             </div>
         </section>
@@ -165,7 +166,7 @@
 
             <div class="cards-grid">
                 <div class="card">
-                    <div class="card-image-sim">🚜</div>
+                    <div class="card-image-sim" role="img" aria-label="Ícone de trator">🚜</div>
                     <div class="card-body">
                         <h3>Pulverização Consciente</h3>
                         <p>Evite o fenômeno da deriva. Quando o vento está muito forte, os defensores agrícolas evaporam ou são levados pelo vento antes de tocar a planta, contaminando rios, matas nativas e polinizadores essenciais como as abelhas.</p>
@@ -177,7 +178,7 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-image-sim">💧</div>
+                    <div class="card-image-sim" role="img" aria-label="Ícone de gota de água">💧</div>
                     <div class="card-body">
                         <h3>Irrigação Inteligente</h3>
                         <p>A agricultura consome cerca de 70% da água doce do planeta. Irrigar a lavoura momentos antes de uma chuva forte se aproximar gera desperdício de recursos hídricos e gasto desnecessário de energia elétrica nas bombas d'água.</p>
@@ -221,7 +222,7 @@
 
     <footer>
         <p>© 2026 EcoRadar Agro — Desenvolvido para o Concurso Agrinho 2026</p>
-        <p style="margin-top: 5px; font-weight: bold; color: var(--cor-secundaria); font-size: 1rem;"> Parceria: @agrinho | #Agrinho2026</p>
+        <p style="margin-top: 5px; font-weight: bold; color: var(--cor-secundaria); font-size: 1rem;">🚀 Parceria: @agrinho | #Agrinho2026</p>
         <p style="margin-top: 8px; font-size: 0.8rem; opacity: 0.8;">Tema: "Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente"</p>
     </footer>
 
