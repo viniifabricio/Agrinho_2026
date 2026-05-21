@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. SISTEMA DO QUIZ INTERATIVO (4 PERGUNTAS)
+   1. SISTEMA DO QUIZ INTERATIVO
    ========================================================================== */
 const bancoPerguntas = [
     {
@@ -22,7 +22,7 @@ const bancoPerguntas = [
         pergunta: "Qual o maior objetivo ecológico defendido pelo tema 'Agro forte, futuro sustentável' no projeto?",
         opcoes: [
             "Provar que a tecnologia serve apenas para aumentar os lucros financeiros das grandes propriedades rurais.",
-            "Mostrar que é possível expandir a produção de alimentos mantendo o equilíbrio ecológico e a preservação ambiental."
+            "Mostrar que é possível expandir a produção de alimentos mantendo o equilíbrio ecológico e a preservação ambientas."
         ],
         correta: 1
     },
@@ -74,7 +74,6 @@ function verificarResposta(opcaoSelecionada) {
         elementResultado.style.color = "#e74c3c";
     }
     
-    // Se o sintetizador de voz estiver ligado, ele lê o feedback do quiz automaticamente
     if (vozLigada) {
         falarTexto(feedbackTexto);
     }
@@ -90,9 +89,9 @@ function proximaPergunta() {
             setTimeout(() => { falarTexto(document.getElementById("pergunta-quiz").innerText); }, 500);
         }
     } else {
-        const fimTexto = "Quiz Concluído! Parabéns! Você completou a trilha de conhecimento técnico sobre agricultura sustentável e digital.";
+        const fimTexto = "Quiz Concluído! Parabéns! Você completou a trilha de conhecimento.";
         document.getElementById("status-pergunta").innerText = "Quiz Concluído! 🎉";
-        document.getElementById("pergunta-quiz").innerText = "Parabéns! Você completou a trilha de conhecimento técnico sobre agricultura sustentável e digital.";
+        document.getElementById("pergunta-quiz").innerText = "Parabéns! Você completou a trilha de conhecimento técnico sobre agricultura sustentável.";
         document.getElementById("btn-opcao-a").style.display = "none";
         document.getElementById("btn-opcao-b").style.display = "none";
         document.getElementById("resultado-quiz").innerText = "";
@@ -122,7 +121,7 @@ function simularClima(velocidadeVento, proximidadeChuva) {
     luzIrrigacao.className = "status-luz";
     if (proximidadeChuva > 70) {
         luzIrrigacao.classList.add("vermelho-ativo");
-        textoIrrigacao.innerText = `Chuva Iminente (${proximidadeChuva}%). Bombas DESLIGADAS para poupar recursos hídricos e energia.`;
+        textoIrrigacao.innerText = `Chuva Iminente (${proximidadeChuva}%). Bombas DESLIGADAS para poupar recursos hídricos.`;
     } else {
         luzIrrigacao.classList.add("verde-ativo");
         textoIrrigacao.innerText = `Tempo Seco (${proximidadeChuva}%). Irrigação LIBERADA para a saúde do plantio.`;
@@ -130,20 +129,20 @@ function simularClima(velocidadeVento, proximidadeChuva) {
 }
 
 /* ==========================================================================
-   3. SISTEMA DE ALTO CONTRASTE (ACESSIBILIDADE VISUAL COGNITIVA)
+   3. ALTO CONTRASTE
    ========================================================================= */
 function toggleContraste() {
-    document.body.classList.toggle("alto-contraste");
+    document.body.classList.toggle("alto-contrast");
     const btn = document.getElementById("btn-contraste");
     if (document.body.classList.contains("alto-contraste")) {
-        btn.innerText = "☀️ Modo Normal";
+        btn.innerText = "Normal";
     } else {
-        btn.innerText = "🌓 Contraste";
+        btn.innerText = "Contraste";
     }
 }
 
 /* ==========================================================================
-   4. LEITOR DE TELA INTEGRADO POR VOZ (PARA CEGOS)
+   4. LEITOR DE TELA ROBUSTO (FALA TODO O CONTEÚDO)
    ========================================================================= */
 let vozLigada = false;
 const sintetizador = window.speechSynthesis;
@@ -154,9 +153,9 @@ function toggleLeituraVoz() {
 
     if (vozLigada) {
         btnVoz.classList.add("btn-ativo");
-        btnVoz.innerText = "🛑 Parar Voz";
-        falarTexto("Leitor de tela integrado ativado. Passe o mouse ou clique nas seções para ouvir o conteúdo do EcoRadar Agro.");
-        adicionarEventosLeitura();
+        btnVoz.innerText = "🛑 Parar";
+        falarTexto("Leitor integrado ativado. Passe o mouse sobre as seções ou cartões para escutar o conteúdo completo.");
+        adicionarEventosLeituraCompleta();
     } else {
         btnVoz.classList.remove("btn-ativo");
         btnVoz.innerText = "🔊 Ouvir Site";
@@ -166,39 +165,30 @@ function toggleLeituraVoz() {
 
 function falarTexto(texto) {
     if (!vozLigada) return;
-    sintetizador.cancel(); // Para qualquer fala em andamento antes de começar a próxima
+    sintetizador.cancel(); 
     const fala = new SpeechSynthesisUtterance(texto);
     fala.lang = "pt-BR";
-    fala.rate = 1.1; // Velocidade da voz ligeiramente mais rápida e natural
+    fala.rate = 1.1; 
     sintetizador.speak(fala);
 }
 
-function adicionarEventosLeitura() {
-    // Captura tags de texto importantes e blocos interativos para ler alto ao focar/passar o mouse
-    const elementosParaLer = document.querySelectorAll('.site-section, .radar-section, .informativo-section, .ferramentas-section, .conclusao-section, .flash-card, .card');
+// AJUSTE: Mapeamento completo para ler os parágrafos internos e textos dos cards
+function adicionarEventosLeituraCompleta() {
+    const elementos = document.querySelectorAll('.site-section, .radar-section, .ferramentas-section, .conclusao-section, .flash-card, .card');
     
-    elementosParaLer.forEach(elemento => {
-        // Evento para quando passa o mouse
-        elemento.addEventListener('mouseenter', () => {
+    elementos.forEach(el => {
+        el.addEventListener('mouseenter', () => {
             if (vozLigada) {
-                let textoExtraido = elemento.innerText || elemento.getAttribute('aria-label');
-                // Limpa textos muito longos ou instruções repetitivas para leitura dinâmica
-                falarTexto(textoExtraido.split('\n')[0] + ". " + (textoExtraido.split('\n')[1] || ""));
-            }
-        });
-        
-        // Evento para navegação via teclado usando a tecla TAB (Acessibilidade Avançada)
-        elemento.addEventListener('focus', () => {
-            if (vozLigada) {
-                let textoExtraido = elemento.innerText || elemento.getAttribute('aria-label');
-                falarTexto(textoExtraido.split('\n')[0]);
+                // Se possuir aria-label detalhado (como nos flash-cards), lê ele. Senão, lê o texto interno completo.
+                let textoParaFalar = el.getAttribute('aria-label') || el.innerText;
+                falarTexto(textoParaFalar);
             }
         });
     });
 }
 
-// Inicializações Automáticas ao Carregar a Página
-window.onload = function() {
+// Função de inicialização chamada pelo HTML externo
+function inicializarQuizEPainel() {
     carregarPergunta();
     simularClima(12, 15);
-};
+}

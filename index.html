@@ -14,17 +14,19 @@
     <header class="navbar">
         <div class="logo" aria-label="EcoRadar Agro">🌱 EcoRadar Agro</div>
         <nav>
-            <a href="#intro">Sobre o Projeto</a>
-            <a href="#radar-secao">Radar</a>
-            <a href="#informativo">Espaço Informativo</a>
-            <a href="#impactos">Impactos Positivos</a>
-            <a href="#quiz">Quiz Técnico</a>
-            <a href="#painel">Painel de Decisão</a>
-            <a href="#conclusao">Conclusão</a>
+            <div class="nav-links">
+                <a href="#intro">Sobre</a>
+                <a href="#radar-secao">Radar</a>
+                <a href="#informativo">Informativo</a>
+                <a href="#impactos">Impactos</a>
+                <a href="#quiz">Quiz</a>
+                <a href="#painel">Decisão</a>
+                <a href="#conclusao">Conclusão</a>
+            </div>
             
             <div class="acessibilidade-botoes">
-                <button id="btn-contraste" onclick="toggleContraste()" class="nav-btn-acessivel" title="Ativar alto contraste para baixa visão">🌓 Contraste</button>
-                <button id="btn-voz" onclick="toggleLeituraVoz()" class="nav-btn-acessivel" title="Ativar leitura de tela por voz para deficientes visuais">🔊 Ouvir Site</button>
+                <button id="btn-contraste" onclick="toggleContraste()" class="nav-btn-acessivel" title="Ativar alto contraste">Publico</button>
+                <button id="btn-voz" onclick="toggleLeituraVoz()" class="nav-btn-acessivel" title="Ouvir Site">🔊 Ouvir Site</button>
             </div>
         </nav>
     </header>
@@ -45,8 +47,8 @@
             <p>O <strong>EcoRadar Agro</strong> é uma plataforma digital desenvolvida para auxiliar pequenos e grandes produtores rurais a tomarem decisões inteligentes e ecológicas no campo. O sistema une a tecnologia de ponta do monitoramento climático com práticas sustentáveis, garantindo um agro forte que protege o futuro do nosso planeta.</p>
             
             <div style="margin-top: 15px; padding: 12px; background-color: #f8fafc; border-left: 4px solid var(--cor-principal); border-radius: 4px; font-size: 0.9rem; line-height: 1.5;" class="creditos-bloco">
-                <strong>💻 Desenvolvedores:</strong> Vinicius & Fabricio<br>
-                <strong>🏫 Escola:</strong> Colégio Estadual de Andirá<br>
+                <strong>💻 Desenvolvedor:</strong> Vinicius Montagna Fabricio<br>
+                <strong>🏫 Escola:</strong> Colégio Estadual Cívico-Militar Stella Maris<br>
                 <strong>📍 Cidade:</strong> Andirá - PR
             </div>
         </section>
@@ -56,7 +58,7 @@
             <p class="sub-painel">Monitore o avanço das nuvens de chuva e planeje suas ações no campo com precisão.</p>
             
             <div class="radar-container">
-                <iframe src="https://embed.windy.com/embed2.html?lat=-23.548&lon=-46.636&zoom=6&level=surface&overlay=radar&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=-23.548&detailLon=-46.636&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=true" class="radar-frame" frameborder="0" title="Radar Meteorológico interativo em tempo real mostrando deslocamento de massas de ar e chuva"></iframe>
+                <iframe src="https://embed.windy.com/embed2.html?lat=-23.050&lon=-50.230&zoom=7&level=surface&overlay=radar&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=true" class="radar-frame" frameborder="0" title="Radar Meteorológico interativo Windy"></iframe>
             </div>
             
             <div class="radar-legendas">
@@ -75,7 +77,7 @@
             
             <div class="info-grid">
                 
-                <div class="flash-card" tabindex="0" aria-label="Card Informativo sobre Tecnologia. Foco do programa agrinho 2026.">
+                <div class="flash-card" tabindex="0" aria-label="Card Informativo sobre Tecnologia. Qual o foco do Programa Agrinho 2026? Resposta: Agro Forte, Futuro Sustentável. O tema destaca a importância de unir produção agrícola, tecnologia e preservação ambiental.">
                     <div class="flash-card-inner">
                         <div class="flash-card-front">
                             <div class="info-tag">Tecnologia</div>
@@ -89,7 +91,7 @@
                     </div>
                 </div>
 
-                <div class="flash-card" tabindex="0" aria-label="Card Informativo sobre Sustentabilidade. O que caracteriza o verdadeiro agro sustentável.">
+                <div class="flash-card" tabindex="0" aria-label="Card Informativo sobre Sustentabilidade. O que caracteriza o verdadeiro Agro Sustentável? Resposta: Equilíbrio de Recursos. É o modelo que atende às necessidades atuais sem comprometer o futuro, utilizando práticas que preservam o solo e economizam água.">
                     <div class="flash-card-inner">
                         <div class="flash-card-front">
                             <div class="info-tag">Sustentabilidade</div>
@@ -103,7 +105,7 @@
                     </div>
                 </div>
 
-                <div class="flash-card" tabindex="0" aria-label="Card Informativo sobre Inovação. Papel e desafios do agronegócio no brasil.">
+                <div class="flash-card" tabindex="0" aria-label="Card Informativo sobre Inovação. Qual o papel e o desafio do Agronegócio no Brasil? Resposta: Segurança Alimentar. O desafio crucial do agro moderno é aumentar a produtividade e a eficiência no campo, preservando rigorosamente as florestas, os recursos hídricos e a biodiversidade local.">
                     <div class="flash-card-inner">
                         <div class="flash-card-front">
                             <div class="info-tag">Inovação</div>
@@ -212,7 +214,7 @@
             <div class="conclusao-conteudo">
                 <div class="conclusao-bloco">
                     <h3>DESAFIOS DO FUTURO</h3>
-                    <p>O grande desafio do campo é mitigar impactos históricos, como a escassez de água e o uso inadequado de insumos. É aqui que a tecnologia se torna indispensável: investimentos em agricultura de precisão e monitoramento digital oferecem soluções reais para que o produtor aumente sua colheita enquanto protege ativamente os ecossistemas, construindo o verdadeiro equilíbrio ecológico.</p>
+                    <p>O grande desafio do campo é mitigar impactos históricos, como a escassez de água e o uso inequado de insumos. É aqui que a tecnologia se torna indispensável: investimentos em agricultura de precisão e monitoramento digital oferecem soluções reais para que o produtor aumente sua colheita enquanto protege ativamente os ecossistemas, construindo o verdadeiro equilíbrio ecológico.</p>
                 </div>
 
                 <div class="conclusao-bloco final-highlight">
@@ -238,7 +240,11 @@
     </div>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
+        // Correção de inicialização do Widget externo
+        window.onload = function() {
+            new window.VLibras.Widget('https://vlibras.gov.br/app');
+            inicializarQuizEPainel();
+        };
     </script>
 
     <script src="./main.js"></script>
