@@ -175,7 +175,6 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efeito sutil de elevação ao interagir com as seções */
 .site-section:hover, .radar-section:hover, .ferramentas-section:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(27, 67, 50, 0.08);
@@ -350,7 +349,7 @@ h2 {
 }
 
 /* ==========================================================================
-   6. DESIGN DA NOVA CALCULADORA ECOLÓGICA
+   6. DESIGN DA CALCULADORA ECOLÓGICA
    ========================================================================== */
 .calc-container {
     background: #f8fafc;
@@ -512,6 +511,48 @@ h2 {
 }
 
 /* ==========================================================================
+   7.1 DESIGN DA SEÇÃO DE INDICADORES OFICIAIS DO CAMPO
+   ========================================================================== */
+.indicadores-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.indicador-linha {
+    display: flex;
+    align-items: center;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 5px solid var(--cor-secundaria);
+    padding: 18px;
+    border-radius: 8px;
+    gap: 20px;
+}
+
+.indicador-numero {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--cor-principal);
+    min-width: 100px;
+    text-align: center;
+}
+
+.indicador-texto {
+    font-size: 0.95rem;
+    color: var(--cor-textos);
+}
+
+.fonte-dado {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #718096;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+/* ==========================================================================
    8. PAINEL DE TOMADA DE DECISÃO
    ========================================================================== */
 .cards-grid {
@@ -661,7 +702,8 @@ body.alto-contraste h2,
 body.alto-contraste h3,
 body.alto-contraste strong,
 body.alto-contraste #pergunta-quiz,
-body.alto-contraste .creditos-titulo {
+body.alto-contraste .creditos-titulo,
+body.alto-contraste .indicador-numero {
     color: #ffff00 !important;
 }
 
@@ -691,29 +733,32 @@ body.alto-contraste .calc-container {
 
 /* --- FORÇANDO TEXTO PRETO EM BLOCOS DE DESTAQUE CLAROS --- */
 
-/* 1. Bloco de Identificação e Cards da Calculadora */
+/* 1. Bloco de Identificação, Cards da Calculadora e Seção de Indicadores */
 body.alto-contraste .creditos-bloco,
-body.alto-contraste .metric-box {
+body.alto-contraste .metric-box,
+body.alto-contraste .indicador-linha {
     background-color: #ffffff !important;
     border: 2px solid #ffff00 !important;
 }
 
-/* Garante que os números e descrições da calculadora e créditos fiquem pretos */
+/* Garante que os números e descrições fiquem pretos para contraste perfeito */
 body.alto-contraste .creditos-item,
 body.alto-contraste .creditos-item span,
 body.alto-contraste .metric-data h4,
-body.alto-contraste .metric-data p {
+body.alto-contraste .metric-data p,
+body.alto-contraste .indicador-texto,
+body.alto-contraste .indicador-numero,
+body.alto-contraste .fonte-dado {
     color: #000000 !important;
 }
 
 /* 2. Bloco de Destaque da Conclusão Final */
 body.alto-contraste .final-highlight {
-    background-color: #ffffff !important; /* Muda de verde-claro para branco puro no contraste */
+    background-color: #ffffff !important; 
     border: 2px solid #ffff00 !important;
     border-left: 5px solid #ffff00 !important;
 }
 
-/* Força o título "CONCLUSÃO" e o texto do parágrafo a ficarem pretos */
 body.alto-contraste .final-highlight h3,
 body.alto-contraste .final-highlight p {
     color: #000000 !important;
@@ -740,6 +785,7 @@ body.alto-contraste .tabela-impactos td {
     background-color: #000000 !important;
     color: #ffffff !important;
 }
+
 /* ==========================================================================
    10. MEDIA QUERIES (MELHORIA EXTREMA DE RESPONSIVIDADE)
    ========================================================================== */
@@ -779,5 +825,10 @@ body.alto-contraste .tabela-impactos td {
     }
     .calc-resultado {
         flex-direction: column;
+    }
+    .indicador-linha {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
     }
 }
