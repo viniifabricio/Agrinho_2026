@@ -1,834 +1,404 @@
 /* ==========================================================================
-   1. CONFIGURAÇÕES GERAIS E VARIÁVEIS
+   ARQUITETURA DE VARIÁVEIS DO PROJETO - TEMA VERDE ECOLÓGICO
    ========================================================================== */
 :root {
-    --cor-principal: #1b4332;   
-    --cor-secundaria: #52b788;  
-    --cor-background: #f4f9f4;  
-    --cor-textos: #2d3748;      
-    --cor-cards: #ffffff;       
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--cor-background);
-    color: var(--cor-textos);
-    line-height: 1.6;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 20px;
+    --bg-global: #0c1a11;
+    --bg-container: #122619;
+    --cor-principal: #4caf50;
+    --cor-principal-hover: #388e3c;
+    --cor-secundaria: #81c784;
+    --texto-claro: #ffffff;
+    --texto-mutado: #b9dfbb;
+    --texto-escuro: #121212;
+    --borda-suave: rgba(76, 175, 80, 0.25);
+    --sombra-card: 0 6px 20px rgba(0, 0, 0, 0.45);
+    --transicao-suave: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --fonte-padrao: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    
+    /* Parâmetros CSS Dinâmicos Substituídos via API JavaScript */
+    --tamanho-fonte-base: 16px;
+    --espacamento-texto-base: normal;
+    --altura-linha-base: 1.6;
 }
 
 /* ==========================================================================
-   2. NAVBAR RESPONSIVA (COM TRANSIÇÕES SUAVES)
+   CLASSES MODIFICADORAS DE COMPORTAMENTO VISUAL (CLASSES INTERATIVAS)
    ========================================================================== */
+body.alto-contraste {
+    --bg-global: #000000;
+    --bg-container: #000000;
+    --cor-principal: #ffff00;
+    --cor-secundaria: #ffff00;
+    --texto-claro: #ffffff;
+    --texto-mutado: #ffffff;
+    --borda-suave: #ffffff;
+}
+body.alto-contraste .flash-card-front, 
+body.alto-contraste .flash-card-back,
+body.alto-contraste .medidor-card,
+body.alto-contraste .timeline-content,
+body.alto-contraste .calc-resultado {
+    background: #000000;
+    border: 2px solid #ffffff;
+}
+
+body.fonte-dislexia {
+    --fonte-padrao: "Comic Sans MS", "Chalkboard SE", "Arial Rounded MT Bold", sans-serif !important;
+}
+
+/* Filtro Monocromático Isolado para não sumir com o Painel de Acessibilidade */
+body.modo-monocromatico main, 
+body.modo-monocromatico header, 
+body.modo-monocromatico footer, 
+body.modo-monocromatico .hero-section {
+    filter: grayscale(100%) contrast(120%) !important;
+}
+
+/* ==========================================================================
+   RESETS, POLIMENTO TÉCNICO E ACESSIBILIDADE BASE
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-global);
+    color: var(--texto-claro);
+    font-family: var(--fonte-padrao);
+    font-size: var(--tamanho-fonte-base);
+    letter-spacing: var(--espacamento-texto-base);
+    line-height: var(--altura-linha-base);
+    transition: var(--transicao-suave);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 25px 20px;
+}
+
+/* FOCO VISUAL PERSONALIZADO CORRIGIDO PARA NAVEGAÇÃO POR TECLADO (WCAG) */
+a:focus, button:focus, input:focus, select:focus, [tabindex="0"]:focus {
+    outline: 2px solid var(--cor-principal) !important;
+    outline-offset: 3px;
+}
+
+/* Atalho para leitores de tela */
+.saltar-conteudo {
+    position: absolute;
+    top: -100px; left: 15px;
+    background: var(--cor-principal);
+    color: var(--texto-escuro);
+    padding: 12px 20px;
+    z-index: 9999;
+    font-weight: bold;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: top 0.2s;
+}
+.saltar-conteudo:focus { top: 15px; }
+
+/* NAVBAR RESPONSIVA CORRIGIDA */
 .navbar {
-    background-color: var(--cor-principal);
-    color: white;
+    background-color: var(--bg-container);
+    border-bottom: 2px solid var(--borda-suave);
+    padding: 15px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 3%;
-    position: sticky;
-    top: 0;
+    position: sticky; 
+    top: 0; 
     z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    flex-wrap: nowrap; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    gap: 20px;
 }
 
-.navbar .logo {
-    font-size: 1.3rem;
-    font-weight: bold;
+.logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--cor-secundaria);
+    letter-spacing: 0.5px;
     white-space: nowrap;
-    margin-right: 15px;
-}
-
-.navbar nav {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 100%;
+    flex-shrink: 0;
 }
 
 .nav-links {
     display: flex;
-    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 15px;
 }
 
-.navbar nav a {
-    color: white;
+.nav-links a {
+    color: var(--texto-claro);
     text-decoration: none;
-    font-size: 0.88rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transicao-suave);
     white-space: nowrap;
-}
-
-.navbar nav a:hover {
-    color: var(--cor-secundaria);
-}
-
-.acessibilidade-botoes {
-    display: flex;
-    gap: 6px;
-    margin-left: 15px;
-}
-
-.nav-btn-acessivel {
-    background-color: transparent;
-    color: white;
-    border: 1.5px solid white;
-    padding: 5px 10px;
+    padding: 6px 10px;
     border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    font-weight: bold;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a:focus { 
+    color: var(--cor-principal); 
+    background: rgba(76, 175, 80, 0.08);
 }
 
-.nav-btn-acessivel:hover {
-    background-color: white;
-    color: var(--cor-principal);
-    transform: scale(1.05);
-}
-
-.btn-ativo {
-    background-color: #f1c40f !important;
-    color: #000 !important;
-    border-color: #f1c40f !important;
-}
-
-/* ==========================================================================
-   3. HERO SECTION
-   ========================================================================== */
+/* HERO DA PÁGINA HOME */
 .hero-section {
     position: relative;
-    background: url('Agrinho.png') no-repeat center center/cover;
-    height: 380px;
+    background-color: #162d1d;
+    height: 320px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: white;
 }
+.overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.55); }
+.hero-content { position: relative; z-index: 1; padding: 25px; max-width: 800px; }
+.hero-content h1 { font-size: 2.8rem; color: var(--cor-secundaria); font-weight: 800; margin-bottom: 8px; }
+.hero-content p { font-size: 1.15rem; color: var(--texto-claro); opacity: 0.9; }
+.badge { display: inline-block; background: var(--cor-principal); color: var(--texto-escuro); padding: 6px 18px; border-radius: 20px; font-weight: bold; margin-top: 15px; font-size: 0.8rem; letter-spacing: 0.5px; }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.45);
-    z-index: 1;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 0 20px;
-}
-
-.hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-}
-
-.hero-content p {
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-    font-weight: 300;
-}
-
-.badge {
-    background-color: var(--cor-secundaria);
-    padding: 6px 15px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: bold;
-}
-
-/* ==========================================================================
-   4. SEÇÕES COM ANIMAÇÕES MODERNAS E SOMBRAS CONTEXTUAIS
-   ========================================================================== */
-.site-section, .radar-section, .informativo-section, .ferramentas-section, .conclusao-section {
-    background: var(--cor-cards);
-    padding: 30px;
+/* SEÇÕES ARQUITETURA DE GRID */
+.site-section, .radar-section, .informativo-section {
+    background-color: var(--bg-container);
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-    margin-top: 30px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 40px;
+    margin-bottom: 35px;
+    border: 1px solid var(--borda-suave);
+    box-shadow: var(--sombra-card);
 }
 
-.site-section:hover, .radar-section:hover, .ferramentas-section:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(27, 67, 50, 0.08);
-}
+h2 { color: var(--cor-principal); margin-bottom: 12px; font-size: 1.9rem; font-weight: 700; }
+.sub-painel { color: var(--texto-mutado); margin-bottom: 30px; font-size: 1.05rem; }
 
-h2 {
-    color: var(--cor-principal);
-    border-bottom: 3px solid var(--cor-secundaria);
-    padding-bottom: 8px;
-    margin-bottom: 15px;
-    font-size: 1.6rem;
-}
-
-.sub-painel {
-    color: #718096;
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-}
-
-.creditos-bloco {
-    margin-top: 20px;
-    padding: 16px;
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
+/* 1. CAIXA DE INTRODUÇÃO DE IMPACTO */
+.impacto-box {
     border-left: 5px solid var(--cor-principal);
-    border-radius: 8px;
+    padding-left: 25px;
 }
-
-.creditos-titulo {
+.tag-destaque {
+    font-size: 0.8rem;
+    background: rgba(76, 175, 80, 0.18);
+    color: var(--cor-secundaria);
+    padding: 5px 12px;
+    border-radius: 4px;
     font-weight: bold;
-    color: var(--cor-principal);
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    display: inline-block;
     margin-bottom: 8px;
 }
-
-.creditos-item {
-    font-size: 0.92rem;
-    margin-bottom: 4px;
-    color: var(--cor-textos);
+.subtitulo-impacto {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--texto-claro);
+    margin: 15px 0 20px 0;
+    line-height: 1.5;
 }
+.texto-profundo p { margin-bottom: 15px; }
 
-.creditos-item span {
-    font-weight: 600;
-}
-
-.radar-container {
+/* 2. LINHA DO TEMPO (DIÁRIO DE BORDO) */
+.timeline {
     position: relative;
-    width: 100%;
-    height: 450px;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 2px solid #e2e8f0;
+    max-width: 850px;
+    margin: 35px auto;
+    padding-left: 40px;
+    border-left: 3px solid var(--borda-suave);
 }
-
-.radar-frame {
-    width: 100%;
-    height: 100%;
-}
-
-.radar-legendas {
-    margin-top: 20px;
-    background: #f8fafc;
-    padding: 15px;
-    border-radius: 8px;
-}
-
-.legenda-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.legenda-item {
-    display: flex;
-    align-items: center;
-    font-size: 0.9rem;
-}
-
-.cor-bloco {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-    margin-right: 10px;
-    flex-shrink: 0;
-}
-
-.c-verde { background-color: #27ae60; }
-.c-amarelo { background-color: #f1c40f; }
-.c-vermelho { background-color: #e74c3c; }
-
-/* ==========================================================================
-   5. FLASH CARDS ANIMADOS
-   ========================================================================== */
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 20px;
-    perspective: 1000px;
-}
-
-.flash-card {
-    background-color: transparent;
-    height: 320px;
-    cursor: pointer;
-}
-
-.flash-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-style: preserve-3d;
-}
-
-.flash-card:hover .flash-card-inner, .flash-card:focus .flash-card-inner {
-    transform: rotateY(180deg);
-}
-
-.flash-card-front, .flash-card-back {
+.timeline-item { position: relative; margin-bottom: 35px; }
+.timeline-dot {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 8px;
+    left: -48px; top: 6px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--cor-principal);
+    box-shadow: 0 0 8px var(--cor-principal);
+}
+.timeline-content {
+    background: rgba(255, 255, 255, 0.02);
     padding: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
 }
-
-.flash-card-front {
-    background-color: #f8fafc;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-}
-
-.flash-card-front h3 {
-    color: var(--cor-principal);
-    font-size: 1.25rem;
-}
-
-.flash-card-back {
-    background-color: var(--cor-principal);
-    color: white;
-    transform: rotateY(180deg);
-    justify-content: center;
-}
-
-.flash-card-back h3 {
-    color: var(--cor-secundaria);
-    margin-bottom: 12px;
-}
-
-.info-tag {
-    display: inline-block;
-    background: #e8f5e9;
-    color: #2e7d32;
-    font-size: 0.75rem;
-    font-weight: bold;
-    padding: 4px 10px;
-    border-radius: 4px;
-}
-
-.instrucao-virar {
-    font-size: 0.85rem;
-    color: #718096;
-}
-
-/* ==========================================================================
-   6. DESIGN DA CALCULADORA ECOLÓGICA
-   ========================================================================== */
-.calc-container {
-    background: #f8fafc;
-    padding: 25px;
-    border-radius: 8px;
-    border-left: 5px solid var(--cor-principal);
-}
-
-.calc-inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 400px;
-}
-
-.calc-inputs label {
-    font-weight: 600;
-    color: var(--cor-principal);
-}
-
-.calc-inputs input {
-    padding: 10px;
-    border: 2px solid #cbd5e1;
-    border-radius: 6px;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.3s;
-}
-
-.calc-inputs input:focus {
-    border-color: var(--cor-secundaria);
-}
-
-.btn-calculadora {
-    background-color: var(--cor-principal);
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
-}
-
-.btn-calculadora:hover {
-    background-color: #2d6a4f;
-    transform: translateY(-2px);
-}
-
-.calc-resultado {
-    margin-top: 25px;
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    animation: fadeInUp 0.5s ease-in-out;
-}
-
-.metric-box {
-    background: white;
-    border: 1px solid #e2e8f0;
-    padding: 15px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    min-width: 250px;
-    flex: 1;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-}
-
-.metric-icon {
-    font-size: 2.2rem;
-}
-
-.metric-data h4 {
-    font-size: 1.4rem;
-    color: var(--cor-principal);
-}
-
-.metric-data p {
-    font-size: 0.85rem;
-    color: #718096;
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* ==========================================================================
-   7. TABELA E QUIZ (BOTÕES INTERATIVOS E ACESSIBILIDADE)
-   ========================================================================== */
-.tabela-impactos {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-}
-
-.tabela-impactos th, .tabela-impactos td {
-    border: 1px solid #e2e8f0;
-    padding: 12px;
-    text-align: left;
-}
-
-.tabela-impactos th {
-    background-color: var(--cor-principal);
-    color: white;
-}
-
-.tabela-impactos tr:nth-child(even) {
-    background-color: #f8fafc;
-}
-
-.quiz-container {
-    background-color: #f8fafc;
-    padding: 25px;
-    border-radius: 8px;
-    border-left: 5px solid var(--cor-secundaria);
-    text-align: center;
-}
-
-.botoes-quiz button {
-    background-color: var(--cor-principal);
-    color: white;
-    border: none;
-    padding: 14px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 0.95rem;
-    font-weight: 500;
-    text-align: left;
-    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
-}
-
-.botoes-quiz button:hover:not(:disabled) {
-    background-color: #2d6a4f;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(45, 106, 79, 0.2);
-}
-
-.botoes-quiz button:disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
-}
-
-#btn-proxima {
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-#btn-proxima:hover {
-    filter: brightness(1.1);
-}
-
-/* ==========================================================================
-   7.1 DESIGN DA SEÇÃO DE INDICADORES OFICIAIS DO CAMPO
-   ========================================================================== */
-.indicadores-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.indicador-linha {
-    display: flex;
-    align-items: center;
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-left: 5px solid var(--cor-secundaria);
-    padding: 18px;
-    border-radius: 8px;
-    gap: 20px;
-}
-
-.indicador-numero {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--cor-principal);
-    min-width: 100px;
-    text-align: center;
-}
-
-.indicador-texto {
-    font-size: 0.95rem;
-    color: var(--cor-textos);
-}
-
-.fonte-dado {
+.timeline-content h3 { font-size: 1.25rem; margin-bottom: 8px; color: var(--texto-claro); }
+.timeline-content p { color: var(--texto-mutado); font-size: 0.95rem; }
+.timeline-date {
     font-size: 0.8rem;
-    font-weight: bold;
-    color: #718096;
-    display: inline-block;
-    margin-top: 5px;
+    color: var(--cor-secundaria);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
 }
 
-/* ==========================================================================
-   8. PAINEL DE TOMADA DE DECISÃO
-   ========================================================================== */
-.cards-grid {
+/* 3. PAINEL DO PRODUTOR */
+.painel-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    gap: 25px;
+    margin-top: 30px;
 }
-
-.card {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-}
-
-.card-image-sim {
-    background: #e2e8f0;
-    font-size: 3rem;
-    padding: 20px;
+.medidor-card {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--borda-suave);
+    padding: 30px 25px;
+    border-radius: 10px;
     text-align: center;
+    transition: var(--transicao-suave);
 }
-
-.card-body {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-grow: 1;
+.medidor-card h3 { font-size: 1.15rem; color: var(--texto-claro); font-weight: 600; }
+.valor-display {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--cor-secundaria);
+    margin: 20px 0;
+    font-variant-numeric: tabular-nums;
 }
-
-.card-body p {
-    margin-bottom: 15px;
-}
-
-.status-box {
-    display: flex;
-    align-items: center;
-    background: white;
-    padding: 10px;
+.status-alerta {
+    background: #2e7d32;
+    padding: 12px;
     border-radius: 6px;
-    border: 1px solid #edf2f7;
-}
-
-.status-luz {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    margin-right: 10px;
-    flex-shrink: 0;
-}
-
-.cinza { background-color: #a0aec0; }
-.verde-ativo { background-color: #2ecc71; box-shadow: 0 0 8px #2ecc71; }
-.vermelho-ativo { background-color: #e74c3c; box-shadow: 0 0 8px #e74c3c; }
-
-.status-texto {
+    font-weight: 700;
+    margin: 18px 0;
     font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    transition: var(--transicao-suave);
 }
-
-.simulador-controle {
-    margin-top: 25px;
-    background: #edf2f7;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.simulador-controle h3 {
-    margin-bottom: 8px;
-    color: var(--cor-principal);
-}
-
-.simulador-controle p {
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-}
-
-.botoes-simulador {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.botoes-simulador button {
-    background: var(--cor-principal);
-    color: white;
+.status-alerta.alerta-ativo { background: #d32f2f !important; }
+.msg-card-status { font-size: 0.95rem; color: var(--texto-mutado); }
+.botoes-simulador { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 25px; }
+.btn-sim {
+    background-color: var(--cor-principal);
+    color: var(--texto-escuro);
     border: none;
-    padding: 10px 15px;
+    padding: 14px 22px;
+    font-weight: 700;
     border-radius: 6px;
     cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s, transform 0.2s;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: var(--transicao-suave);
+}
+.btn-sim:hover { 
+    background-color: var(--cor-principal-hover);
+    color: var(--texto-claro);
 }
 
-.botoes-simulador button:hover {
-    background-color: #2d6a4f;
-    transform: scale(1.03);
+/* 4. CALCULADORA DE CARBONO */
+.calc-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
 }
-
-.conclusao-conteudo {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.final-highlight {
-    background-color: #e8f5e9;
-    padding: 20px;
-    border-radius: 8px;
-    border-left: 5px solid var(--cor-principal);
-}
-
-footer {
-    background-color: var(--cor-principal);
+.calc-form { display: flex; flex-direction: column; gap: 20px; }
+.input-group { display: flex; flex-direction: column; gap: 8px; }
+.input-group label { font-weight: 600; font-size: 0.95rem; color: var(--texto-mutado); }
+.input-group input, .input-group select {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--borda-suave);
+    padding: 12px;
     color: white;
-    text-align: center;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+.input-group input:focus, .input-group select:focus { border-color: var(--cor-secundaria); }
+.calc-resultado {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--borda-suave);
+    border-radius: 8px;
     padding: 25px;
-    margin-top: 40px;
 }
+.calc-resultado h3 { font-size: 1.2rem; color: var(--cor-secundaria); margin-bottom: 10px; }
+.calc-resultado hr { border: 0; border-top: 1px solid var(--borda-suave); margin-bottom: 15px; }
+.calc-resultado p { margin-bottom: 12px; font-size: 1rem; }
+.calc-resultado span { font-weight: bold; color: var(--cor-principal); }
+.nota-cientifica { font-size: 0.78rem !important; opacity: 0.6; margin-top: 15px; font-style: italic; }
 
-/* ==========================================================================
-   9. CLASSE DE ALTO CONTRASTE REFORMULADA (CORREÇÃO DE LEGIBILIDADE GERAL)
-   ========================================================================== */
-body.alto-contraste {
-    background-color: #000000 !important;
-    color: #ffffff !important;
+/* 5. FLASHCARDS INFORMATIVOS */
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+.flash-card { background: transparent; perspective: 1000px; height: 320px; cursor: pointer; }
+.flash-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; }
+.flash-card:hover .flash-card-inner, .flash-card:focus .flash-card-inner { transform: rotateY(180deg); }
+.flash-card-front, .flash-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 10px; padding: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid var(--borda-suave); }
+.flash-card-front { background-color: rgba(255, 255, 255, 0.02); }
+.flash-card-front h3 { font-size: 1.4rem; }
+.flash-card-back { background-color: #15311e; transform: rotateY(180deg); }
+.flash-card-back h3 { font-size: 1.2rem; color: var(--cor-secundaria); margin-bottom: 10px; }
+.flash-card-back p { font-size: 0.9rem; line-height: 1.5; text-align: justify; }
+.info-tag { background: var(--cor-principal); color: var(--texto-escuro); padding: 4px 10px; font-size: 0.75rem; font-weight: bold; border-radius: 4px; margin-bottom: 15px; letter-spacing: 0.5px; }
+.instrucao-virar { font-size: 0.8rem; opacity: 0.6; margin-top: 15px; }
+
+/* 6. MAPA RADAR METEOROLÓGICO */
+.radar-container { width: 100%; height: 450px; border-radius: 10px; overflow: hidden; border: 1px solid var(--borda-suave); }
+.radar-frame { width: 100%; height: 100%; }
+
+/* 7. QUIZ TÉCNICO INTERATIVO */
+.quiz-container { background: rgba(0, 0, 0, 0.25); padding: 35px; border-radius: 10px; border: 1px solid var(--borda-suave); text-align: center; max-width: 700px; margin: 0 auto; }
+.texto-questao { font-size: 1.15rem; font-weight: 600; margin-bottom: 25px; line-height: 1.5; }
+.botoes-quiz { display: flex; flex-direction: column; gap: 12px; max-width: 500px; margin: 20px auto; }
+.btn-resposta-quiz { background: rgba(255, 255, 255, 0.03); color: white; border: 1px solid var(--borda-suave); padding: 15px 20px; border-radius: 6px; cursor: pointer; text-align: left; font-size: 0.95rem; font-weight: 500; transition: var(--transicao-suave); }
+.btn-resposta-quiz:hover, .btn-resposta-quiz:focus { background: rgba(76, 175, 80, 0.15); border-color: var(--cor-principal); }
+.feedback-quiz { margin-top: 18px; font-weight: 700; font-size: 1.05rem; }
+.btn-avancar-quiz { background: var(--cor-principal); color: var(--texto-escuro); border: none; padding: 12px 25px; font-weight: bold; margin-top: 20px; cursor: pointer; border-radius: 6px; font-size: 0.95rem; transition: var(--transicao-suave); }
+.btn-avancar-quiz:hover { background-color: var(--cor-principal-hover); color: white; }
+.avancar-oculto { display: none; }
+
+/* RECURSOS FLUTUANTES DE ACESSIBILIDADE */
+.painel-acessibilidade-container { position: fixed; bottom: 30px; left: 30px; z-index: 9999; }
+.btn-flutuante-acessivel {
+    background-color: var(--cor-principal); color: var(--texto-escuro);
+    border: none; width: 56px; height: 56px; border-radius: 50%;
+    font-size: 1.6rem; cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transicao-suave);
 }
-
-body.alto-contraste .navbar,
-body.alto-contraste footer,
-body.alto-contraste .botoes-quiz button,
-body.alto-contraste .botoes-simulador button,
-body.alto-contraste .btn-calculadora,
-body.alto-contraste #btn-proxima {
-    background-color: #000000 !important;
-    color: #ffff00 !important;
-    border: 2px solid #ffff00 !important;
+.btn-flutuante-acessivel:hover, .btn-flutuante-acessivel:focus { transform: scale(1.1); }
+.menu-acessibilidade-box {
+    position: absolute; bottom: 70px; left: 0;
+    background-color: var(--bg-container); border: 2px solid var(--cor-principal);
+    border-radius: 10px; padding: 20px; width: 280px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.55);
 }
-
-body.alto-contraste h2,
-body.alto-contraste h3,
-body.alto-contraste strong,
-body.alto-contraste #pergunta-quiz,
-body.alto-contraste .creditos-titulo,
-body.alto-contraste .indicador-numero {
-    color: #ffff00 !important;
+.menu-acessibilidade-box h3 { font-size: 1.05rem; text-align: center; margin-bottom: 12px; color: var(--cor-secundaria); font-weight: 700; }
+.menu-acessibilidade-box hr { border: 0; border-top: 1px solid var(--borda-suave); margin-bottom: 12px; }
+.op-btn-acessivel {
+    display: block; width: 100%; background: rgba(255,255,255,0.04);
+    color: var(--texto-claro); border: 1px solid var(--borda-suave);
+    padding: 10px 14px; margin-bottom: 8px; border-radius: 6px;
+    cursor: pointer; text-align: left; font-size: 0.9rem;
+    font-weight: 500; transition: var(--transicao-suave);
 }
+.op-btn-acessivel:hover, .op-btn-acessivel:focus { background: var(--cor-principal); color: var(--texto-escuro); }
+.acessibilidade-escondido { display: none; }
 
-body.alto-contraste p,
-body.alto-contraste .sub-painel,
-body.alto-contraste .instrucao-virar,
-body.alto-contraste .calc-inputs label {
-    color: #ffffff !important;
+/* RODAPÉ OFICIAL MANDATÓRIO */
+.rodape-oficial { background-color: #050d09; border-top: 3px solid var(--borda-suave); padding: 50px 30px 30px 30px; margin-top: 50px; }
+.rodape-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 35px; }
+.rodape-bloco h4 { color: var(--cor-principal); margin-bottom: 18px; font-size: 1.15rem; border-bottom: 1px solid var(--borda-suave); padding-bottom: 6px; font-weight: 700; }
+.rodape-bloco p { font-size: 0.9rem; margin-bottom: 10px; color: var(--texto-mutado); line-height: 1.5; }
+.Destaque-Senar { font-weight: bold; color: #ffffff !important; background: #1b5e20; display: inline-block; padding: 3px 10px; border-radius: 4px; margin-top: 6px; font-size: 0.85rem; }
+.hashtag-rodape { font-weight: 700; color: var(--cor-secundaria) !important; margin-top: 6px; display: block; }
+.rodape-copyright { max-width: 1200px; margin: 40px auto 0 auto; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.35); line-height: 1.5; }
+
+/* MEDIA QUERIES GERAIS RESPONSIVAS */
+@media (max-width: 992px) {
+    .navbar { flex-direction: column; text-align: center; padding: 15px; }
+    .nav-links { justify-content: center; width: 100%; }
 }
-
-body.alto-contraste .site-section,
-body.alto-contraste .radar-section,
-body.alto-contraste .informativo-section,
-body.alto-contraste .ferramentas-section,
-body.alto-contraste .conclusao-section,
-body.alto-contraste .card,
-body.alto-contraste .radar-legendas,
-body.alto-contraste .quiz-container,
-body.alto-contraste .simulador-controle,
-body.alto-contraste .flash-card-front,
-body.alto-contraste .status-box,
-body.alto-contraste .calc-container {
-    background-color: #000000 !important;
-    color: #ffffff !important;
-    border: 2px solid #ffffff !important;
-}
-
-/* --- FORÇANDO TEXTO PRETO EM BLOCOS DE DESTAQUE CLAROS --- */
-
-/* 1. Bloco de Identificação, Cards da Calculadora e Seção de Indicadores */
-body.alto-contraste .creditos-bloco,
-body.alto-contraste .metric-box,
-body.alto-contraste .indicador-linha {
-    background-color: #ffffff !important;
-    border: 2px solid #ffff00 !important;
-}
-
-/* Garante que os números e descrições fiquem pretos para contraste perfeito */
-body.alto-contraste .creditos-item,
-body.alto-contraste .creditos-item span,
-body.alto-contraste .metric-data h4,
-body.alto-contraste .metric-data p,
-body.alto-contraste .indicador-texto,
-body.alto-contraste .indicador-numero,
-body.alto-contraste .fonte-dado {
-    color: #000000 !important;
-}
-
-/* 2. Bloco de Destaque da Conclusão Final */
-body.alto-contraste .final-highlight {
-    background-color: #ffffff !important; 
-    border: 2px solid #ffff00 !important;
-    border-left: 5px solid #ffff00 !important;
-}
-
-body.alto-contraste .final-highlight h3,
-body.alto-contraste .final-highlight p {
-    color: #000000 !important;
-}
-
-/* 3. Verso dos Flash Cards */
-body.alto-contraste .flash-card-back {
-    background-color: #ffff00 !important;
-    color: #000000 !important;
-}
-
-body.alto-contraste .flash-card-back h3,
-body.alto-contraste .flash-card-back p {
-    color: #000000 !important;
-}
-
-/* 4. Tabelas */
-body.alto-contraste .tabela-impactos th {
-    background-color: #ffff00 !important;
-    color: #000000 !important;
-}
-
-body.alto-contraste .tabela-impactos td {
-    background-color: #000000 !important;
-    color: #ffffff !important;
-}
-
-/* ==========================================================================
-   10. MEDIA QUERIES (MELHORIA EXTREMA DE RESPONSIVIDADE)
-   ========================================================================== */
 @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-        padding: 15px;
-    }
-    .navbar nav {
-        flex-direction: column;
-        gap: 12px;
-    }
-    .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-    .acessibilidade-botoes {
-        margin-left: 0;
-        margin-top: 5px;
-    }
-    .hero-section {
-        height: 280px;
-    }
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-    .hero-content p {
-        font-size: 1rem;
-    }
-    .tabela-impactos {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-    .calc-resultado {
-        flex-direction: column;
-    }
-    .indicador-linha {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
+    .nav-links a { padding: 5px 8px; font-size: 0.85rem; }
+    .hero-content h1 { font-size: 2rem; }
+    .hero-content p { font-size: 1rem; }
+    .site-section, .radar-section, .informativo-section { padding: 25px 20px; }
+    .timeline { padding-left: 25px; }
+    .timeline-dot { left: -33px; }
+    .painel-acessibilidade-container { bottom: 20px; left: 20px; }
 }
