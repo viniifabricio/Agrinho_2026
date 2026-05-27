@@ -1,5 +1,5 @@
 /* ==========================================================================
-   VARIÁVEIS DE CORES E PADRÕES
+   1. VARIÁVEIS DE CORES E PADRÕES ORIGINAIS
    ========================================================================== */
 :root {
     --cor-principal: #1b4332;
@@ -50,7 +50,7 @@ body {
 }
 
 /* ==========================================================================
-   MENU SUPERIOR (NAVBAR) - CORRIGIDO SEM QUEBRA DE LINHA
+   2. NAVBAR & HERO (MENU SUPERIOR E BANNER)
    ========================================================================== */
 .navbar {
     background-color: var(--cor-escura);
@@ -92,9 +92,6 @@ body {
     outline: 2px solid white;
 }
 
-/* ==========================================================================
-   BANNER PRINCIPAL (HERO)
-   ========================================================================== */
 .hero-section {
     position: relative;
     background-image: url('Agrinho.png');
@@ -143,7 +140,7 @@ body {
 }
 
 /* ==========================================================================
-   CAIXAS DE CONTEÚDO E ESTRUTURA
+   3. SEÇÕES DE CONTEÚDO PADRÃO E ESCURO
    ========================================================================== */
 .site-section {
     background: white;
@@ -152,6 +149,19 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     border: 1px solid #e0e2e0;
+}
+
+/* Mantém o painel do Quiz e Tabela escuros originais */
+.site-section.dark-panel {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 1px solid #333;
+}
+
+.site-section.dark-panel h2, 
+.site-section.dark-panel h3, 
+.site-section.dark-panel p {
+    color: #ffffff !important;
 }
 
 .impacto-box {
@@ -172,11 +182,13 @@ body {
     color: var(--cor-principal);
 }
 
-.texto-profundo p {
-    margin-bottom: 15px;
+.site-section.dark-panel .subtitulo-impacto {
+    color: #ffff00 !important;
 }
 
-/* LINHA DO TEMPO (TIMELINE) */
+/* ==========================================================================
+   4. LINHA DO TEMPO (DIÁRIO DE BORDO ORIGINAL RECONSTRUÍDO)
+   ========================================================================== */
 .timeline {
     position: relative;
     margin: 30px 0;
@@ -189,7 +201,9 @@ body {
     margin-bottom: 30px;
 }
 
-.timeline-dot {
+/* Renderiza as bolinhas verdes perfeitamente alinhadas à linha */
+.timeline-item::before {
+    content: '';
     position: absolute;
     width: 16px;
     height: 16px;
@@ -203,10 +217,12 @@ body {
     font-size: 0.85rem;
     color: var(--cor-secundaria);
     font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
 }
 
 /* ==========================================================================
-   SIMULADORES DO CLIMA
+   5. COMPONENTES DOS SIMULADORES E CALCULADORA
    ========================================================================== */
 .botoes-simulador {
     display: flex;
@@ -224,13 +240,12 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    transition: background 0.3s ease, transform 0.2s ease, outline 0.2s ease;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .btn-sim:hover, .btn-sim:focus {
     background-color: var(--cor-secundaria);
     transform: translateY(-2px);
-    outline: 3px solid var(--cor-escura);
 }
 
 .painel-grid {
@@ -262,9 +277,6 @@ body {
     margin: 15px 0;
 }
 
-/* ==========================================================================
-   CALCULADORA DE CARBONO
-   ========================================================================== */
 .calc-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -297,29 +309,9 @@ body {
     border-radius: 6px;
 }
 
-.calc-resultado h3, .calc-resultado p {
-    color: var(--cor-escura);
-}
-
-.calc-resultado hr {
-    margin: 10px 0;
-    border: 0;
-    border-top: 1px solid #ccc;
-}
-
-.nota-cientifica {
-    font-size: 0.8rem;
-    color: #555;
-    margin-top: 15px;
-}
-
-/* RADAR */
-.radar-section {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    margin: 30px 0;
-    border: 1px solid #e0e2e0;
+.site-section.dark-panel .calc-resultado {
+    background: #111 !important;
+    border-color: #52b788;
 }
 
 .radar-container {
@@ -329,16 +321,16 @@ body {
     margin-top: 20px;
     border-radius: 6px;
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .radar-frame {
     width: 100%;
     height: 100%;
+    border: none;
 }
 
 /* ==========================================================================
-   FLASHCARDS (NUNCA VAZAM TEXTO PARA FORA)
+   6. FLASHCARDS (ESTILO 3D PRESERVADO)
    ========================================================================== */
 .info-grid {
     display: grid;
@@ -374,13 +366,12 @@ body {
     height: 100%;
     backface-visibility: hidden;
     border-radius: 8px;
-    padding: 15px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    overflow-y: auto;
 }
 
 .flash-card-front {
@@ -398,36 +389,15 @@ body {
 .info-tag {
     background: var(--cor-secundaria);
     color: white;
-    padding: 3px 10px;
+    padding: 4px 12px;
     font-size: 0.8rem;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    flex-shrink: 0;
-}
-
-.instrucao-virar {
-    font-size: 0.8rem;
-    color: #666;
-    margin-top: 15px;
-    flex-shrink: 0;
+    border-radius: 12px;
+    margin-bottom: 12px;
 }
 
 /* ==========================================================================
-   TABELA DE IMPACTO
+   7. TABELA DE IMPACTO ORIGINAL
    ========================================================================== */
-.tabela-impacto-container {
-    margin-top: 40px;
-    padding: 25px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #e0e2e0;
-}
-
-.tabela-impacto-container h3 {
-    color: var(--cor-principal);
-    margin-bottom: 10px;
-}
-
 .tabela-responsiva {
     width: 100%;
     overflow-x: auto;
@@ -438,21 +408,19 @@ body {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    background-color: white;
+    background-color: #ffffff;
 }
 
 .tabela-eco th, .tabela-eco td {
     padding: 15px;
     border: 1px solid #dddddd;
     font-size: 0.95rem;
-    vertical-align: top;
     color: var(--cor-texto);
 }
 
 .tabela-eco th {
-    background-color: var(--cor-principal);
-    color: white !important;
-    font-weight: bold;
+    background-color: #1b4332 !important;
+    color: #ffffff !important;
 }
 
 .tabela-eco tr:nth-child(even) {
@@ -460,92 +428,75 @@ body {
 }
 
 .tabela-eco td strong {
-    color: var(--cor-secundaria);
+    color: #2d6a4f;
     display: block;
     margin-bottom: 5px;
 }
 
-/* ==========================================================================
-   QUIZ DE CONHECIMENTOS
-   ========================================================================== */
-.quiz-container {
-    background: #f8f9fa;
-    border: 1px solid #e0e0e0;
-    padding: 25px;
-    border-radius: 6px;
-    margin-top: 20px;
+.site-section.dark-panel .tabela-eco td {
+    color: #000000 !important;
 }
 
+/* ==========================================================================
+   8. QUIZ DE CONHECIMENTOS (CORREÇÃO DE VISIBILIDADE DOS BOTÕES)
+   ========================================================================== */
 .texto-questao {
     font-size: 1.35rem;
     font-weight: bold;
     margin: 15px 0;
-    color: var(--cor-escura);
+    color: var(--cor-escura); /* Cor escura padrão para leitura */
+}
+
+.site-section.dark-panel .texto-questao {
+    color: #ffffff !important;
 }
 
 .botoes-quiz {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin-top: 20px;
 }
 
+/* Força o botão a ter fundo cinza claro e texto escuro no modo normal */
 .btn-resposta-quiz {
-    background: white;
-    border: 2px solid #ccc;
+    background-color: #f4f6f4 !important;
+    border: 2px solid var(--cor-secundaria) !important;
     padding: 20px 25px;
     text-align: left;
     font-size: 1.15rem;
     font-weight: 500;
-    color: var(--cor-texto);
+    color: var(--cor-escura) !important; /* Texto escuro para destacar no fundo claro */
     border-radius: 6px;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
 }
 
+/* Efeito ao passar o mouse no modo normal */
 .btn-resposta-quiz:hover, .btn-resposta-quiz:focus {
-    background: #e8f5e9;
-    border-color: var(--cor-secundaria);
-    transform: translateY(-2px);
+    background-color: #e8f5e9 !important;
+    border-color: var(--cor-principal) !important;
 }
 
-.feedback-quiz {
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: 1.2rem;
-    padding: 10px;
+/* SE O SITE ESTIVER NO MODO PRETO E BRANCO: Transforma o botão para garantir contraste */
+html.preto-branco .btn-resposta-quiz {
+    background-color: #000000 !important;
+    border: 2px solid #ffffff !important;
+    color: #ffffff !important; /* Texto branco no fundo preto */
 }
 
-.btn-avancar-quiz, .btn-reiniciar-quiz {
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    margin-top: 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.05rem;
-    font-weight: bold;
-    transition: background 0.3s ease, transform 0.2s ease;
+html.preto-branco .btn-resposta-quiz:hover {
+    background-color: #222222 !important;
 }
-
-.btn-avancar-quiz { background-color: var(--cor-secundaria); }
-.btn-reiniciar-quiz { background-color: var(--cor-texto); }
-
-.btn-avancar-quiz:hover, .btn-reiniciar-quiz:hover {
-    transform: translateY(-2px);
-}
-
-.botoes-controle-quiz { display: flex; gap: 15px; }
-.avancar-oculto { display: none; }
 
 /* ==========================================================================
-   PAINEL DE ACESSIBILIDADE FLUTUANTE (BLINDADO CONTRA DESAPARECIMENTO)
+   9. PAINEL DE ACESSIBILIDADE FLUTUANTE
    ========================================================================== */
 .painel-acessibilidade-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 99999 !important; /* Força ficar na frente absoluta de tudo */
+    z-index: 999999 !important;
 }
 
 .btn-flutuante-acessivel {
@@ -558,10 +509,6 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: transform 0.2s ease;
-}
-.btn-flutuante-acessivel:hover {
-    transform: scale(1.1);
 }
 
 .menu-acessibilidade-box {
@@ -572,33 +519,36 @@ body {
     border: 2px solid var(--cor-principal);
     padding: 15px;
     border-radius: 8px;
-    width: 250px;
+    width: 260px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 .acessibilidade-escondido { display: none; }
+
+.menu-acessibilidade-box h3 {
+    color: var(--cor-escura) !important;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
 
 .op-btn-acessivel {
     display: block;
     width: 100%;
     background: #f4f6f4;
     border: 1px solid #ccc;
-    padding: 8px;
+    padding: 10px;
     margin: 8px 0;
     text-align: left;
     cursor: pointer;
     border-radius: 4px;
-    font-weight: 500;
     color: var(--cor-texto) !important;
-    transition: background 0.2s ease;
-}
-.op-btn-acessivel:hover {
-    background: #e0e2e0;
 }
 
 /* ==========================================================================
-   BLINDAGEM DO ALTO CONTRASTE
+   10. MODIFICADORES E REGRAS DE ACESSIBILIDADE (ALTO CONTRASTE & SATURAÇÃO)
    ========================================================================== */
+
+/* ALTO CONTRASTE */
 body.alto-contraste,
 body.alto-contraste * {
     background-color: #000000 !important;
@@ -606,95 +556,43 @@ body.alto-contraste * {
     border-color: #ffffff !important;
     box-shadow: none !important;
 }
-
-body.alto-contraste h1,
-body.alto-contraste h2,
-body.alto-contraste h3,
-body.alto-contraste th,
-body.alto-contraste td strong,
-body.alto-contraste .valor-display,
-body.alto-contraste .status-alerta,
-body.alto-contraste .tag-destaque {
+body.alto-contraste h1, body.alto-contraste h2, body.alto-contraste h3, 
+body.alto-contraste th, body.alto-contraste td strong, body.alto-contraste .valor-display,
+body.alto-contraste .status-alerta, body.alto-contraste .tag-destaque, 
+body.alto-contraste .subtitulo-impacto {
     color: #ffff00 !important;
 }
-
-body.alto-contraste button,
-body.alto-contraste a,
-body.alto-contraste input,
-body.alto-contraste select {
+body.alto-contraste button, body.alto-contraste a, body.alto-contraste input, body.alto-contraste select {
     background-color: #000000 !important;
     color: #ffffff !important;
     border: 2px solid #ffffff !important;
 }
-
-body.alto-contraste button:hover,
-body.alto-contraste a:hover {
-    background-color: #333333 !important;
-    color: #ffff00 !important;
-    border-color: #ffff00 !important;
+body.alto-contraste .tabela-eco, body.alto-contraste .tabela-eco tr, body.alto-contraste .tabela-eco td {
+    background-color: #000000 !important;
+    color: #ffffff !important;
 }
 
-/* ==========================================================================
-   SOLUÇÃO DEFINITIVA PARA A SATURAÇÃO (SEM QUEBRAR OS FLASHCARDS)
-   ========================================================================== */
-
-/* Aplicamos a escala de cinza nas grandes seções, mas PULAMOS o bloco de informações dos cards */
-body.preto-branco .navbar,
-body.preto-branco .hero-section,
-body.preto-branco #intro,
-body.preto-branco #diario-bordo,
-body.preto-branco #painel-produtor,
-body.preto-branco #calculadora-secao,
-body.preto-branco #radar-secao,
-body.preto-branco .tabela-impacto-container,
-body.preto-branco #quiz,
-body.preto-branco .rodape-oficial,
-body.preto-branco iframe {
+/* SATURAÇÃO (PRETO E BRANCO GLOBAL VIA HTML) */
+html.preto-branco {
     filter: grayscale(100%) !important;
 }
 
-/* Deixamos o container dos flashcards livre do filtro pesado para não quebrar o 3D */
-body.preto-branco .info-grid {
-    filter: none !important;
-}
-
-/* Em vez de quebrar o 3D, mudamos as cores dos cartões manualmente para cinza */
-body.preto-branco .flash-card-front {
-    background-color: #e0e0e0 !important;
-    border-color: #aaaaaa !important;
-    color: #333333 !important;
-}
-
-body.preto-branco .flash-card-back {
-    background-color: #555555 !important;
+/* Correções específicas para o modo preto e branco funcionar liso e sem bugs */
+html.preto-branco .btn-resposta-quiz {
+    border-color: #ffffff !important;
     color: #ffffff !important;
 }
-
-body.preto-branco .info-tag {
-    background-color: #777777 !important;
-    color: #ffffff !important;
+html.preto-branco .flash-card-inner {
+    transform-style: preserve-3d !important;
 }
 
-/* Mantém o painel flutuante de acessibilidade visível, intacto e colorido */
-.painel-acessibilidade-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 999999 !important;
-}
-
-body.preto-branco .painel-acessibilidade-container {
-    filter: none !important;
-    isolation: isolate;
-}
-
-/* Modificadores extras */
-body.fonte-grande { --tamanho-base: 20px; }
-body.espacado { --espacamento-base: 2px; }
-body.fonte-dislexia { font-family: 'Comic Sans MS', sans-serif !important; }
+/* MODIFICADORES DE TEXTO */
+body.fonte-grande { --tamanho-base: 19px; }
+body.espacado { --espacamento-base: 2.2px; }
+body.fonte-dislexia { font-family: 'Comic Sans MS', cursive, sans-serif !important; }
 
 /* ==========================================================================
-   RODAPÉ
+   11. RODAPÉ ORIGINAL
    ========================================================================== */
 .rodape-oficial {
     background-color: var(--cor-escura);
