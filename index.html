@@ -417,27 +417,3 @@
     <script src="main.js"></script>
 </body>
 </html>
-/* Força as fotos da galeria a caberem no espaço do cartão */
-.galeria-card img {
-    width: 100%;          /* Faz a imagem ocupar toda a largura do card */
-    height: 250px;        /* Define uma altura fixa para todas ficarem iguais */
-    object-fit: cover;    /* Corta e encaixa a foto sem deixar ela esticada ou distorcida */
-    border-radius: 8px 8px 0 0; /* Arredonda só os cantos de cima da foto */
-}
-
-/* Garante que os cards fiquem alinhados um do lado do outro */
-.galeria-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;            /* Dá um espaço maneiro entre um card e outro */
-    margin-top: 20px;
-}
-
-/* Estilo básico do card para segurar a onda */
-.galeria-card {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;     /* Garante que nada saia para fora das bordas do card */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
